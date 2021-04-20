@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 13693818}
   - component: {fileID: 5409530}
   - component: {fileID: 10833074}
+  - component: {fileID: -3537312624167391979}
+  - component: {fileID: -8854157840331020585}
   m_Layer: 0
   m_Name: Shell
   m_TagString: Untagged
@@ -174,6 +176,30 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &-3537312624167391979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e0e6176de28414999ec8da1d787382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8854157840331020585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a2343deffabf74a85f15138a48e80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1291295503164410
 GameObject:
   m_ObjectHideFlags: 0
