@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class DestroyBehaviour : MonoBehaviour, IDestroy
+public class DestroyBehaviour : MonoBehaviour, IKillable
 {
-    public void Destroy()
+    public void Kill()
     {
         Destroy(gameObject);
     }

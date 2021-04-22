@@ -2,15 +2,15 @@
 
 public class ShellController : MonoBehaviour
 {
-    private IDestroy destroyer;
+    private IKillable killer;
 
     private void Awake()
     {
-        destroyer = GetComponent<IDestroy>();
+        killer = GetComponent<IKillable>();
     }
 
     private void OnTriggerEnter()
     {
-        destroyer.Destroy();
+        killer.Kill();
     }
 }

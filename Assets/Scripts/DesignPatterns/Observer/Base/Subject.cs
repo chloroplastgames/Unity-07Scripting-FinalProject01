@@ -19,14 +19,7 @@ public abstract class Subject : MonoBehaviour, ISubject
         observers.Remove(observer);
     }
 
-    public void Notify()
-    {
-        for (int i = 0; i < observers.Count; i++)
-        {
-            Observer observer = (Observer)observers[i];
-            observer.OnNotify();
-        }
-    }
+    public abstract void Notify();
 }
 
 public abstract class Subject<T> : MonoBehaviour, ISubject<T>
@@ -47,12 +40,5 @@ public abstract class Subject<T> : MonoBehaviour, ISubject<T>
         observers.Remove(observer);
     }
 
-    public void Notify()
-    {
-        for (int i = 0; i < observers.Count; i++)
-        {
-            Observer observer = (Observer)observers[i];
-            observer.OnNotify();
-        }
-    }
+    public abstract void Notify();
 }

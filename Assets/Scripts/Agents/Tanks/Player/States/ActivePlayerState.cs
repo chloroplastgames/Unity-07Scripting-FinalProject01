@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class ActivePlayerState : State
+public class ActivePlayerState : State, IObserver
 {
     private readonly ITranslate translator;
     private readonly IRotate rotator;
     private readonly IFire shooter;
-
+    private readonly ISubject killerSubject;
     private float translationSense;
     private float rotationSense;
 
@@ -13,17 +13,21 @@ public class ActivePlayerState : State
         IStateController controller,
         ITranslate translator,
         IRotate rotator,
-        IFire shooter
+        IFire shooter,
+        ISubject killerSubject
         ) : base(controller)
     {
         this.translator = translator;
         this.rotator = rotator;
         this.shooter = shooter;
+        this.killerSubject = killerSubject;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        killerSubject.Add(this);
     }
 
     public override void Update()
@@ -34,12 +38,6 @@ public class ActivePlayerState : State
         if (Input.GetKeyDown(KeyCode.B))
         {
             shooter.Fire();
-        }
-
-        // TEST
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            controller.SwitchState<InactivePlayerState>();
         }
     }
 
@@ -52,5 +50,12 @@ public class ActivePlayerState : State
     public override void Exit()
     {
         base.Exit();
+
+        killerSubject.Remove(this);
+    }
+
+    public void OnNotify()
+    {
+        controller.SwitchState<InactivePlayerState>();
     }
 }

@@ -9790,6 +9790,8 @@ GameObject:
   - component: {fileID: 1374353978}
   - component: {fileID: 1374353977}
   - component: {fileID: 7967284407601141437}
+  - component: {fileID: -3709291175885122702}
+  - component: {fileID: 5681119833771036373}
   m_Layer: 9
   m_Name: TankPlayer
   m_TagString: Untagged
@@ -10093,6 +10095,30 @@ MonoBehaviour:
   shellPrefab: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   fireTransform: {fileID: 435794}
   launchForce: 20
+--- !u!114 &-3709291175885122702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7fdf1cb676f0041895d9dc0a94c40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5681119833771036373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d626c4ab6118345bf434e3116e382a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &192314
 GameObject:
   m_ObjectHideFlags: 0

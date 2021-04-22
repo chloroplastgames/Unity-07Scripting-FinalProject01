@@ -6,18 +6,21 @@
     private ITranslate translator;
     private IRotate rotator;
     private IFire shooter;
+    private ISubject dieBehaviour;
 
     private void Awake()
     {
         translator = GetComponent<ITranslate>();
         rotator = GetComponent<IRotate>();
         shooter = GetComponent<IFire>();
+        dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         activePlayerState = new ActivePlayerState(
             this,
             translator,
             rotator,
-            shooter
+            shooter,
+            dieBehaviour
             );
         inactivePlayerState = new InactivePlayerState(
             this
