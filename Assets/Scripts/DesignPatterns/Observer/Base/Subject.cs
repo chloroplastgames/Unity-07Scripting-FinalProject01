@@ -1,6 +1,4 @@
-﻿// TODO: Get rid of the interfaces and apply encapsulation
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Subject : MonoBehaviour, ISubject
@@ -21,7 +19,14 @@ public abstract class Subject : MonoBehaviour, ISubject
         observers.Remove(observer);
     }
 
-    public abstract void Notify();
+    public void Notify()
+    {
+        for (int i = 0; i < observers.Count; i++)
+        {
+            Observer observer = (Observer)observers[i];
+            observer.OnNotify();
+        }
+    }
 }
 
 public abstract class Subject<T> : MonoBehaviour, ISubject<T>
@@ -42,5 +47,12 @@ public abstract class Subject<T> : MonoBehaviour, ISubject<T>
         observers.Remove(observer);
     }
 
-    public abstract void Notify();
+    public void Notify()
+    {
+        for (int i = 0; i < observers.Count; i++)
+        {
+            Observer observer = (Observer)observers[i];
+            observer.OnNotify();
+        }
+    }
 }

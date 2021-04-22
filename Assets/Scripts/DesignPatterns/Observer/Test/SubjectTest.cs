@@ -9,12 +9,4 @@ public class SubjectTest : Subject
             Notify();
         }
     }
-
-    public override void Notify()
-    {
-        foreach (Observer observer in observers)
-        {
-            observer.OnNotify();
-        }
-    }
 }

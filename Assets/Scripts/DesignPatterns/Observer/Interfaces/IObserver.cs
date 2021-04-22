@@ -1,11 +1,11 @@
 ﻿public interface IObserver
 {
-    void InitializeSubject();
+    ISubject Subject { get; }
     void OnNotify();
 }
 
 public interface IObserver<T>
 {
-    void InitializeSubject();
+    ISubject<T> Subject { get; }
     void OnNotify(T parameter);
 }
