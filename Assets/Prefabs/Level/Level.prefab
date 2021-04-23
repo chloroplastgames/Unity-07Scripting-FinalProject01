@@ -811,7 +811,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &490602
 Transform:
@@ -2367,6 +2367,7 @@ GameObject:
   - component: {fileID: 9563772}
   - component: {fileID: 6573236}
   - component: {fileID: 6576880}
+  - component: {fileID: 2600001316819036298}
   m_Layer: 0
   m_Name: PumpJack (2)
   m_TagString: Untagged
@@ -2434,6 +2435,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0337658, y: 3.3892279, z: 1}
   m_Center: {x: -0.5801923, y: 2.0646138, z: 0}
+--- !u!208 &2600001316819036298
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118640}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.6, y: 0.5, z: 1.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.7, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &119348
 GameObject:
   m_ObjectHideFlags: 0
@@ -7008,6 +7025,7 @@ GameObject:
   - component: {fileID: 9552378}
   - component: {fileID: 6524440}
   - component: {fileID: 6595896}
+  - component: {fileID: 6779250430644841571}
   m_Layer: 0
   m_Name: PumpJack (1)
   m_TagString: Untagged
@@ -7075,6 +7093,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0337658, y: 3.3892279, z: 1}
   m_Center: {x: -0.5801923, y: 2.0646138, z: 0}
+--- !u!208 &6779250430644841571
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157012}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.6, y: 0.5, z: 1.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.7, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &157102
 GameObject:
   m_ObjectHideFlags: 0
@@ -9051,7 +9085,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &453662
 Transform:
@@ -9475,7 +9509,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &487742
 Transform:
@@ -9635,6 +9669,7 @@ GameObject:
   - component: {fileID: 9586742}
   - component: {fileID: 6545074}
   - component: {fileID: 6547424}
+  - component: {fileID: 8902653062898723761}
   m_Layer: 0
   m_Name: PumpJack
   m_TagString: Untagged
@@ -9702,6 +9737,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0337658, y: 3.3892279, z: 1}
   m_Center: {x: -0.5801923, y: 2.0646138, z: 0}
+--- !u!208 &8902653062898723761
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179732}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.6, y: 0.5, z: 1.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.7, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &179810
 GameObject:
   m_ObjectHideFlags: 0
