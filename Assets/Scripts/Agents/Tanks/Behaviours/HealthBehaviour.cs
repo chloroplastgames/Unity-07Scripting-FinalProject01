@@ -24,6 +24,8 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
         if (currentHealth == 0)
         {
             killer.Kill();
+
+            Destroy(this); // TODO
         }
     }
 }

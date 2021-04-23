@@ -6,6 +6,7 @@ public class ActivePlayerState : State, IObserver
     private readonly IRotate rotator;
     private readonly IFire shooter;
     private readonly ISubject killerSubject;
+
     private float translationSense;
     private float rotationSense;
 

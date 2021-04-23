@@ -29,6 +29,11 @@
         states.Add(typeof(InactivePlayerState), inactivePlayerState);
     }
 
+    private void Start()
+    {
+        SwitchState<InactivePlayerState>();
+    }
+
     private void Update()
     {
         currentState.Update();
@@ -37,10 +42,5 @@
     private void FixedUpdate()
     {
         currentState.FixedUpdate();
-    }
-
-    private void Start()
-    {
-        SwitchState<InactivePlayerState>();
     }
 }
