@@ -13,7 +13,7 @@ public class EnemyStateController : StateController
     private void Awake()
     {
         destinationSetter = GetComponent<ISetDestination>();
-        player = FindObjectOfType<PlayerStateController>().transform;
+        player = FindObjectOfType<PlayerStateController>().transform; // TODO
         dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         spawnEnemyState = new SpawnEnemyState(

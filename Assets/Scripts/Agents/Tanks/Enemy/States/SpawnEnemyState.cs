@@ -11,7 +11,7 @@ public class SpawnEnemyState : State
 
     public override void Update()
     {
-        // TEST - Should wait .25f seconds
+        // TEST - Should wait .25f seconds - TODO
         if (Input.GetKeyDown(KeyCode.Space))
         {
             controller.SwitchState<ChaseEnemyState>();

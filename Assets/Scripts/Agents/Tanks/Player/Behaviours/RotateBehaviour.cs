@@ -14,8 +14,8 @@ public class RotateBehaviour : MonoBehaviour, IRotate
 
     public void Rotate(float sense)
     {
-        float rotation = sense * speed * Time.deltaTime;
-        Quaternion yRotation = Quaternion.Euler(0f, rotation, 0f);
-        myRigidbody.MoveRotation(myRigidbody.rotation * yRotation);
+        float rotationAmount = sense * speed * Time.deltaTime;
+        Quaternion rotation = Quaternion.Euler(0f, rotationAmount, 0f);
+        myRigidbody.MoveRotation(myRigidbody.rotation * rotation);
     }
 }
