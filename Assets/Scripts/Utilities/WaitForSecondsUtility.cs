@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
-public class WaitForSecondsUtility : MonoBehaviour
+public class WaitForSecondsUtility : Singleton<WaitForSecondsUtility>
 {
-    // Start is called before the first frame update
-    void Start()
+    public void WaitForSeconds(float seconds, Action callback)
     {
-        
+        StartCoroutine(WaitForSecondsRoutine(seconds, callback));
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator WaitForSecondsRoutine(float seconds, Action callback)
     {
-        
+        yield return new WaitForSeconds(seconds);
+        callback();
     }
 }

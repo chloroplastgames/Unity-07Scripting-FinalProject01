@@ -1,21 +1,17 @@
-﻿using UnityEngine;
-
-public class SpawnEnemyState : State
+﻿public class SpawnEnemyState : State
 {
     public SpawnEnemyState(IStateController controller) : base(controller) { }
 
     public override void Enter()
     {
         base.Enter();
+
+        WaitForSecondsUtility.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
     }
 
     public override void Update()
     {
-        // TEST - Should wait .25f seconds - TODO
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            controller.SwitchState<ChaseEnemyState>();
-        }
+        return;
     }
 
     public override void FixedUpdate()
@@ -26,5 +22,10 @@ public class SpawnEnemyState : State
     public override void Exit()
     {
         base.Exit();
+    }
+
+    private void SwitchToChaseEnemyState()
+    {
+        controller.SwitchState<ChaseEnemyState>();
     }
 }
