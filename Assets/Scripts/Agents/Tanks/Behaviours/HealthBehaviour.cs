@@ -2,7 +2,7 @@
 
 public class HealthBehaviour : MonoBehaviour, IDamageable
 {
-    private readonly int maxHealth = 100;
+    [SerializeField] private int maxHealth;
 
     private int currentHealth;
 

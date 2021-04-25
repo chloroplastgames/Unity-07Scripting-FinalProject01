@@ -1,28 +1,20 @@
 ﻿public class PlayerStateController : StateController
 {
-    private IState activePlayerState;
-    private IState inactivePlayerState;
-
-    private ITranslate translator;
-    private IRotate rotator;
-    private IFire shooter;
-    private ISubject dieBehaviour;
-
     private void Awake()
     {
-        translator = GetComponent<ITranslate>();
-        rotator = GetComponent<IRotate>();
-        shooter = GetComponent<IFire>();
-        dieBehaviour = GetComponent<DieBehaviour>(); // TODO
+        ITranslate translator = GetComponent<ITranslate>();
+        IRotate rotator = GetComponent<IRotate>();
+        IFire shooter = GetComponent<IFire>();
+        ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
-        activePlayerState = new ActivePlayerState(
+        IState activePlayerState = new ActivePlayerState(
             this,
             translator,
             rotator,
             shooter,
             dieBehaviour
             );
-        inactivePlayerState = new InactivePlayerState(
+        IState inactivePlayerState = new InactivePlayerState(
             this
             );
         states.Add(typeof(ActivePlayerState), activePlayerState);

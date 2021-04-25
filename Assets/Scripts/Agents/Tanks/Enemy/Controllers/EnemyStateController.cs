@@ -2,30 +2,27 @@
 
 public class EnemyStateController : StateController
 {
-    private IState spawnEnemyState;
-    private IState chaseEnemyState;
-    private IState deadEnemyState;
-
-    private ISetDestination destinationSetter;
-    private Transform player;
-    ISubject dieBehaviour;
+    [SerializeField] private ChaseEnemyStateData chaseEnemyStateData;
 
     private void Awake()
     {
-        destinationSetter = GetComponent<ISetDestination>();
-        player = FindObjectOfType<PlayerStateController>().transform; // TODO
-        dieBehaviour = GetComponent<DieBehaviour>(); // TODO
+        ISetDestination destinationSetter = GetComponent<ISetDestination>();
+        Transform player = FindObjectOfType<PlayerStateController>().transform; // TODO
+        Transform myAgent = gameObject.transform;
+        ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
-        spawnEnemyState = new SpawnEnemyState(
+        IState spawnEnemyState = new SpawnEnemyState(
             this
             );
-        chaseEnemyState = new ChaseEnemyState(
+        IState chaseEnemyState = new ChaseEnemyState(
             this,
             destinationSetter,
+            myAgent,
             player,
-            dieBehaviour
+            dieBehaviour,
+            chaseEnemyStateData
             );
-        deadEnemyState = new DeadEnemyState(
+        IState deadEnemyState = new DeadEnemyState(
             this
             );
         states.Add(typeof(SpawnEnemyState), spawnEnemyState);
