@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStateController : StateController
 {
@@ -6,9 +7,9 @@ public class EnemyStateController : StateController
 
     private void Awake()
     {
-        ISetDestination destinationSetter = GetComponent<ISetDestination>();
         Transform player = FindObjectOfType<PlayerStateController>().transform; // TODO
         Transform myAgent = gameObject.transform;
+        NavMeshAgent navMeshAgent = myAgent.GetComponent<NavMeshAgent>();
         ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         IState spawnEnemyState = new SpawnEnemyState(
@@ -16,17 +17,22 @@ public class EnemyStateController : StateController
             );
         IState chaseEnemyState = new ChaseEnemyState(
             this,
-            destinationSetter,
             myAgent,
+            navMeshAgent,
             player,
             dieBehaviour,
             chaseEnemyStateData
+            );
+        IState attackEnemyState = new AttackEnemyState(
+            this,
+            dieBehaviour
             );
         IState deadEnemyState = new DeadEnemyState(
             this
             );
         states.Add(typeof(SpawnEnemyState), spawnEnemyState);
         states.Add(typeof(ChaseEnemyState), chaseEnemyState);
+        states.Add(typeof(AttackEnemyState), attackEnemyState);
         states.Add(typeof(DeadEnemyState), deadEnemyState);
     }
 

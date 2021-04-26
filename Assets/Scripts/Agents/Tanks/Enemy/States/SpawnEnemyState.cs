@@ -6,7 +6,7 @@
     {
         base.Enter();
 
-        WaitForSecondsUtility.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
+        WaitForSecondsSingleton.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
     }
 
     public override void Update()

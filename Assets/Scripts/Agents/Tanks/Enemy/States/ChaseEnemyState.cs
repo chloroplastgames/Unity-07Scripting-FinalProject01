@@ -1,28 +1,27 @@
-﻿// CONTINUE
+﻿// TODO Apply SOLID
 
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ChaseEnemyState : State, IObserver
 {
-    private readonly ISetDestination destinationSetter;
     private readonly Transform agent;
+    private readonly NavMeshAgent navMeshAgent;
     private readonly Transform player;
     private readonly ISubject killerSubject;
     private readonly ChaseEnemyStateData chaseEnemyStateData;
 
-    private Vector3 destination;
-
     public ChaseEnemyState(
         IStateController controller,
-        ISetDestination destinationSetter,
         Transform agent,
+        NavMeshAgent navMeshAgent,
         Transform player,
         ISubject killerSubject,
         ChaseEnemyStateData chaseEnemyStateData
         ) : base(controller)
     {
-        this.destinationSetter = destinationSetter;
         this.agent = agent;
+        this.navMeshAgent = navMeshAgent;
         this.player = player;
         this.killerSubject = killerSubject;
         this.chaseEnemyStateData = chaseEnemyStateData;
@@ -39,14 +38,14 @@ public class ChaseEnemyState : State, IObserver
 
     public override void Update()
     {
+        // TODO Check line of sight too, SqrMagnitude
         if (Vector3.Distance(agent.position, player.position) <= chaseEnemyStateData.VisionRange)
         {
-            // Switch to Attack State
-            Debug.Log("Switch to Attack State");
+            controller.SwitchState<AttackEnemyState>();
             return;
         }
 
-        if (Vector3.Distance(agent.position, destination) <= Mathf.Epsilon) // Increment distance check
+        if (navMeshAgent.remainingDistance <= chaseEnemyStateData.MinDestinationRemainingDistance)
         {
             SetDestination();
         }
@@ -62,6 +61,8 @@ public class ChaseEnemyState : State, IObserver
         base.Exit();
 
         killerSubject.Remove(this);
+
+        navMeshAgent.isStopped = true;
     }
 
     public void OnNotify()
@@ -74,16 +75,19 @@ public class ChaseEnemyState : State, IObserver
         Vector2 temp =
             Random.insideUnitCircle * (Random.Range(chaseEnemyStateData.MinChaseDistance, chaseEnemyStateData.MaxChaseDistance));
 
-        destination = new Vector3(temp.x, 0, temp.y);
-
+        // XZ movement
+        Vector3 destination = new Vector3(agent.position.x + temp.x, 0, agent.position.z + temp.y);
         Debug.Log(destination);
 
-        // Inifite loop
-        //if (!destinationSetter.TrySetDestination(destination))
-        //{
-        //    SetDestination();
-        //}
-
-        destinationSetter.SetDestination(destination);
+        NavMeshPath path = new NavMeshPath();
+        navMeshAgent.CalculatePath(destination, path);
+        if (path.status == NavMeshPathStatus.PathComplete)
+        {
+            navMeshAgent.SetDestination(destination);
+        }
+        else // Can't reach destination
+        {
+            SetDestination();
+        }
     }
 }

@@ -240,7 +240,6 @@ GameObject:
   - component: {fileID: 5405183731304052919}
   - component: {fileID: 5405183731304045627}
   - component: {fileID: -7391368840678306826}
-  - component: {fileID: -1810625615807555977}
   - component: {fileID: 2707343990691471648}
   - component: {fileID: 542369995901330671}
   - component: {fileID: 420089946590574920}
@@ -492,18 +491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseEnemyStateData: {fileID: 11400000, guid: 83fb89e0a6b59e4438b92ab0bc3f44bf,
     type: 2}
---- !u!114 &-1810625615807555977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5405183731309056573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d361f82cdb2f3674c86300a57f8782c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2707343990691471648
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,3 +15,4 @@ MonoBehaviour:
   visionRange: 10
   minChaseDistance: 10
   maxChaseDistance: 20
+  minDestinationRemainingDistance: 1
