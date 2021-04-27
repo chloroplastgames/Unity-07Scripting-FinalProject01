@@ -5,19 +5,19 @@ using UnityEngine.AI;
 
 public class ChaseEnemyState : State, IObserver
 {
+    private readonly ChaseEnemyStateData chaseEnemyStateData;
     private readonly Transform agent;
     private readonly NavMeshAgent navMeshAgent;
     private readonly Transform player;
     private readonly ISubject killerSubject;
-    private readonly ChaseEnemyStateData chaseEnemyStateData;
 
     public ChaseEnemyState(
         IStateController controller,
+        ChaseEnemyStateData chaseEnemyStateData,
         Transform agent,
         NavMeshAgent navMeshAgent,
         Transform player,
-        ISubject killerSubject,
-        ChaseEnemyStateData chaseEnemyStateData
+        ISubject killerSubject
         ) : base(controller)
     {
         this.agent = agent;

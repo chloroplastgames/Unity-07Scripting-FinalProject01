@@ -4,11 +4,13 @@ using UnityEngine.AI;
 public class EnemyStateController : StateController
 {
     [SerializeField] private ChaseEnemyStateData chaseEnemyStateData;
+    [SerializeField] private AttackEnemyStateData attackEnemyStateData;
 
     private void Awake()
     {
         Transform player = FindObjectOfType<PlayerStateController>().transform; // TODO
         NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        IFire shooter = GetComponent<IFire>();
         ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         IState spawnEnemyState = new SpawnEnemyState(
@@ -16,14 +18,16 @@ public class EnemyStateController : StateController
             );
         IState chaseEnemyState = new ChaseEnemyState(
             this,
+            chaseEnemyStateData,
             gameObject.transform,
             navMeshAgent,
             player,
-            dieBehaviour,
-            chaseEnemyStateData
+            dieBehaviour
             );
         IState attackEnemyState = new AttackEnemyState(
             this,
+            attackEnemyStateData,
+            shooter,
             dieBehaviour
             );
         IState deadEnemyState = new DeadEnemyState(

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class WaitForSecondsSingleton : Singleton<WaitForSecondsSingleton>
 {
-    public void WaitForSeconds(float seconds, Action callback)
+    public Coroutine WaitForSeconds(float seconds, Action callback)
     {
-        StartCoroutine(WaitForSecondsRoutine(seconds, callback));
+        return StartCoroutine(WaitForSecondsRoutine(seconds, callback));
     }
 
     private IEnumerator WaitForSecondsRoutine(float seconds, Action callback)

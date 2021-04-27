@@ -491,6 +491,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseEnemyStateData: {fileID: 11400000, guid: 83fb89e0a6b59e4438b92ab0bc3f44bf,
     type: 2}
+  attackEnemyStateData: {fileID: 11400000, guid: 32eba637ba4d05543a77754094ec6870,
+    type: 2}
 --- !u!114 &2707343990691471648
 MonoBehaviour:
   m_ObjectHideFlags: 0
