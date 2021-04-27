@@ -2,20 +2,26 @@
 
 public class InactivePlayerState : State
 {
-    public InactivePlayerState(IStateController controller) : base(controller) { }
+    private readonly GameObject myGameObject;
+
+    public InactivePlayerState(
+        IStateController controller,
+        GameObject myGameObject
+        ) : base(controller)
+    {
+        this.myGameObject = myGameObject;
+    }
 
     public override void Enter()
     {
         base.Enter();
+
+        myGameObject.SetActive(false);
     }
 
     public override void Update()
     {
-        // TEST
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            controller.SwitchState<ActivePlayerState>();
-        }
+        return;
     }
 
     public override void FixedUpdate()

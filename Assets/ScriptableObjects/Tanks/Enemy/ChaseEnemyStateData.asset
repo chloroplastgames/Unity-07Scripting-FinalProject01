@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2572d90b9027d84db89c9651dfeab9d, type: 3}
   m_Name: ChaseEnemyStateData
   m_EditorClassIdentifier: 
-  visionRange: 10
-  minChaseDistance: 10
-  maxChaseDistance: 20
+  visionRange: 20
+  minChaseDistance: 20
+  maxChaseDistance: 30
   minDestinationRemainingDistance: 1

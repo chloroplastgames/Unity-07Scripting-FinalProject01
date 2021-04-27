@@ -15,7 +15,8 @@
             dieBehaviour
             );
         IState inactivePlayerState = new InactivePlayerState(
-            this
+            this,
+            gameObject
             );
         states.Add(typeof(ActivePlayerState), activePlayerState);
         states.Add(typeof(InactivePlayerState), inactivePlayerState);
@@ -23,7 +24,7 @@
 
     private void Start()
     {
-        SwitchState<InactivePlayerState>();
+        SwitchState<ActivePlayerState>();
     }
 
     private void Update()

@@ -19,11 +19,21 @@ public class CameraControl : MonoBehaviour
         myCamera = GetComponentInChildren<Camera>();
     }
 
+    // The tanks move in FixedUpdate
     private void FixedUpdate()
     {
         Move();
 
         Zoom();
+    }
+
+    public void ResetCamera()
+    {
+        FindAveragePositions();
+
+        transform.position = desiredPosition;
+
+        myCamera.orthographicSize = FindRequiredSize();
     }
 
     private void Move()

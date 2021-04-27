@@ -8,8 +8,7 @@ public class EnemyStateController : StateController
     private void Awake()
     {
         Transform player = FindObjectOfType<PlayerStateController>().transform; // TODO
-        Transform myAgent = gameObject.transform;
-        NavMeshAgent navMeshAgent = myAgent.GetComponent<NavMeshAgent>();
+        NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
         ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         IState spawnEnemyState = new SpawnEnemyState(
@@ -17,7 +16,7 @@ public class EnemyStateController : StateController
             );
         IState chaseEnemyState = new ChaseEnemyState(
             this,
-            myAgent,
+            gameObject.transform,
             navMeshAgent,
             player,
             dieBehaviour,
@@ -28,7 +27,8 @@ public class EnemyStateController : StateController
             dieBehaviour
             );
         IState deadEnemyState = new DeadEnemyState(
-            this
+            this,
+            gameObject
             );
         states.Add(typeof(SpawnEnemyState), spawnEnemyState);
         states.Add(typeof(ChaseEnemyState), chaseEnemyState);
