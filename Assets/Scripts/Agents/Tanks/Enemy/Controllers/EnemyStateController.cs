@@ -28,6 +28,8 @@ public class EnemyStateController : StateController
             this,
             attackEnemyStateData,
             shooter,
+            gameObject.transform,
+            player,
             dieBehaviour
             );
         IState deadEnemyState = new DeadEnemyState(

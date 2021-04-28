@@ -1,22 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AttackEnemyState : State, IObserver
 {
     private readonly AttackEnemyStateData attackEnemyStateData;
     private readonly IFire shooter;
+    private readonly Transform agent;
+    private readonly Transform player;
     private readonly ISubject killerSubject;
 
-    private Coroutine attackRoutine; // TODO: in order to stop it if necessary
+    private Coroutine attackRoutine;
 
     public AttackEnemyState(
         IStateController controller,
         AttackEnemyStateData attackEnemyStateData,
         IFire shooter,
+        Transform agent,
+        Transform player,
         ISubject killerSubject
         ) : base(controller)
     {
         this.attackEnemyStateData = attackEnemyStateData;
         this.shooter = shooter;
+        this.agent = agent;
+        this.player = player;
         this.killerSubject = killerSubject;
     }
 
@@ -31,7 +38,7 @@ public class AttackEnemyState : State, IObserver
 
     public override void Update()
     {
-        return;
+        LookToTarget();
     }
 
     public override void FixedUpdate()
@@ -44,6 +51,8 @@ public class AttackEnemyState : State, IObserver
         base.Exit();
 
         killerSubject.Remove(this);
+
+        RoutineHelperSingleton.Instance.StopCoroutine(attackRoutine);
     }
 
     public void OnNotify()
@@ -51,9 +60,16 @@ public class AttackEnemyState : State, IObserver
         controller.SwitchState<DeadEnemyState>();
     }
 
+    private void LookToTarget()
+    {
+        Vector3 directionToLook = player.position - agent.position;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToLook);
+        agent.rotation = Quaternion.Slerp(agent.rotation, targetRotation, attackEnemyStateData.RotationSpeed * Time.deltaTime);
+    }
+
     private void PrepareToShoot()
     {
-        attackRoutine = WaitForSecondsSingleton.Instance.WaitForSeconds(attackEnemyStateData.TimeBetweenAttacks, () => Shoot());
+        attackRoutine = RoutineHelperSingleton.Instance.WaitForSeconds(attackEnemyStateData.TimeBetweenAttacks, () => Shoot());
     }
 
     private void Shoot()

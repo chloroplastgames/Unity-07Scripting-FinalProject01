@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WaitForSecondsSingleton : Singleton<WaitForSecondsSingleton>
+public class RoutineHelperSingleton : Singleton<RoutineHelperSingleton>
 {
     public Coroutine WaitForSeconds(float seconds, Action callback)
     {
