@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class ChaseEnemyState : State, IObserver
 {
     private readonly ChaseEnemyStateData chaseEnemyStateData;
+    private readonly EnemyStateData enemyStateData;
     private readonly Transform agent;
     private readonly NavMeshAgent navMeshAgent;
     private readonly Transform player;
@@ -14,6 +15,7 @@ public class ChaseEnemyState : State, IObserver
     public ChaseEnemyState(
         IStateController controller,
         ChaseEnemyStateData chaseEnemyStateData,
+        EnemyStateData enemyStateData,
         Transform agent,
         NavMeshAgent navMeshAgent,
         Transform player,
@@ -25,6 +27,7 @@ public class ChaseEnemyState : State, IObserver
         this.player = player;
         this.killerSubject = killerSubject;
         this.chaseEnemyStateData = chaseEnemyStateData;
+        this.enemyStateData = enemyStateData;
     }
 
     public override void Enter()
@@ -39,13 +42,13 @@ public class ChaseEnemyState : State, IObserver
     public override void Update()
     {
         // TODO Check line of sight too, SqrMagnitude
-        if (Vector3.Distance(agent.position, player.position) <= chaseEnemyStateData.VisionRange)
+        if (Vector3.Distance(agent.position, player.position) <= enemyStateData.VisionRange)
         {
             controller.SwitchState<AttackEnemyState>();
             return;
         }
 
-        if (navMeshAgent.remainingDistance <= chaseEnemyStateData.MinDestinationRemainingDistance)
+        if (navMeshAgent.remainingDistance <= chaseEnemyStateData.DestinationRemainingDistance)
         {
             SetDestination();
         }

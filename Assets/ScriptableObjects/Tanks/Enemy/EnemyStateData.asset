@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2572d90b9027d84db89c9651dfeab9d, type: 3}
-  m_Name: ChaseEnemyStateData
+  m_Script: {fileID: 11500000, guid: e7fdd8cd52ae65745869aff7e3bd303b, type: 3}
+  m_Name: EnemyStateData
   m_EditorClassIdentifier: 
   visionRange: 20
-  minChaseDistance: 20
-  maxChaseDistance: 30
-  destinationRemainingDistance: 1

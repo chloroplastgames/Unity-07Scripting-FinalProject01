@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AttackEnemyStateData
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  timeBetweenAttacks: 0.5
+  timeBetweenAttacks: 1

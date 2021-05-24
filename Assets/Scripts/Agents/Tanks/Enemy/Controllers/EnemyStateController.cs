@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class EnemyStateController : StateController
 {
+    [SerializeField] private EnemyStateData enemyStateData;
     [SerializeField] private ChaseEnemyStateData chaseEnemyStateData;
     [SerializeField] private AttackEnemyStateData attackEnemyStateData;
 
@@ -19,6 +20,7 @@ public class EnemyStateController : StateController
         IState chaseEnemyState = new ChaseEnemyState(
             this,
             chaseEnemyStateData,
+            enemyStateData,
             gameObject.transform,
             navMeshAgent,
             player,
