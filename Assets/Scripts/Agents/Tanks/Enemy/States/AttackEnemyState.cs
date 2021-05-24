@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// TODO: Apply SOLID
+
+using UnityEngine;
 
 public class AttackEnemyState : State, IObserver
 {
@@ -9,6 +11,7 @@ public class AttackEnemyState : State, IObserver
     private readonly ISubject killerSubject;
 
     private Coroutine attackRoutine;
+    private Coroutine dodgeRoutine;
 
     public AttackEnemyState(
         IStateController controller,
@@ -33,6 +36,9 @@ public class AttackEnemyState : State, IObserver
         killerSubject.Add(this);
 
         PrepareToShoot();
+
+        dodgeRoutine = RoutineHelperSingleton.Instance.WaitForSeconds(
+            Random.Range(attackEnemyStateData.MinTimeToDodge, attackEnemyStateData.MaxTimeToDodge), () => SwitchToDodgeEnemyState());
     }
 
     public override void Update()
@@ -52,6 +58,7 @@ public class AttackEnemyState : State, IObserver
         killerSubject.Remove(this);
 
         RoutineHelperSingleton.Instance.StopCoroutine(attackRoutine);
+        RoutineHelperSingleton.Instance.StopCoroutine(dodgeRoutine);
     }
 
     public void OnNotify()
@@ -76,5 +83,10 @@ public class AttackEnemyState : State, IObserver
         shooter.Fire();
 
         PrepareToShoot();
+    }
+
+    private void SwitchToDodgeEnemyState()
+    {
+        controller.SwitchState<ChaseEnemyState>();
     }
 }

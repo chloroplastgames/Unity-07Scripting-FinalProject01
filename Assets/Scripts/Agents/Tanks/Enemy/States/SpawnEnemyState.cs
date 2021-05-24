@@ -1,10 +1,20 @@
-﻿public class SpawnEnemyState : State
+﻿public class SpawnEnemyState : State, IObserver
 {
-    public SpawnEnemyState(IStateController controller) : base(controller) { }
+    private readonly ISubject killerSubject;
+
+    public SpawnEnemyState(
+        IStateController controller,
+        ISubject killerSubject
+        ) : base(controller)
+    {
+        this.killerSubject = killerSubject;
+    }
 
     public override void Enter()
     {
         base.Enter();
+
+        killerSubject.Add(this);
 
         RoutineHelperSingleton.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
     }
@@ -21,7 +31,14 @@
 
     public override void Exit()
     {
+        killerSubject.Remove(this);
+
         base.Exit();
+    }
+
+    public void OnNotify()
+    {
+        controller.SwitchState<DeadEnemyState>();
     }
 
     private void SwitchToChaseEnemyState()

@@ -15,7 +15,8 @@ public class EnemyStateController : StateController
         ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         IState spawnEnemyState = new SpawnEnemyState(
-            this
+            this,
+            dieBehaviour
             );
         IState chaseEnemyState = new ChaseEnemyState(
             this,

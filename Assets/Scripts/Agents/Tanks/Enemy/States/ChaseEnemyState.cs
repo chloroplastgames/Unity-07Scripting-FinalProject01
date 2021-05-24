@@ -1,4 +1,4 @@
-﻿// TODO Apply SOLID
+﻿// TODO: Apply SOLID
 
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,12 +22,12 @@ public class ChaseEnemyState : State, IObserver
         ISubject killerSubject
         ) : base(controller)
     {
+        this.chaseEnemyStateData = chaseEnemyStateData;
+        this.enemyStateData = enemyStateData;
         this.agent = agent;
         this.navMeshAgent = navMeshAgent;
         this.player = player;
         this.killerSubject = killerSubject;
-        this.chaseEnemyStateData = chaseEnemyStateData;
-        this.enemyStateData = enemyStateData;
     }
 
     public override void Enter()
@@ -36,13 +36,14 @@ public class ChaseEnemyState : State, IObserver
 
         killerSubject.Add(this);
 
+        navMeshAgent.isStopped = false;
+
         SetDestination();
     }
 
     public override void Update()
     {
-        // TODO Check line of sight too, SqrMagnitude
-        if (Vector3.Distance(agent.position, player.position) <= enemyStateData.VisionRange)
+        if (Vector3.SqrMagnitude(player.position - agent.position) <= enemyStateData.VisionRange * enemyStateData.VisionRange)
         {
             controller.SwitchState<AttackEnemyState>();
             return;
@@ -78,7 +79,6 @@ public class ChaseEnemyState : State, IObserver
         Vector2 temp =
             Random.insideUnitCircle * (Random.Range(chaseEnemyStateData.MinChaseDistance, chaseEnemyStateData.MaxChaseDistance));
 
-        // XZ movement
         Vector3 destination = new Vector3(agent.position.x + temp.x, 0, agent.position.z + temp.y);
         Debug.Log(destination);
 
@@ -88,7 +88,7 @@ public class ChaseEnemyState : State, IObserver
         {
             navMeshAgent.SetDestination(destination);
         }
-        else // Can't reach destination
+        else
         {
             SetDestination();
         }

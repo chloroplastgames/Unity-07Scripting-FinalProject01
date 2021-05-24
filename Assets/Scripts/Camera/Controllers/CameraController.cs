@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     [SerializeField] private float dampTime = 0.2f;
     [SerializeField] private float screenEdgeBuffer = 4f;
@@ -19,7 +19,6 @@ public class CameraControl : MonoBehaviour
         myCamera = GetComponentInChildren<Camera>();
     }
 
-    // The tanks move in FixedUpdate
     private void FixedUpdate()
     {
         Move();
