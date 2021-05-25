@@ -1,26 +1,18 @@
-﻿using UnityEngine;
-
-public class ChaseEnemyState : State, IObserver
+﻿public class DodgeEnemyState : State, IObserver
 {
     private readonly EnemyStateData enemyStateData;
     private readonly INavMeshAgent navMeshAgent;
-    private readonly Transform agent;
-    private readonly Transform player;
     private readonly ISubject killerSubject;
 
-    public ChaseEnemyState(
+    public DodgeEnemyState(
         IStateController controller,
         EnemyStateData enemyStateData,
         INavMeshAgent navMeshAgent,
-        Transform agent,
-        Transform player,
         ISubject killerSubject
         ) : base(controller)
     {
         this.enemyStateData = enemyStateData;
         this.navMeshAgent = navMeshAgent;
-        this.agent = agent;
-        this.player = player;
         this.killerSubject = killerSubject;
     }
 
@@ -37,15 +29,9 @@ public class ChaseEnemyState : State, IObserver
 
     public override void Update()
     {
-        if (Vector3.SqrMagnitude(player.position - agent.position) <= enemyStateData.VisionRange * enemyStateData.VisionRange)
-        {
-            controller.SwitchState<AttackEnemyState>();
-            return;
-        }
-
         if (navMeshAgent.GetRemainingDistance() <= enemyStateData.RemainingDistance)
         {
-            SetDestination();
+            controller.SwitchState<ChaseEnemyState>();
         }
     }
 

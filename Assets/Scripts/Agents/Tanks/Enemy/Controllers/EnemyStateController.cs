@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyStateController : StateController
 {
     [SerializeField] private EnemyStateData enemyStateData;
-    [SerializeField] private ChaseEnemyStateData chaseEnemyStateData;
     [SerializeField] private AttackEnemyStateData attackEnemyStateData;
 
     private void Awake()
     {
         Transform player = FindObjectOfType<PlayerStateController>().transform; // TODO
-        NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        INavMeshAgent navMeshAgent = GetComponent<INavMeshAgent>();
         ICalculateTrajectoryShoot shooter = GetComponent<ICalculateTrajectoryShoot>();
         ILookAtTarget looker = GetComponent<ILookAtTarget>();
         ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
@@ -22,9 +20,8 @@ public class EnemyStateController : StateController
         IState chaseEnemyState = new ChaseEnemyState(
             this,
             enemyStateData,
-            chaseEnemyStateData,
-            gameObject.transform,
             navMeshAgent,
+            gameObject.transform,
             player,
             dieBehaviour
             );
@@ -37,6 +34,12 @@ public class EnemyStateController : StateController
             player,
             dieBehaviour
             );
+        IState dodgeEnemyState = new DodgeEnemyState(
+            this,
+            enemyStateData,
+            navMeshAgent,
+            dieBehaviour
+            );
         IState deadEnemyState = new DeadEnemyState(
             this,
             gameObject
@@ -44,6 +47,7 @@ public class EnemyStateController : StateController
         states.Add(typeof(SpawnEnemyState), spawnEnemyState);
         states.Add(typeof(ChaseEnemyState), chaseEnemyState);
         states.Add(typeof(AttackEnemyState), attackEnemyState);
+        states.Add(typeof(DodgeEnemyState), dodgeEnemyState);
         states.Add(typeof(DeadEnemyState), deadEnemyState);
     }
 

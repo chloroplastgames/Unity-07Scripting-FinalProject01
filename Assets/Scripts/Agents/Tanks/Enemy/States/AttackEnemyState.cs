@@ -83,6 +83,6 @@ public class AttackEnemyState : State, IObserver
 
     private void SwitchToDodgeEnemyState()
     {
-        controller.SwitchState<ChaseEnemyState>();
+        controller.SwitchState<DodgeEnemyState>();
     }
 }

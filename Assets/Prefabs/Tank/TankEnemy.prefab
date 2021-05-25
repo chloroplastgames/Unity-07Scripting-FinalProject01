@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 5405183731304052919}
   - component: {fileID: 5405183731304045627}
   - component: {fileID: -7391368840678306826}
+  - component: {fileID: 4933751553933436208}
   - component: {fileID: 4761818052294735104}
   - component: {fileID: 9017238408056383834}
   - component: {fileID: 542369995901330671}
@@ -495,6 +496,18 @@ MonoBehaviour:
     type: 2}
   attackEnemyStateData: {fileID: 11400000, guid: 32eba637ba4d05543a77754094ec6870,
     type: 2}
+--- !u!114 &4933751553933436208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5405183731309056573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22239251fde13b54481ee3c19230449b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4761818052294735104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269185e5d325275408a8d0f8444693fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 2
+  speed: 2
 --- !u!114 &9017238408056383834
 MonoBehaviour:
   m_ObjectHideFlags: 0
