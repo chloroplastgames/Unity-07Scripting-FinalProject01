@@ -11,7 +11,8 @@ public class EnemyStateController : StateController
     {
         Transform player = FindObjectOfType<PlayerStateController>().transform; // TODO
         NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-        IFire shooter = GetComponent<IFire>();
+        ICalculateTrajectoryShoot shooter = GetComponent<ICalculateTrajectoryShoot>();
+        ILookAtTarget looker = GetComponent<ILookAtTarget>();
         ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         IState spawnEnemyState = new SpawnEnemyState(
@@ -20,8 +21,8 @@ public class EnemyStateController : StateController
             );
         IState chaseEnemyState = new ChaseEnemyState(
             this,
-            chaseEnemyStateData,
             enemyStateData,
+            chaseEnemyStateData,
             gameObject.transform,
             navMeshAgent,
             player,
@@ -31,6 +32,7 @@ public class EnemyStateController : StateController
             this,
             attackEnemyStateData,
             shooter,
+            looker,
             gameObject.transform,
             player,
             dieBehaviour

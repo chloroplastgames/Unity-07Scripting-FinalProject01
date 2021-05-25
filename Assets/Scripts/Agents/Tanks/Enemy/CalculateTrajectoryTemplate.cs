@@ -1,8 +1,8 @@
-﻿// TODO: Merge with AttackEnemyState and ShootBehaviour
+﻿// TEMPLATE
 
 using UnityEngine;
 
-public class CalculateTrajectoryBehaviour : MonoBehaviour, IFire
+public abstract class CalculateTrajectoryTemplate : MonoBehaviour
 {
     [SerializeField] private Rigidbody shellPrefab;
     [SerializeField] private Transform fireTransform;
@@ -30,12 +30,12 @@ public class CalculateTrajectoryBehaviour : MonoBehaviour, IFire
         float? angle = RotateTurret();
         if (angle != null && Vector3.Angle(direction, transform.forward) < targetPrecision)
         {
-            Fire();
+            Shoot();
         }
     }
 
     // ShootBehaviour
-    public void Fire()
+    public void Shoot()
     {
         if (canShoot)
         {

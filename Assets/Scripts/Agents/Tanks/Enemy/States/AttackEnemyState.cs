@@ -1,22 +1,22 @@
-﻿// TODO: Refactor with CalculateTrajectoryBehaviour
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AttackEnemyState : State, IObserver
 {
     private readonly AttackEnemyStateData attackEnemyStateData;
-    private readonly IFire shooter;
+    private readonly ICalculateTrajectoryShoot shooter;
+    private readonly ILookAtTarget looker;
     private readonly Transform agent;
     private readonly Transform player;
     private readonly ISubject killerSubject;
 
-    private Coroutine attackRoutine;
+    private bool canShoot = true;
     private Coroutine dodgeRoutine;
 
     public AttackEnemyState(
         IStateController controller,
         AttackEnemyStateData attackEnemyStateData,
-        IFire shooter,
+        ICalculateTrajectoryShoot shooter,
+        ILookAtTarget looker,
         Transform agent,
         Transform player,
         ISubject killerSubject
@@ -24,6 +24,7 @@ public class AttackEnemyState : State, IObserver
     {
         this.attackEnemyStateData = attackEnemyStateData;
         this.shooter = shooter;
+        this.looker = looker;
         this.agent = agent;
         this.player = player;
         this.killerSubject = killerSubject;
@@ -35,15 +36,20 @@ public class AttackEnemyState : State, IObserver
 
         killerSubject.Add(this);
 
-        // PrepareToShoot();
-
         dodgeRoutine = RoutineHelperSingleton.Instance.WaitForSeconds(
             Random.Range(attackEnemyStateData.MinTimeToDodge, attackEnemyStateData.MaxTimeToDodge), () => SwitchToDodgeEnemyState());
     }
 
     public override void Update()
     {
-        // LookToTarget();
+        Vector3 direction = looker.LookAtTarget(player);
+
+        if (Vector3.Angle(direction, agent.forward) < attackEnemyStateData.RotateToShootPrecision && canShoot)
+        {
+            shooter.CalculateTrajectoryShoot(player);
+            canShoot = false;
+            CanShootRoutine();
+        }
     }
 
     public override void FixedUpdate()
@@ -57,7 +63,6 @@ public class AttackEnemyState : State, IObserver
 
         killerSubject.Remove(this);
 
-        // RoutineHelperSingleton.Instance.StopCoroutine(attackRoutine);
         RoutineHelperSingleton.Instance.StopCoroutine(dodgeRoutine);
     }
 
@@ -66,23 +71,14 @@ public class AttackEnemyState : State, IObserver
         controller.SwitchState<DeadEnemyState>();
     }
 
-    private void LookToTarget()
+    private void CanShootRoutine()
     {
-        Vector3 directionToLook = player.position - agent.position;
-        Quaternion targetRotation = Quaternion.LookRotation(directionToLook);
-        agent.rotation = Quaternion.Slerp(agent.rotation, targetRotation, attackEnemyStateData.RotationSpeed * Time.deltaTime);
+        RoutineHelperSingleton.Instance.WaitForSeconds(attackEnemyStateData.TimeBetweenAttacks, () => CanShoot());
     }
 
-    private void PrepareToShoot()
+    private void CanShoot()
     {
-        attackRoutine = RoutineHelperSingleton.Instance.WaitForSeconds(attackEnemyStateData.TimeBetweenAttacks, () => Shoot());
-    }
-
-    private void Shoot()
-    {
-        shooter.Fire();
-
-        PrepareToShoot();
+        canShoot = true;
     }
 
     private void SwitchToDodgeEnemyState()

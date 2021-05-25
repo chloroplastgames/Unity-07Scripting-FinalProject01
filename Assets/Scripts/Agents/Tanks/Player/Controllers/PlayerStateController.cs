@@ -4,7 +4,7 @@
     {
         ITranslate translator = GetComponent<ITranslate>();
         IRotate rotator = GetComponent<IRotate>();
-        IFire shooter = GetComponent<IFire>();
+        IShoot shooter = GetComponent<IShoot>();
         ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
 
         IState activePlayerState = new ActivePlayerState(

@@ -4,7 +4,7 @@ public class ActivePlayerState : State, IObserver
 {
     private readonly ITranslate translator;
     private readonly IRotate rotator;
-    private readonly IFire shooter;
+    private readonly IShoot shooter;
     private readonly ISubject killerSubject;
 
     private float translationSense;
@@ -14,7 +14,7 @@ public class ActivePlayerState : State, IObserver
         IStateController controller,
         ITranslate translator,
         IRotate rotator,
-        IFire shooter,
+        IShoot shooter,
         ISubject killerSubject
         ) : base(controller)
     {
@@ -38,7 +38,7 @@ public class ActivePlayerState : State, IObserver
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            shooter.Fire();
+            shooter.Shoot();
         }
     }
 
