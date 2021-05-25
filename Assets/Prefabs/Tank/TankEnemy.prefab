@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 5405183731304052919}
   - component: {fileID: 5405183731304045627}
   - component: {fileID: -7391368840678306826}
-  - component: {fileID: 2707343990691471648}
+  - component: {fileID: 134593780812206005}
   - component: {fileID: 542369995901330671}
   - component: {fileID: 420089946590574920}
   - component: {fileID: 7795216693410662961}
@@ -494,7 +494,7 @@ MonoBehaviour:
     type: 2}
   attackEnemyStateData: {fileID: 11400000, guid: 32eba637ba4d05543a77754094ec6870,
     type: 2}
---- !u!114 &2707343990691471648
+--- !u!114 &134593780812206005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -503,12 +503,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5405183731309056573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df6b048cce62b6488109317e287c3d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 23bce4fb2e913b141a99d196b6090dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shellPrefab: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   fireTransform: {fileID: 5405183731308794319}
   launchForce: 20
+  target: {fileID: 0}
+  turret: {fileID: 5405183731308739375}
+  turnSpeed: 2
+  isLowAngle: 1
+  targetPrecision: 10
 --- !u!114 &542369995901330671
 MonoBehaviour:
   m_ObjectHideFlags: 0

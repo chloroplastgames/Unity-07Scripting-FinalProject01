@@ -1,4 +1,4 @@
-﻿// TODO: Apply SOLID
+﻿// TODO: Refactor with CalculateTrajectoryBehaviour
 
 using UnityEngine;
 
@@ -35,7 +35,7 @@ public class AttackEnemyState : State, IObserver
 
         killerSubject.Add(this);
 
-        PrepareToShoot();
+        // PrepareToShoot();
 
         dodgeRoutine = RoutineHelperSingleton.Instance.WaitForSeconds(
             Random.Range(attackEnemyStateData.MinTimeToDodge, attackEnemyStateData.MaxTimeToDodge), () => SwitchToDodgeEnemyState());
@@ -43,7 +43,7 @@ public class AttackEnemyState : State, IObserver
 
     public override void Update()
     {
-        LookToTarget();
+        // LookToTarget();
     }
 
     public override void FixedUpdate()
@@ -57,7 +57,7 @@ public class AttackEnemyState : State, IObserver
 
         killerSubject.Remove(this);
 
-        RoutineHelperSingleton.Instance.StopCoroutine(attackRoutine);
+        // RoutineHelperSingleton.Instance.StopCoroutine(attackRoutine);
         RoutineHelperSingleton.Instance.StopCoroutine(dodgeRoutine);
     }
 
