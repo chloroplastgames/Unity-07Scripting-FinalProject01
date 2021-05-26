@@ -11,5 +11,5 @@ public class AttackEnemyStateData : ScriptableObject
     [SerializeField] private float timeBetweenAttacks = 1f;
     [SerializeField] private float minTimeToDodge = 3f;
     [SerializeField] private float maxTimeToDodge = 4f;
-    [SerializeField] private float rotateToShootPrecision = 10f;
+    [SerializeField] private float rotateToShootPrecision = 5f;
 }

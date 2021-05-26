@@ -2,7 +2,7 @@
 
 public class LookAtTargetBehaviour : MonoBehaviour, ILookAtTarget
 {
-    [SerializeField] private float speed = 2f;
+    [SerializeField] private float speed = 3f;
 
     public Vector3 LookAtTarget(Transform target)
     {

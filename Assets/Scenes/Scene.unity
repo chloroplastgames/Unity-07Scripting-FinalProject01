@@ -1901,5 +1901,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 9017238408056383834, guid: e32eb3488fce49e42980bbb34be65216,
+        type: 3}
+      propertyPath: anglePrecision
+      value: 0.08
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e32eb3488fce49e42980bbb34be65216, type: 3}

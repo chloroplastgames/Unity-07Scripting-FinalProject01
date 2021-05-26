@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2021053c90308334dae009c5d8525c28, type: 3}
   m_Name: AttackEnemyStateData
   m_EditorClassIdentifier: 
-  rotationSpeed: 2
   timeBetweenAttacks: 1
+  minTimeToDodge: 3
+  maxTimeToDodge: 4
+  rotateToShootPrecision: 5
