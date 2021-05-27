@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public Transform[] Targets {
+        get
+        {
+            return targets;
+        }
+        set
+        {
+            targets = value;
+        }
+    }
+
     [SerializeField] private float dampTime = 0.2f;
     [SerializeField] private float screenEdgeBuffer = 4f;
     [SerializeField] private float minSize = 6.5f;
-    [SerializeField] private Transform[] targets;
+    [SerializeField] private Transform[] targets; // TODO: Remove SerializeField
 
     private Camera myCamera;
     private float zoomSpeed;
