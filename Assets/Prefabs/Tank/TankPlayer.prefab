@@ -9799,7 +9799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &446194
 Transform:
   m_ObjectHideFlags: 0
@@ -10093,7 +10093,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellPrefab: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   fireTransform: {fileID: 435794}
-  turret: {fileID: 494770}
   launchForce: 20
 --- !u!114 &-3709291175885122702
 MonoBehaviour:
