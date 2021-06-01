@@ -1,5 +1,9 @@
-﻿public class PlayerStateController : StateController
+﻿using UnityEngine;
+
+public class PlayerStateController : StateController
 {
+    [SerializeField] private PlayerControlData control;
+
     private void Awake()
     {
         ITranslate translator = GetComponent<ITranslate>();
@@ -12,7 +16,8 @@
             translator,
             rotator,
             shooter,
-            dieBehaviour
+            dieBehaviour,
+            control
             );
         IState inactivePlayerState = new InactivePlayerState(
             this,

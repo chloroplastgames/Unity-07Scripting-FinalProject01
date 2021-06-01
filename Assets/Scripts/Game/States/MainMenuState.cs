@@ -2,18 +2,18 @@
 
 public class MainMenuState : State
 {
-    private readonly MainMenu canvas;
+    private readonly CanvasMainMenu mainMenu;
     private readonly GameObject cameraMainMenu;
     private readonly GameObject cameraGameplay;
 
     public MainMenuState(
         IStateController controller,
-        MainMenu canvas,
+        CanvasMainMenu mainMenu,
         GameObject cameraMainMenu,
         GameObject cameraGameplay
         ) : base(controller)
     {
-        this.canvas = canvas;
+        this.mainMenu = mainMenu;
         this.cameraMainMenu = cameraMainMenu;
         this.cameraGameplay = cameraGameplay;
     }
@@ -24,11 +24,11 @@ public class MainMenuState : State
 
         cameraGameplay.SetActive(false);
         cameraMainMenu.SetActive(true);
-        canvas.gameObject.SetActive(true);
+        mainMenu.gameObject.SetActive(true);
 
-        canvas.ButtonPvsP.onClick.AddListener(() => SwitchToCharacterSelectionPvsPState());
-        canvas.ButtonPvsCPU.onClick.AddListener(() => SwitchToCharacterSelectionPvsCPUState());
-        canvas.ButtonExit.onClick.AddListener(() => ExitGame());
+        mainMenu.ButtonPvsP.onClick.AddListener(() => SelectPvsP());
+        mainMenu.ButtonPvsCPU.onClick.AddListener(() => SelectPvsCPU());
+        mainMenu.ButtonExit.onClick.AddListener(() => ExitGame());
     }
 
     public override void Update()
@@ -45,26 +45,29 @@ public class MainMenuState : State
     {
         base.Exit();
 
-        canvas.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
 
-        canvas.ButtonPvsP.onClick.RemoveAllListeners();
-        canvas.ButtonPvsCPU.onClick.RemoveAllListeners();
-        canvas.ButtonExit.onClick.RemoveAllListeners();
+        mainMenu.ButtonPvsP.onClick.RemoveAllListeners();
+        mainMenu.ButtonPvsCPU.onClick.RemoveAllListeners();
+        mainMenu.ButtonExit.onClick.RemoveAllListeners();
     }
 
-    private void SwitchToCharacterSelectionPvsPState()
+    private void SelectPvsP()
     {
+        GameManager.Instance.SetPvsP(); // TODO
+
         controller.SwitchState<CharacterSelectionPvsPState>();
     }
 
-    private void SwitchToCharacterSelectionPvsCPUState()
+    private void SelectPvsCPU()
     {
+        GameManager.Instance.SetPvsCPU(); // TODO
+
         controller.SwitchState<CharacterSelectionPvsCPUSTate>();
     }
 
     private void ExitGame()
     {
-        Debug.Log("Exit game...");
         Application.Quit();
     }
 }

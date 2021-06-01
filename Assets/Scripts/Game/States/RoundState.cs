@@ -2,23 +2,21 @@
 
 public class RoundState : State
 {
-    private readonly GameObject canvasHUD;
+    private readonly GameObject canvas;
 
     public RoundState(
         IStateController controller,
-        GameObject canvasHUD
+        GameObject canvas
         ) : base(controller)
     {
-        this.canvasHUD = canvasHUD;
+        this.canvas = canvas;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        canvasHUD.SetActive(true);
-
-        RoutineHelperSingleton.Instance.WaitForSeconds(5f, () => SwitchToGameOverState());
+        canvas.SetActive(true);
     }
 
     public override void Update()
@@ -35,7 +33,7 @@ public class RoundState : State
     {
         base.Exit();
 
-        canvasHUD.SetActive(false);
+        canvas.SetActive(false);
     }
 
     private void SwitchToGameOverState()

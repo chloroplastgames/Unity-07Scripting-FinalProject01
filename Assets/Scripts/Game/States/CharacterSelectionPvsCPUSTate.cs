@@ -2,29 +2,38 @@
 
 public class CharacterSelectionPvsCPUSTate : State
 {
-    private readonly CharacterSelectionPvsCPU canvas;
+    private readonly GameObject canvas;
+    private readonly IPlayerCharacterSelection playerCharacterSelector;
+    private readonly PlayerControlData player1Control;
+
+    private bool routineStarted;
 
     public CharacterSelectionPvsCPUSTate(
         IStateController controller,
-        CharacterSelectionPvsCPU canvas
+        GameObject canvas,
+        IPlayerCharacterSelection playerCharacterSelector,
+        PlayerControlData player1Control
         ) : base(controller)
     {
         this.canvas = canvas;
+        this.playerCharacterSelector = playerCharacterSelector;
+        this.player1Control = player1Control;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        canvas.gameObject.SetActive(true);
+        routineStarted = false;
+
+        canvas.SetActive(true);
     }
 
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            controller.SwitchState<CountdownState>();
-        }
+        if (routineStarted) return;
+
+        GetPlayerInput();
     }
 
     public override void FixedUpdate()
@@ -36,8 +45,42 @@ public class CharacterSelectionPvsCPUSTate : State
     {
         base.Exit();
 
-        canvas.gameObject.SetActive(false);
+        canvas.SetActive(false);
 
-        // Reset
+        playerCharacterSelector.ResetSelection();
+    }
+
+    private void SwitchToCountdownState()
+    {
+        controller.SwitchState<CountdownState>();
+    }
+
+    private void SwitchToMainMenuState()
+    {
+        controller.SwitchState<MainMenuState>();
+    }
+
+    private void GetPlayerInput()
+    {
+        if (Input.GetKeyDown(player1Control.TurnLeft))
+        {
+            playerCharacterSelector.PreviousSelection();
+        }
+        else if (Input.GetKeyDown(player1Control.TurnRight))
+        {
+            playerCharacterSelector.NextSelection();
+        }
+        else if (Input.GetKeyDown(player1Control.Special))
+        {
+            SwitchToMainMenuState();
+        }
+        else if (Input.GetKeyDown(player1Control.Shoot))
+        {
+            playerCharacterSelector.SetSelection();
+
+            RoutineHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
+
+            routineStarted = true;
+        }
     }
 }

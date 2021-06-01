@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewEnemyStateData", menuName = "ScriptableObject/EnemyStateData")]
+[CreateAssetMenu(fileName = "NewEnemyState", menuName = "ScriptableObject/Agents/Tanks/Enemy/States/EnemyState")]
 public class EnemyStateData : ScriptableObject
 {
     public int VisionRange => visionRange;

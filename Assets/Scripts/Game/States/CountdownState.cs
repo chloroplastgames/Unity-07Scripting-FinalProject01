@@ -2,18 +2,22 @@
 
 public class CountdownState : State
 {
-    private readonly Countdown canvas;
+    private readonly CanvasCountdown countdown;
     private readonly GameObject cameraGameplay;
     private readonly GameObject cameraMainMenu;
 
+    private const int CountdownTime = 3;
+
+    private int time;
+
     public CountdownState(
         IStateController controller,
-        Countdown canvas,
+        CanvasCountdown countdown,
         GameObject cameraGameplay,
         GameObject cameraMainMenu
         ) : base(controller)
     {
-        this.canvas = canvas;
+        this.countdown = countdown;
         this.cameraGameplay = cameraGameplay;
         this.cameraMainMenu = cameraMainMenu;
     }
@@ -24,11 +28,11 @@ public class CountdownState : State
 
         cameraMainMenu.SetActive(false);
         cameraGameplay.SetActive(true);
-        canvas.gameObject.SetActive(true);
+        countdown.gameObject.SetActive(true);
 
-        RoutineHelperSingleton.Instance.WaitForSeconds(1f, () => ChangeCountdownText(2));
-        RoutineHelperSingleton.Instance.WaitForSeconds(2f, () => ChangeCountdownText(1));
-        RoutineHelperSingleton.Instance.WaitForSeconds(3f, () => SwitchToRoundState());
+        time = CountdownTime;
+
+        ChangeCountdownText(time);
     }
 
     public override void Update()
@@ -45,15 +49,21 @@ public class CountdownState : State
     {
         base.Exit();
 
-        canvas.gameObject.SetActive(false);
-
-        // Reset
-        canvas.CountdownText.text = 3.ToString();
+        countdown.gameObject.SetActive(false);
     }
 
-    private void ChangeCountdownText(int number)
+    private void ChangeCountdownText(int time)
     {
-        canvas.CountdownText.text = number.ToString();
+        if (time == 0)
+        {
+            SwitchToRoundState();
+            return;
+        }
+
+        countdown.CountdownText.text = time.ToString();
+        time--;
+
+        RoutineHelperSingleton.Instance.WaitForSeconds(1f, () => ChangeCountdownText(time));
     }
 
     private void SwitchToRoundState()

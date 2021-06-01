@@ -2,43 +2,52 @@
 
 public class CharacterSelectionPvsPState : State
 {
-    private readonly CharacterSelectionPvsP canvas;
+    private readonly GameObject canvas;
+    private readonly IPlayerCharacterSelection player1CharacterSelector;
+    private readonly IPlayerCharacterSelection player2CharacterSelector;
+    private readonly PlayerControlData player1Control;
+    private readonly PlayerControlData player2Control;
 
-    private bool player1Ready;
-    private bool player2Ready;
+    private bool routineStarted;
 
     public CharacterSelectionPvsPState(
         IStateController controller,
-        CharacterSelectionPvsP canvas
+        GameObject canvas,
+        IPlayerCharacterSelection player1CharacterSelector,
+        IPlayerCharacterSelection player2CharacterSelector,
+        PlayerControlData player1Control,
+        PlayerControlData player2Control
         ) : base(controller)
     {
         this.canvas = canvas;
+        this.player1CharacterSelector = player1CharacterSelector;
+        this.player2CharacterSelector = player2CharacterSelector;
+        this.player1Control = player1Control;
+        this.player2Control = player2Control;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        canvas.gameObject.SetActive(true);
+        routineStarted = false;
+
+        canvas.SetActive(true);
     }
 
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B) && !player1Ready)
-        {
-            canvas.Player1Text.text = "READY!";
-            player1Ready = true;
-        }
+        if (routineStarted) return;
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && !player2Ready)
-        {
-            canvas.Player2Text.text = "READY!";
-            player2Ready = true;
-        }
+        GetPlayer1Input();
 
-        if (player1Ready && player2Ready)
+        GetPlayer2Input();
+
+        if (PlayersAreReady())
         {
-            controller.SwitchState<CountdownState>();
+            RoutineHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
+
+            routineStarted = true;
         }
     }
 
@@ -51,8 +60,60 @@ public class CharacterSelectionPvsPState : State
     {
         base.Exit();
 
-        canvas.gameObject.SetActive(false);
+        canvas.SetActive(false);
 
-        // Reset
+        player1CharacterSelector.ResetSelection();
+        player2CharacterSelector.ResetSelection();
+    }
+
+    private bool PlayersAreReady()
+    {
+        return player1CharacterSelector.IsReady() && player2CharacterSelector.IsReady();
+    }
+
+    private void SwitchToCountdownState()
+    {
+        controller.SwitchState<CountdownState>();
+    }
+
+    private void SwitchToMainMenuState()
+    {
+        controller.SwitchState<MainMenuState>();
+    }
+
+    private void GetPlayer1Input()
+    {
+        if (Input.GetKeyDown(player1Control.TurnLeft))
+        {
+            player1CharacterSelector.PreviousSelection();
+        }
+        else if (Input.GetKeyDown(player1Control.TurnRight))
+        {
+            player1CharacterSelector.NextSelection();
+        }
+        else if (Input.GetKeyDown(player1Control.Shoot))
+        {
+            player1CharacterSelector.SetSelection();
+        }
+        else if (Input.GetKeyDown(player1Control.Special))
+        {
+            SwitchToMainMenuState();
+        }
+    }
+
+    private void GetPlayer2Input()
+    {
+        if (Input.GetKeyDown(player2Control.TurnLeft))
+        {
+            player2CharacterSelector.PreviousSelection();
+        }
+        else if (Input.GetKeyDown(player2Control.TurnRight))
+        {
+            player2CharacterSelector.NextSelection();
+        }
+        else if (Input.GetKeyDown(player2Control.Shoot))
+        {
+            player2CharacterSelector.SetSelection();
+        }
     }
 }

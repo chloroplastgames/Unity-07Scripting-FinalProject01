@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewAttackEnemyStateData", menuName = "ScriptableObject/AttackEnemyStateData")]
+[CreateAssetMenu(fileName = "NewAttackEnemyState", menuName = "ScriptableObject/Agents/Tanks/Enemy/States/AttackEnemyState")]
 public class AttackEnemyStateData : ScriptableObject
 {
     public float TimeBetweenAttacks => timeBetweenAttacks;

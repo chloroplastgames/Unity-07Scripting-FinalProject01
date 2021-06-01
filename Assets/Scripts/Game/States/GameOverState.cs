@@ -1,23 +1,23 @@
 ﻿public class GameOverState : State
 {
-    private readonly GameOver canvas;
+    private readonly CanvasGameOver gameOver;
 
     public GameOverState(
         IStateController controller,
-        GameOver canvas
+        CanvasGameOver gameOver
         ) : base(controller)
     {
-        this.canvas = canvas;
+        this.gameOver = gameOver;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        canvas.gameObject.SetActive(true);
+        gameOver.gameObject.SetActive(true);
 
-        canvas.ButtonMenu.onClick.AddListener(() => SwitchToMainMenuState());
-        canvas.ButtonRestart.onClick.AddListener(() => SwitchToCountdownState());
+        gameOver.ButtonMenu.onClick.AddListener(() => SwitchToMainMenuState());
+        gameOver.ButtonRestart.onClick.AddListener(() => SwitchToCountdownState());
     }
 
     public override void Update()
@@ -34,10 +34,10 @@
     {
         base.Exit();
 
-        canvas.gameObject.SetActive(false);
+        gameOver.gameObject.SetActive(false);
 
-        canvas.ButtonMenu.onClick.RemoveAllListeners();
-        canvas.ButtonRestart.onClick.RemoveAllListeners();
+        gameOver.ButtonMenu.onClick.RemoveAllListeners();
+        gameOver.ButtonRestart.onClick.RemoveAllListeners();
     }
 
     private void SwitchToMainMenuState()

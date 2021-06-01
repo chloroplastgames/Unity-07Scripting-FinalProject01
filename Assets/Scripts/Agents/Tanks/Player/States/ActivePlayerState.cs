@@ -6,6 +6,7 @@ public class ActivePlayerState : State, IObserver
     private readonly IRotate rotator;
     private readonly IShoot shooter;
     private readonly ISubject killerSubject;
+    private readonly PlayerControlData control;
 
     private float translationSense;
     private float rotationSense;
@@ -15,13 +16,15 @@ public class ActivePlayerState : State, IObserver
         ITranslate translator,
         IRotate rotator,
         IShoot shooter,
-        ISubject killerSubject
+        ISubject killerSubject,
+        PlayerControlData control
         ) : base(controller)
     {
         this.translator = translator;
         this.rotator = rotator;
         this.shooter = shooter;
         this.killerSubject = killerSubject;
+        this.control = control;
     }
 
     public override void Enter()
@@ -33,13 +36,15 @@ public class ActivePlayerState : State, IObserver
 
     public override void Update()
     {
-        translationSense = Input.GetAxis("Vertical1");
-        rotationSense = Input.GetAxis("Horizontal1");
+        if (Input.GetKey(control.Forward)) translationSense = 1f;
+        else if (Input.GetKey(control.Backward)) translationSense = -1f;
+        else translationSense = 0f;
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            shooter.Shoot();
-        }
+        if (Input.GetKey(control.TurnRight)) rotationSense = 1f;
+        else if (Input.GetKey(control.TurnLeft)) rotationSense = -1f;
+        else rotationSense = 0f;
+
+        if (Input.GetKeyDown(control.Shoot)) shooter.Shoot();
     }
 
     public override void FixedUpdate()
