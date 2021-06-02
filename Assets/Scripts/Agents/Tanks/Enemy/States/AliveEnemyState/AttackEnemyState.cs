@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AttackEnemyState : State
+public class AttackEnemyState : AliveEnemyStateBase
 {
     private readonly AttackEnemyStateData attackEnemyStateData;
     private readonly ICalculateTrajectoryShoot shooter;
@@ -72,10 +72,5 @@ public class AttackEnemyState : State
     private void SwitchToDodgeEnemyState()
     {
         controller.SwitchState<DodgeEnemyState>();
-    }
-
-    private void SwitchToDeadEnemyState()
-    {
-        controller.SwitchState<DeadEnemyState>();
     }
 }

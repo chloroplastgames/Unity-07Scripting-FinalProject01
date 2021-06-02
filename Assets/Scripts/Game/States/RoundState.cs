@@ -57,32 +57,31 @@ public class RoundState : State, IObserver<TimerArgs>, IObserver<DieArgs>
     {
         EndRound();
 
-        // Get tanks health
-        // Get round winner
-        // Get game winner
-
-        // is last round => Game over
-        // else => Countdown
-
-        SwitchToCountdownState(); // TEST
+        CheckGameWinner();
     }
 
     public void OnNotify(DieArgs parameter)
     {
         EndRound();
 
-        // Get round winner
-        // Get game winner
-
-        // is last round => Game over
-        // else => Countdown
-
-        SwitchToCountdownState(); // TEST
+        CheckGameWinner();
     }
 
     private void EndRound()
     {
         GameManagerSingleton.Instance.EndRound();
+    }
+
+    private void CheckGameWinner()
+    {
+        if (GameManagerSingleton.Instance.GameWinner == null)
+        {
+            SwitchToCountdownState();
+        }
+        else
+        {
+            SwitchToGameOverState();
+        }
     }
 
     private void SwitchToCountdownState()

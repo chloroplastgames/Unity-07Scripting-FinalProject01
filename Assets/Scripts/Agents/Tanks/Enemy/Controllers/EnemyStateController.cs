@@ -47,7 +47,7 @@ public class EnemyStateController : StateController
 
     private void Start()
     {
-        SwitchState<SpawnEnemyState>();
+        SwitchState<DeadEnemyState>();
     }
 
     private void Update()

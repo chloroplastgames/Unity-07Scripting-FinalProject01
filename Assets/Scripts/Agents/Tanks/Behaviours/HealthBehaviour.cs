@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-public class HealthBehaviour : MonoBehaviour, IDamageable
+public class HealthBehaviour : Subject<HealthArgs>, IDamageable, IResetHealth, ICurrentHealth
 {
+    public int CurrentHealth => currentHealth;
+
     [SerializeField] private int maxHealth;
 
     private int currentHealth;
@@ -20,14 +22,26 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
 
         print($"{gameObject} took {damageAmount} damage! {currentHealth} health left");
 
+        Notify();
+
         if (currentHealth == 0)
         {
             killer.Kill();
         }
     }
 
-    private void ResetHealth()
+    public void ResetHealth()
     {
         currentHealth = maxHealth;
+    }
+
+    public override void Notify()
+    {
+        IObserver<HealthArgs>[] observersPhoto = observers.ToArray();
+
+        foreach (IObserver<HealthArgs> observer in observersPhoto)
+        {
+            observer.OnNotify(new HealthArgs(currentHealth, maxHealth));
+        }
     }
 }

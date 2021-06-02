@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AlivePlayerState : State
+public class AlivePlayerState : State, IObserver<EndRoundArgs>
 {
     private readonly ITranslate translator;
     private readonly IRotate rotator;
@@ -27,6 +27,8 @@ public class AlivePlayerState : State
     public override void Enter()
     {
         base.Enter();
+
+        GameManagerSingleton.Instance.RoundEnder.Add(this);
     }
 
     public override void Update()
@@ -51,6 +53,13 @@ public class AlivePlayerState : State
     public override void Exit()
     {
         base.Exit();
+
+        GameManagerSingleton.Instance.RoundEnder.Remove(this);
+    }
+
+    public void OnNotify(EndRoundArgs parameter)
+    {
+        SwitchToDeadPlayerState();
     }
 
     private void SwitchToDeadPlayerState()

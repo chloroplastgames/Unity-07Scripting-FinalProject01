@@ -1,4 +1,4 @@
-﻿public class DeadEnemyState : State
+﻿public class DeadEnemyState : State, IObserver<StartRoundArgs>
 {
     public DeadEnemyState(
         IStateController controller
@@ -10,6 +10,8 @@
     public override void Enter()
     {
         base.Enter();
+
+        GameManagerSingleton.Instance.RoundStarter.Add(this);
     }
 
     public override void Update()
@@ -25,6 +27,13 @@
     public override void Exit()
     {
         base.Exit();
+
+        GameManagerSingleton.Instance.RoundStarter.Remove(this);
+    }
+
+    public void OnNotify(StartRoundArgs parameter)
+    {
+        SwitchToSpawnEnemyState();
     }
 
     private void SwitchToSpawnEnemyState()

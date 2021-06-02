@@ -23,6 +23,9 @@ public class GameStateController : StateController
         IPlayerCharacterSelection playerCharacterSelectorPvsCPU =
             canvasCharacterSelectionPvsCPU.GetComponent<Player1CharacterSelectionBehaviour>();
 
+        IShowWinner winnerShower =
+            canvasGameOver.gameObject.GetComponent<IShowWinner>();
+
         IState mainMenuState = new MainMenuState(
             this,
             canvasMainMenu,
@@ -56,7 +59,8 @@ public class GameStateController : StateController
             );
         IState gameOverState = new GameOverState(
             this,
-            canvasGameOver
+            canvasGameOver,
+            winnerShower
             );
         states.Add(typeof(MainMenuState), mainMenuState);
         states.Add(typeof(CharacterSelectionPvsPState), characterSelectionPvsPState);

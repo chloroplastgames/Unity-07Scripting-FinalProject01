@@ -1,5 +1,9 @@
-﻿public class SpawnEnemyState : State
+﻿using UnityEngine;
+
+public class SpawnEnemyState : AliveEnemyStateBase
 {
+    private Coroutine chaseRoutine;
+
     public SpawnEnemyState(
         IStateController controller
         ) : base(controller)
@@ -11,7 +15,7 @@
     {
         base.Enter();
 
-        CoroutinesHelperSingleton.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
+        chaseRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
     }
 
     public override void Update()
@@ -27,15 +31,12 @@
     public override void Exit()
     {
         base.Exit();
+
+        CoroutinesHelperSingleton.Instance.StopCoroutine(chaseRoutine);
     }
 
     private void SwitchToChaseEnemyState()
     {
         controller.SwitchState<ChaseEnemyState>();
-    }
-
-    private void SwitchToDeadEnemyState()
-    {
-        controller.SwitchState<DeadEnemyState>();
     }
 }
