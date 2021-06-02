@@ -1,25 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName ="Prototype/Data/Tank")]
-public class TankData : ScriptableObject
+[CreateAssetMenu(menuName ="Prototipo/Data/Tank")]
+public sealed class TankData : ScriptableObject
 {
-    [SerializeField] private Speed _speed;
+    [SerializeField] private float _motionSpeed;
 
-    [SerializeField] private FirePower _firePower;
+    [SerializeField] private float _motionAcceleration;
 
-    [SerializeField] private Shield _shield;
+    [SerializeField] private float _maxLife;
 
-    [SerializeField] private Sprite _iconSelect;
-
-    [SerializeField] private string _name;
-
-    public Speed Speed { get => _speed; }
-
-    public FirePower FirePower { get => _firePower; }
-
-    public Shield Shield { get => _shield; }
-
-    public string Name { get => _name; }
+    public float MotionSpeed { get => _motionSpeed; }
+    public float MotionAcceleration { get => _motionAcceleration;}
+    public float MaxLife { get => _maxLife; }
 }
