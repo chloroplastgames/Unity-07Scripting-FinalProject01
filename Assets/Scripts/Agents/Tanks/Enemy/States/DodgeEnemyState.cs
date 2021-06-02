@@ -1,26 +1,21 @@
-﻿public class DodgeEnemyState : State, IObserver<DieArgs>
+﻿public class DodgeEnemyState : State
 {
     private readonly EnemyStateData enemyStateData;
     private readonly INavMeshAgent navMeshAgent;
-    private readonly ISubject<DieArgs> killerSubject;
 
     public DodgeEnemyState(
         IStateController controller,
         EnemyStateData enemyStateData,
-        INavMeshAgent navMeshAgent,
-        ISubject<DieArgs> killerSubject
+        INavMeshAgent navMeshAgent
         ) : base(controller)
     {
         this.enemyStateData = enemyStateData;
         this.navMeshAgent = navMeshAgent;
-        this.killerSubject = killerSubject;
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        killerSubject.Add(this);
 
         navMeshAgent.Resume();
 
@@ -31,7 +26,7 @@
     {
         if (navMeshAgent.GetRemainingDistance() <= enemyStateData.RemainingDistance)
         {
-            controller.SwitchState<ChaseEnemyState>();
+            SwitchToChaseEnemyState();
         }
     }
 
@@ -44,14 +39,7 @@
     {
         base.Exit();
 
-        killerSubject.Remove(this);
-
         navMeshAgent.Stop();
-    }
-
-    public void OnNotify(DieArgs param)
-    {
-        controller.SwitchState<DeadEnemyState>();
     }
 
     private void SetDestination()
@@ -64,5 +52,15 @@
         {
             SetDestination();
         }
+    }
+
+    private void SwitchToChaseEnemyState()
+    {
+        controller.SwitchState<ChaseEnemyState>();
+    }
+
+    private void SwitchToDeadEnemyState()
+    {
+        controller.SwitchState<DeadEnemyState>();
     }
 }

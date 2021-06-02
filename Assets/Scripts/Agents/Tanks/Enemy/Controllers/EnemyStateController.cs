@@ -11,19 +11,16 @@ public class EnemyStateController : StateController
         INavMeshAgent navMeshAgent = GetComponent<INavMeshAgent>();
         ICalculateTrajectoryShoot shooter = GetComponent<ICalculateTrajectoryShoot>();
         ILookAtTarget looker = GetComponent<ILookAtTarget>();
-        ISubject<DieArgs> dieBehaviour = GetComponent<ISubject<DieArgs>>();
 
         IState spawnEnemyState = new SpawnEnemyState(
-            this,
-            dieBehaviour
+            this
             );
         IState chaseEnemyState = new ChaseEnemyState(
             this,
             enemyStateData,
             navMeshAgent,
             gameObject.transform,
-            player,
-            dieBehaviour
+            player
             );
         IState attackEnemyState = new AttackEnemyState(
             this,
@@ -31,14 +28,12 @@ public class EnemyStateController : StateController
             shooter,
             looker,
             gameObject.transform,
-            player,
-            dieBehaviour
+            player
             );
         IState dodgeEnemyState = new DodgeEnemyState(
             this,
             enemyStateData,
-            navMeshAgent,
-            dieBehaviour
+            navMeshAgent
             );
         IState deadEnemyState = new DeadEnemyState(
             this

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class RoundState : State, IObserver<TimerArgs>
+public class RoundState : State, IObserver<TimerArgs>, IObserver<DieArgs>
 {
     private readonly GameObject canvas;
     private readonly TimerHUDBehaviour timer;
@@ -23,6 +23,11 @@ public class RoundState : State, IObserver<TimerArgs>
 
         timer.Add(this);
         timer.ResetTimer();
+
+        GameManagerSingleton.Instance.Tank1Instance.GetComponent<ISubject<DieArgs>>().Add(this);
+        GameManagerSingleton.Instance.Tank2Instance.GetComponent<ISubject<DieArgs>>().Add(this);
+
+        GameManagerSingleton.Instance.StartRound();
     }
 
     public override void Update()
@@ -43,16 +48,41 @@ public class RoundState : State, IObserver<TimerArgs>
 
         timer.Remove(this);
         timer.StopTimer();
+
+        GameManagerSingleton.Instance.Tank1Instance.GetComponent<ISubject<DieArgs>>().Remove(this);
+        GameManagerSingleton.Instance.Tank2Instance.GetComponent<ISubject<DieArgs>>().Remove(this);
     }
 
     public void OnNotify(TimerArgs parameter)
     {
+        EndRound();
+
         // Get tanks health
+        // Get round winner
+        // Get game winner
 
         // is last round => Game over
         // else => Countdown
 
         SwitchToCountdownState(); // TEST
+    }
+
+    public void OnNotify(DieArgs parameter)
+    {
+        EndRound();
+
+        // Get round winner
+        // Get game winner
+
+        // is last round => Game over
+        // else => Countdown
+
+        SwitchToCountdownState(); // TEST
+    }
+
+    private void EndRound()
+    {
+        GameManagerSingleton.Instance.EndRound();
     }
 
     private void SwitchToCountdownState()

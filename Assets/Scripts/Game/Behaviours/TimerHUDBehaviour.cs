@@ -30,9 +30,10 @@ public class TimerHUDBehaviour : Subject<TimerArgs>
 
     public override void Notify()
     {
-        for (int i = 0; i < observers.Count; i++)
+        IObserver<TimerArgs>[] observersPhoto = observers.ToArray();
+
+        foreach (IObserver<TimerArgs> observer in observersPhoto)
         {
-            IObserver<TimerArgs> observer = observers[i];
             observer.OnNotify(new TimerArgs());
         }
     }

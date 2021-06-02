@@ -60,11 +60,22 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
 
         // Reset health
 
-        // Reset state
-
         // Reset camera
         cameraController.ResetCamera();
 
         // Increment round
+    }
+
+    public void StartRound()
+    {
+        // After countdown
+        // Set alive states
+    }
+
+    public void EndRound()
+    {
+        // After tank die
+        // Set dead states
+        // Get round winner or game winner
     }
 }

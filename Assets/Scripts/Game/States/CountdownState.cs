@@ -30,12 +30,12 @@ public class CountdownState : State
         cameraGameplay.SetActive(true);
         countdown.gameObject.SetActive(true);
 
+        // Gameplay camera must be active
+        GameManagerSingleton.Instance.SetupRound();
+
         time = CountdownTime;
 
         ChangeCountdownText(time);
-
-        // Gameplay camera must be active
-        GameManagerSingleton.Instance.SetupRound();
     }
 
     public override void Update()

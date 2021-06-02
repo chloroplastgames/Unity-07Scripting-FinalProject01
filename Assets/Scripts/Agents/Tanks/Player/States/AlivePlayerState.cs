@@ -1,37 +1,32 @@
 ﻿using UnityEngine;
 
-public class ActivePlayerState : State, IObserver<DieArgs>
+public class AlivePlayerState : State
 {
     private readonly ITranslate translator;
     private readonly IRotate rotator;
     private readonly IShoot shooter;
-    private readonly ISubject<DieArgs> killerSubject;
     private readonly PlayerControlData control;
 
     private float translationSense;
     private float rotationSense;
 
-    public ActivePlayerState(
+    public AlivePlayerState(
         IStateController controller,
         ITranslate translator,
         IRotate rotator,
         IShoot shooter,
-        ISubject<DieArgs> killerSubject,
         PlayerControlData control
         ) : base(controller)
     {
         this.translator = translator;
         this.rotator = rotator;
         this.shooter = shooter;
-        this.killerSubject = killerSubject;
         this.control = control;
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        killerSubject.Add(this);
     }
 
     public override void Update()
@@ -56,12 +51,10 @@ public class ActivePlayerState : State, IObserver<DieArgs>
     public override void Exit()
     {
         base.Exit();
-
-        killerSubject.Remove(this);
     }
 
-    public void OnNotify(DieArgs param)
+    private void SwitchToDeadPlayerState()
     {
-        controller.SwitchState<InactivePlayerState>();
+        controller.SwitchState<DeadPlayerState>();
     }
 }

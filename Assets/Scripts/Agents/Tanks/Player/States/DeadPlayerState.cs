@@ -1,8 +1,8 @@
 ﻿// TODO: Event => ActivePlayerState
 
-public class InactivePlayerState : State
+public class DeadPlayerState : State
 {
-    public InactivePlayerState(
+    public DeadPlayerState(
         IStateController controller
         ) : base(controller)
     {
@@ -27,5 +27,10 @@ public class InactivePlayerState : State
     public override void Exit()
     {
         base.Exit();
+    }
+
+    private void SwitchToAlivePlayerState()
+    {
+        controller.SwitchState<AlivePlayerState>();
     }
 }

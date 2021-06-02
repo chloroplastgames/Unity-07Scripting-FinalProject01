@@ -1,22 +1,17 @@
-﻿public class SpawnEnemyState : State, IObserver<DieArgs>
+﻿public class SpawnEnemyState : State
 {
-    private readonly ISubject<DieArgs> killerSubject;
-
     public SpawnEnemyState(
-        IStateController controller,
-        ISubject<DieArgs> killerSubject
+        IStateController controller
         ) : base(controller)
     {
-        this.killerSubject = killerSubject;
+
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        killerSubject.Add(this);
-
-        CoroutinesHelperSingleton.Instance.WaitForSeconds(3.25f, () => SwitchToChaseEnemyState()); // TODO: 3.25f?
+        CoroutinesHelperSingleton.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
     }
 
     public override void Update()
@@ -31,18 +26,16 @@
 
     public override void Exit()
     {
-        killerSubject.Remove(this);
-
         base.Exit();
-    }
-
-    public void OnNotify(DieArgs param)
-    {
-        controller.SwitchState<DeadEnemyState>();
     }
 
     private void SwitchToChaseEnemyState()
     {
         controller.SwitchState<ChaseEnemyState>();
+    }
+
+    private void SwitchToDeadEnemyState()
+    {
+        controller.SwitchState<DeadEnemyState>();
     }
 }

@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class AttackEnemyState : State, IObserver<DieArgs>
+public class AttackEnemyState : State
 {
     private readonly AttackEnemyStateData attackEnemyStateData;
     private readonly ICalculateTrajectoryShoot shooter;
     private readonly ILookAtTarget looker;
     private readonly Transform agent;
     private readonly Transform player;
-    private readonly ISubject<DieArgs> killerSubject;
 
     private bool canShoot = true;
     private Coroutine dodgeRoutine;
@@ -18,8 +17,7 @@ public class AttackEnemyState : State, IObserver<DieArgs>
         ICalculateTrajectoryShoot shooter,
         ILookAtTarget looker,
         Transform agent,
-        Transform player,
-        ISubject<DieArgs> killerSubject
+        Transform player
         ) : base(controller)
     {
         this.attackEnemyStateData = attackEnemyStateData;
@@ -27,14 +25,11 @@ public class AttackEnemyState : State, IObserver<DieArgs>
         this.looker = looker;
         this.agent = agent;
         this.player = player;
-        this.killerSubject = killerSubject;
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        killerSubject.Add(this);
 
         dodgeRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(
             Random.Range(attackEnemyStateData.MinTimeToDodge, attackEnemyStateData.MaxTimeToDodge), () => SwitchToDodgeEnemyState());
@@ -61,14 +56,7 @@ public class AttackEnemyState : State, IObserver<DieArgs>
     {
         base.Exit();
 
-        killerSubject.Remove(this);
-
         CoroutinesHelperSingleton.Instance.StopCoroutine(dodgeRoutine);
-    }
-
-    public void OnNotify(DieArgs param)
-    {
-        controller.SwitchState<DeadEnemyState>();
     }
 
     private void CanShootRoutine()
@@ -84,5 +72,10 @@ public class AttackEnemyState : State, IObserver<DieArgs>
     private void SwitchToDodgeEnemyState()
     {
         controller.SwitchState<DodgeEnemyState>();
+    }
+
+    private void SwitchToDeadEnemyState()
+    {
+        controller.SwitchState<DeadEnemyState>();
     }
 }

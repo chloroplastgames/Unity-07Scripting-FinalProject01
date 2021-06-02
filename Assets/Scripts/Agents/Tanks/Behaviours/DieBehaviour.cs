@@ -7,9 +7,10 @@
 
     public override void Notify()
     {
-        for (int i = 0; i < observers.Count; i++)
+        IObserver<DieArgs>[] observersPhoto = observers.ToArray();
+
+        foreach(IObserver<DieArgs> observer in observersPhoto)
         {
-            IObserver<DieArgs> observer = observers[i];
             observer.OnNotify(new DieArgs());
         }
     }

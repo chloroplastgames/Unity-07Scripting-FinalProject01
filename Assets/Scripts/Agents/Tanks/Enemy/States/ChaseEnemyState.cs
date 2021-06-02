@@ -1,34 +1,29 @@
 ﻿using UnityEngine;
 
-public class ChaseEnemyState : State, IObserver<DieArgs>
+public class ChaseEnemyState : State
 {
     private readonly EnemyStateData enemyStateData;
     private readonly INavMeshAgent navMeshAgent;
     private readonly Transform agent;
     private readonly Transform player;
-    private readonly ISubject<DieArgs> killerSubject;
 
     public ChaseEnemyState(
         IStateController controller,
         EnemyStateData enemyStateData,
         INavMeshAgent navMeshAgent,
         Transform agent,
-        Transform player,
-        ISubject<DieArgs> killerSubject
+        Transform player
         ) : base(controller)
     {
         this.enemyStateData = enemyStateData;
         this.navMeshAgent = navMeshAgent;
         this.agent = agent;
         this.player = player;
-        this.killerSubject = killerSubject;
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        killerSubject.Add(this);
 
         navMeshAgent.Resume();
 
@@ -39,7 +34,7 @@ public class ChaseEnemyState : State, IObserver<DieArgs>
     {
         if (Vector3.SqrMagnitude(player.position - agent.position) <= enemyStateData.VisionRange * enemyStateData.VisionRange)
         {
-            controller.SwitchState<AttackEnemyState>();
+            SwitchToAttackEnemyState();
             return;
         }
 
@@ -58,14 +53,7 @@ public class ChaseEnemyState : State, IObserver<DieArgs>
     {
         base.Exit();
 
-        killerSubject.Remove(this);
-
         navMeshAgent.Stop();
-    }
-
-    public void OnNotify(DieArgs param)
-    {
-        controller.SwitchState<DeadEnemyState>();
     }
 
     private void SetDestination()
@@ -78,5 +66,15 @@ public class ChaseEnemyState : State, IObserver<DieArgs>
         {
             SetDestination();
         }
+    }
+
+    private void SwitchToAttackEnemyState()
+    {
+        controller.SwitchState<AttackEnemyState>();
+    }
+
+    private void SwitchToDeadEnemyState()
+    {
+        controller.SwitchState<DeadEnemyState>();
     }
 }

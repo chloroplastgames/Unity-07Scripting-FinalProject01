@@ -26,4 +26,9 @@
     {
         base.Exit();
     }
+
+    private void SwitchToSpawnEnemyState()
+    {
+        controller.SwitchState<SpawnEnemyState>();
+    }
 }
