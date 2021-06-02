@@ -18,8 +18,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float dampTime = 0.2f;
     [SerializeField] private float screenEdgeBuffer = 4f;
     [SerializeField] private float minSize = 6.5f;
-    [SerializeField] private Transform[] targets; // TODO: Remove SerializeField
-
+    
+    private Transform[] targets;
     private Camera myCamera;
     private float zoomSpeed;
     private Vector3 moveVelocity;

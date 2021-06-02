@@ -13,13 +13,7 @@ public abstract class PlayerCharacterSelectionBehaviourBase : MonoBehaviour, IPl
     private const string ReadyText = "READY!";
 
     private int index;
-    private MeshRenderer[] meshRenderers;
     private bool ready;
-
-    private void Awake()
-    {
-        meshRenderers = tank.GetComponentsInChildren<MeshRenderer>();
-    }
 
     private void Start()
     {
@@ -66,10 +60,7 @@ public abstract class PlayerCharacterSelectionBehaviourBase : MonoBehaviour, IPl
 
         background.color = colorList.Colors[index].Color;
 
-        foreach (MeshRenderer meshRenderer in meshRenderers)
-        {
-            meshRenderer.material.color = colorList.Colors[index].Color;
-        }
+        UtilityFunctionsHelper.ColorGameObject(tank, colorList.Colors[index].Color);
 
         colorName.text = colorList.Colors[index].ColorName.ToUpper();
     }

@@ -33,6 +33,9 @@ public class CountdownState : State
         time = CountdownTime;
 
         ChangeCountdownText(time);
+
+        // Gameplay camera must be active
+        GameManagerSingleton.Instance.SetupRound();
     }
 
     public override void Update()
@@ -63,7 +66,7 @@ public class CountdownState : State
         countdown.CountdownText.text = time.ToString();
         time--;
 
-        RoutineHelperSingleton.Instance.WaitForSeconds(1f, () => ChangeCountdownText(time));
+        CoroutinesHelperSingleton.Instance.WaitForSeconds(1f, () => ChangeCountdownText(time));
     }
 
     private void SwitchToRoundState()

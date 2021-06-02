@@ -45,7 +45,7 @@ public class CharacterSelectionPvsPState : State
 
         if (PlayersAreReady())
         {
-            RoutineHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
+            CoroutinesHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
 
             routineStarted = true;
         }
@@ -64,6 +64,8 @@ public class CharacterSelectionPvsPState : State
 
         player1CharacterSelector.ResetSelection();
         player2CharacterSelector.ResetSelection();
+
+        GameManagerSingleton.Instance.SetupGame();
     }
 
     private bool PlayersAreReady()

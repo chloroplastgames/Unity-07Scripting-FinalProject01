@@ -11,7 +11,7 @@ public class EnemyStateController : StateController
         INavMeshAgent navMeshAgent = GetComponent<INavMeshAgent>();
         ICalculateTrajectoryShoot shooter = GetComponent<ICalculateTrajectoryShoot>();
         ILookAtTarget looker = GetComponent<ILookAtTarget>();
-        ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
+        ISubject<DieArgs> dieBehaviour = GetComponent<ISubject<DieArgs>>();
 
         IState spawnEnemyState = new SpawnEnemyState(
             this,
@@ -41,8 +41,7 @@ public class EnemyStateController : StateController
             dieBehaviour
             );
         IState deadEnemyState = new DeadEnemyState(
-            this,
-            gameObject
+            this
             );
         states.Add(typeof(SpawnEnemyState), spawnEnemyState);
         states.Add(typeof(ChaseEnemyState), chaseEnemyState);

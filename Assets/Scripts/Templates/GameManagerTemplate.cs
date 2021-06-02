@@ -32,7 +32,6 @@ public class GameManagerTemplate : MonoBehaviour
 
     private void SpawnAllTanks()
     {
-        // TODO: With events?
         for (int i = 0; i < tankManagers.Length; i++)
         {
             tankManagers[i].Instance = Instantiate(tankPrefab, tankManagers[i].SpawnPoint.position, tankManagers[i].SpawnPoint.rotation);
@@ -64,7 +63,7 @@ public class GameManagerTemplate : MonoBehaviour
 
         if (gameWinner != null)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // TODO
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else
         {

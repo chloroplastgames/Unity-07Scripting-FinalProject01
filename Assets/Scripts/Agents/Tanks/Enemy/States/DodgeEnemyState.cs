@@ -1,14 +1,14 @@
-﻿public class DodgeEnemyState : State, IObserver
+﻿public class DodgeEnemyState : State, IObserver<DieArgs>
 {
     private readonly EnemyStateData enemyStateData;
     private readonly INavMeshAgent navMeshAgent;
-    private readonly ISubject killerSubject;
+    private readonly ISubject<DieArgs> killerSubject;
 
     public DodgeEnemyState(
         IStateController controller,
         EnemyStateData enemyStateData,
         INavMeshAgent navMeshAgent,
-        ISubject killerSubject
+        ISubject<DieArgs> killerSubject
         ) : base(controller)
     {
         this.enemyStateData = enemyStateData;
@@ -49,7 +49,7 @@
         navMeshAgent.Stop();
     }
 
-    public void OnNotify()
+    public void OnNotify(DieArgs param)
     {
         controller.SwitchState<DeadEnemyState>();
     }

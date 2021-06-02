@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-public class ActivePlayerState : State, IObserver
+public class ActivePlayerState : State, IObserver<DieArgs>
 {
     private readonly ITranslate translator;
     private readonly IRotate rotator;
     private readonly IShoot shooter;
-    private readonly ISubject killerSubject;
+    private readonly ISubject<DieArgs> killerSubject;
     private readonly PlayerControlData control;
 
     private float translationSense;
@@ -16,7 +16,7 @@ public class ActivePlayerState : State, IObserver
         ITranslate translator,
         IRotate rotator,
         IShoot shooter,
-        ISubject killerSubject,
+        ISubject<DieArgs> killerSubject,
         PlayerControlData control
         ) : base(controller)
     {
@@ -60,7 +60,7 @@ public class ActivePlayerState : State, IObserver
         killerSubject.Remove(this);
     }
 
-    public void OnNotify()
+    public void OnNotify(DieArgs param)
     {
         controller.SwitchState<InactivePlayerState>();
     }

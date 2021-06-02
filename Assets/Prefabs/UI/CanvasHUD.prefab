@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 1375724233825080462}
   - component: {fileID: 1375724233825080463}
   - component: {fileID: 1375724233825080460}
+  - component: {fileID: 1790387372}
   m_Layer: 5
   m_Name: CanvasHUD
   m_TagString: Untagged
@@ -270,6 +271,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1790387372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375724233825080461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7b17aff173eb940aadec14d6f87505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 484352061264615958}
+  time: 60
 --- !u!1 &1375724234434926862
 GameObject:
   m_ObjectHideFlags: 0

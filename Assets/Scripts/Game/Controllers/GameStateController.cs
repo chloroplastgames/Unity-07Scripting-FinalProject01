@@ -9,6 +9,7 @@ public class GameStateController : StateController
     [SerializeField] private GameObject canvasCharacterSelectionPvsCPU;
     [SerializeField] private CanvasCountdown canvasCountdown;
     [SerializeField] private GameObject canvasHUD;
+    [SerializeField] private TimerHUDBehaviour timerHUDBehaviour;
     [SerializeField] private CanvasGameOver canvasGameOver;
     [SerializeField] private PlayerControlData player1Control;
     [SerializeField] private PlayerControlData player2Control;
@@ -50,7 +51,8 @@ public class GameStateController : StateController
             );
         IState roundState = new RoundState(
             this,
-            canvasHUD
+            canvasHUD,
+            timerHUDBehaviour
             );
         IState gameOverState = new GameOverState(
             this,

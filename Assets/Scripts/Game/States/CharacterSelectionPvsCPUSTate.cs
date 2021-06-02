@@ -48,6 +48,8 @@ public class CharacterSelectionPvsCPUSTate : State
         canvas.SetActive(false);
 
         playerCharacterSelector.ResetSelection();
+
+        GameManagerSingleton.Instance.SetupGame();
     }
 
     private void SwitchToCountdownState()
@@ -70,17 +72,17 @@ public class CharacterSelectionPvsCPUSTate : State
         {
             playerCharacterSelector.NextSelection();
         }
-        else if (Input.GetKeyDown(player1Control.Special))
-        {
-            SwitchToMainMenuState();
-        }
         else if (Input.GetKeyDown(player1Control.Shoot))
         {
             playerCharacterSelector.SetSelection();
 
-            RoutineHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
+            CoroutinesHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
 
             routineStarted = true;
         }
+        else if (Input.GetKeyDown(player1Control.Special))
+        {
+            SwitchToMainMenuState();
+        }  
     }
 }

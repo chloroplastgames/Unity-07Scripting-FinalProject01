@@ -54,14 +54,14 @@ public class MainMenuState : State
 
     private void SelectPvsP()
     {
-        GameManager.Instance.SetPvsP(); // TODO
+        GameManagerSingleton.Instance.SetPvsP();
 
         controller.SwitchState<CharacterSelectionPvsPState>();
     }
 
     private void SelectPvsCPU()
     {
-        GameManager.Instance.SetPvsCPU(); // TODO
+        GameManagerSingleton.Instance.SetPvsCPU();
 
         controller.SwitchState<CharacterSelectionPvsCPUSTate>();
     }

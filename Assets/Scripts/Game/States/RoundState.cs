@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 
-public class RoundState : State
+public class RoundState : State, IObserver<TimerArgs>
 {
     private readonly GameObject canvas;
+    private readonly TimerHUDBehaviour timer;
 
     public RoundState(
         IStateController controller,
-        GameObject canvas
+        GameObject canvas,
+        TimerHUDBehaviour timer
         ) : base(controller)
     {
         this.canvas = canvas;
+        this.timer = timer;
     }
 
     public override void Enter()
@@ -17,6 +20,9 @@ public class RoundState : State
         base.Enter();
 
         canvas.SetActive(true);
+
+        timer.Add(this);
+        timer.ResetTimer();
     }
 
     public override void Update()
@@ -34,6 +40,24 @@ public class RoundState : State
         base.Exit();
 
         canvas.SetActive(false);
+
+        timer.Remove(this);
+        timer.StopTimer();
+    }
+
+    public void OnNotify(TimerArgs parameter)
+    {
+        // Get tanks health
+
+        // is last round => Game over
+        // else => Countdown
+
+        SwitchToCountdownState(); // TEST
+    }
+
+    private void SwitchToCountdownState()
+    {
+        controller.SwitchState<CountdownState>();
     }
 
     private void SwitchToGameOverState()

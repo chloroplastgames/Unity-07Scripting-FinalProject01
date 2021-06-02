@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class ChaseEnemyState : State, IObserver
+public class ChaseEnemyState : State, IObserver<DieArgs>
 {
     private readonly EnemyStateData enemyStateData;
     private readonly INavMeshAgent navMeshAgent;
     private readonly Transform agent;
     private readonly Transform player;
-    private readonly ISubject killerSubject;
+    private readonly ISubject<DieArgs> killerSubject;
 
     public ChaseEnemyState(
         IStateController controller,
@@ -14,7 +14,7 @@ public class ChaseEnemyState : State, IObserver
         INavMeshAgent navMeshAgent,
         Transform agent,
         Transform player,
-        ISubject killerSubject
+        ISubject<DieArgs> killerSubject
         ) : base(controller)
     {
         this.enemyStateData = enemyStateData;
@@ -63,7 +63,7 @@ public class ChaseEnemyState : State, IObserver
         navMeshAgent.Stop();
     }
 
-    public void OnNotify()
+    public void OnNotify(DieArgs param)
     {
         controller.SwitchState<DeadEnemyState>();
     }

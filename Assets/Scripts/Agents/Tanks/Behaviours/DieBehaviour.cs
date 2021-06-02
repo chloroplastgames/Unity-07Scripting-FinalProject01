@@ -1,4 +1,4 @@
-﻿public class DieBehaviour : Subject, IKillable
+﻿public class DieBehaviour : Subject<DieArgs>, IKillable
 {
     public void Kill()
     {
@@ -9,8 +9,8 @@
     {
         for (int i = 0; i < observers.Count; i++)
         {
-            IObserver observer = observers[i];
-            observer.OnNotify();
+            IObserver<DieArgs> observer = observers[i];
+            observer.OnNotify(new DieArgs());
         }
     }
 }

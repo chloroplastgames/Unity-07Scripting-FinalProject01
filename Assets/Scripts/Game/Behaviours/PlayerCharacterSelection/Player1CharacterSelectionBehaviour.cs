@@ -2,6 +2,6 @@
 {
     protected override void SaveSelection()
     {
-        GameManager.Instance.SetPlayer1Color(colorSelected);
+        GameManagerSingleton.Instance.SetTank1Color(colorSelected);
     }
 }

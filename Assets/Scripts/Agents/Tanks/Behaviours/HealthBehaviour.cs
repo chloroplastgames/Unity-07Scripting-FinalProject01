@@ -5,12 +5,11 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
     [SerializeField] private int maxHealth;
 
     private int currentHealth;
-
     private IKillable killer;
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        ResetHealth();
 
         killer = GetComponent<IKillable>();
     }
@@ -24,8 +23,11 @@ public class HealthBehaviour : MonoBehaviour, IDamageable
         if (currentHealth == 0)
         {
             killer.Kill();
-
-            Destroy(this); // TODO
         }
+    }
+
+    private void ResetHealth()
+    {
+        currentHealth = maxHealth;
     }
 }

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public class AttackEnemyState : State, IObserver
+public class AttackEnemyState : State, IObserver<DieArgs>
 {
     private readonly AttackEnemyStateData attackEnemyStateData;
     private readonly ICalculateTrajectoryShoot shooter;
     private readonly ILookAtTarget looker;
     private readonly Transform agent;
     private readonly Transform player;
-    private readonly ISubject killerSubject;
+    private readonly ISubject<DieArgs> killerSubject;
 
     private bool canShoot = true;
     private Coroutine dodgeRoutine;
@@ -19,7 +19,7 @@ public class AttackEnemyState : State, IObserver
         ILookAtTarget looker,
         Transform agent,
         Transform player,
-        ISubject killerSubject
+        ISubject<DieArgs> killerSubject
         ) : base(controller)
     {
         this.attackEnemyStateData = attackEnemyStateData;
@@ -36,7 +36,7 @@ public class AttackEnemyState : State, IObserver
 
         killerSubject.Add(this);
 
-        dodgeRoutine = RoutineHelperSingleton.Instance.WaitForSeconds(
+        dodgeRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(
             Random.Range(attackEnemyStateData.MinTimeToDodge, attackEnemyStateData.MaxTimeToDodge), () => SwitchToDodgeEnemyState());
     }
 
@@ -63,17 +63,17 @@ public class AttackEnemyState : State, IObserver
 
         killerSubject.Remove(this);
 
-        RoutineHelperSingleton.Instance.StopCoroutine(dodgeRoutine);
+        CoroutinesHelperSingleton.Instance.StopCoroutine(dodgeRoutine);
     }
 
-    public void OnNotify()
+    public void OnNotify(DieArgs param)
     {
         controller.SwitchState<DeadEnemyState>();
     }
 
     private void CanShootRoutine()
     {
-        RoutineHelperSingleton.Instance.WaitForSeconds(attackEnemyStateData.TimeBetweenAttacks, () => CanShoot());
+        CoroutinesHelperSingleton.Instance.WaitForSeconds(attackEnemyStateData.TimeBetweenAttacks, () => CanShoot());
     }
 
     private void CanShoot()

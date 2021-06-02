@@ -1,22 +1,15 @@
-﻿using UnityEngine;
-
-public class DeadEnemyState : State
+﻿public class DeadEnemyState : State
 {
-    private readonly GameObject myGameObject;
-
     public DeadEnemyState(
-        IStateController controller,
-        GameObject myGameObject
+        IStateController controller
         ) : base(controller)
     {
-        this.myGameObject = myGameObject;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        myGameObject.SetActive(false);
     }
 
     public override void Update()

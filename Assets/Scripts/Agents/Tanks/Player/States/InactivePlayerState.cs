@@ -1,22 +1,17 @@
-﻿using UnityEngine;
+﻿// TODO: Event => ActivePlayerState
 
 public class InactivePlayerState : State
 {
-    private readonly GameObject myGameObject;
-
     public InactivePlayerState(
-        IStateController controller,
-        GameObject myGameObject
+        IStateController controller
         ) : base(controller)
     {
-        this.myGameObject = myGameObject;
+        
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        myGameObject.SetActive(false);
     }
 
     public override void Update()

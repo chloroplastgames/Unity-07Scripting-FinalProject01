@@ -9,7 +9,7 @@ public class PlayerStateController : StateController
         ITranslate translator = GetComponent<ITranslate>();
         IRotate rotator = GetComponent<IRotate>();
         IShoot shooter = GetComponent<IShoot>();
-        ISubject dieBehaviour = GetComponent<DieBehaviour>(); // TODO
+        ISubject<DieArgs> dieBehaviour = GetComponent<ISubject<DieArgs>>();
 
         IState activePlayerState = new ActivePlayerState(
             this,
@@ -20,8 +20,7 @@ public class PlayerStateController : StateController
             control
             );
         IState inactivePlayerState = new InactivePlayerState(
-            this,
-            gameObject
+            this
             );
         states.Add(typeof(ActivePlayerState), activePlayerState);
         states.Add(typeof(InactivePlayerState), inactivePlayerState);
@@ -29,7 +28,7 @@ public class PlayerStateController : StateController
 
     private void Start()
     {
-        SwitchState<ActivePlayerState>();
+        SwitchState<ActivePlayerState>(); // TODO: Change to InactivePlayerState
     }
 
     private void Update()
