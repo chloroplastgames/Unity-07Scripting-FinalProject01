@@ -48,12 +48,12 @@ public class CharacterSelectionPvsCPUSTate : State
         canvas.SetActive(false);
 
         playerCharacterSelector.ResetSelection();
-
-        GameManagerSingleton.Instance.SetupGame();
     }
 
     private void SwitchToCountdownState()
     {
+        GameManagerSingleton.Instance.SetupGame();
+
         controller.SwitchState<CountdownState>();
     }
 

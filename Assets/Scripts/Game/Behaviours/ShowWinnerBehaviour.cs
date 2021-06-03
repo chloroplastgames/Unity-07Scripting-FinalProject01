@@ -15,24 +15,21 @@ public class ShowWinnerBehaviour : MonoBehaviour, IShowWinner
         {
             if (winner.name.Contains("Player1"))
             {
-                SetCanvas(GameManagerSingleton.Instance.Tank1Instance, "P1");
+                SetCanvas(GameManagerSingleton.Instance.Tank1Color, "P1");
             }
             else if (winner.name.Contains("Player2"))
             {
-                SetCanvas(GameManagerSingleton.Instance.Tank2Instance, "P1");
+                SetCanvas(GameManagerSingleton.Instance.Tank2Color, "P2");
             }
             else
             {
-                SetCanvas(GameManagerSingleton.Instance.Tank2Instance, "CPU");
+                SetCanvas(GameManagerSingleton.Instance.Tank2Color, "CPU");
             }
         }
     }
 
-    private void SetCanvas(GameObject instance, string name)
+    private void SetCanvas(Color winnerColor, string name)
     {
-        GameObject winnerInstance = instance;
-        Color winnerColor = winnerInstance.GetComponentInChildren<MeshRenderer>().material.color;
-
         background.color = winnerColor;
         UtilityFunctionsHelper.ColorGameObject(tank, winnerColor);
         title.text = name + " WINS";

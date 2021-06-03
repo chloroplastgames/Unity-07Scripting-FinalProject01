@@ -64,8 +64,6 @@ public class CharacterSelectionPvsPState : State
 
         player1CharacterSelector.ResetSelection();
         player2CharacterSelector.ResetSelection();
-
-        GameManagerSingleton.Instance.SetupGame();
     }
 
     private bool PlayersAreReady()
@@ -75,6 +73,8 @@ public class CharacterSelectionPvsPState : State
 
     private void SwitchToCountdownState()
     {
+        GameManagerSingleton.Instance.SetupGame();
+
         controller.SwitchState<CountdownState>();
     }
 

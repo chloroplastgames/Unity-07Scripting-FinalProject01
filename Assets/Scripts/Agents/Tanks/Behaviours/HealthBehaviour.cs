@@ -33,6 +33,8 @@ public class HealthBehaviour : Subject<HealthArgs>, IDamageable, IResetHealth, I
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+
+        Notify();
     }
 
     public override void Notify()

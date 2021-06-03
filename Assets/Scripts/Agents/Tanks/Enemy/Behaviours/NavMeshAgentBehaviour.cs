@@ -33,6 +33,7 @@ public class NavMeshAgentBehaviour : MonoBehaviour, INavMeshAgent
     public void Stop()
     {
         navMeshAgent.isStopped = true;
+        navMeshAgent.velocity = Vector3.zero;
     }
 
     public void Resume()

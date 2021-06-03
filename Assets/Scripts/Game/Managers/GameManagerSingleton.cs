@@ -5,9 +5,15 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
 {
     public GameObject Tank1Instance => tank1Instance;
     public GameObject Tank2Instance => tank2Instance;
+    public Color Tank1Color => tank1Color;
+    public Color Tank2Color => tank2Color;
     public Subject<StartRoundArgs> RoundStarter => roundStarter;
     public Subject<EndRoundArgs> RoundEnder => roundEnder;
     public GameObject GameWinner => gameWinner;
+    public Player1RoundWinnerBehaviour Player1RoundWinner => player1RoundWinner;
+    public Player2RoundWinnerBehaviour Player2RoundWinner => player2RoundWinner;
+    public int Tank1Wins => tank1Wins;
+    public int Tank2Wins => tank2Wins;
 
     // TODO: Config => ScriptableObject
     [SerializeField] private CameraController cameraController;
@@ -23,8 +29,8 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
 
     private GameObject tank1;
     private GameObject tank2;
-    private Color tank1Color;
-    private Color tank2Color;
+    private Color tank1Color = Color.black;
+    private Color tank2Color = Color.black;
 
     private GameObject tank1Instance;
     private GameObject tank2Instance;
@@ -33,12 +39,18 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
     private int tank2Wins;
     private GameObject gameWinner;
 
+    private Player1RoundWinnerBehaviour player1RoundWinner;
+    private Player2RoundWinnerBehaviour player2RoundWinner;
+
     protected override void Awake()
     {
         base.Awake();
 
         roundStarter = GetComponent<StartRoundBehaviour>();
         roundEnder = GetComponent<EndRoundBehaviour>();
+
+        player1RoundWinner = GetComponent<Player1RoundWinnerBehaviour>();
+        player2RoundWinner = GetComponent<Player2RoundWinnerBehaviour>();
     }
 
     public void SetPvsP()
@@ -51,8 +63,6 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
     {
         tank1 = player1Tank;
         tank2 = cpuTank;
-
-        tank2Color = Color.black; // TODO
     }
 
     public void SetTank1Color(Color color)
@@ -111,11 +121,11 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
         int tank2Health = tank2Instance.GetComponent<ICurrentHealth>().CurrentHealth;
 
         // Get round winner
-        if (tank2Health == 0 || tank1Health > tank2Health)
+        if (player1RoundWinner.HasPlayer1WonRound(tank1Health, tank2Health))
         {
-            tank1Wins++;
+            tank1Wins++; // TODO: Redundancy with points in round winner behaviour
         }
-        else
+        else if (player2RoundWinner.HasPlayer2WonRound(tank1Health, tank2Health))
         {
             tank2Wins++;
         }
@@ -136,6 +146,9 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
         tank1Wins = 0;
         tank2Wins = 0;
         gameWinner = null;
+
+        player1RoundWinner.ResetPoints();
+        player2RoundWinner.ResetPoints();
     }
 
     public void ResetGameHard()
