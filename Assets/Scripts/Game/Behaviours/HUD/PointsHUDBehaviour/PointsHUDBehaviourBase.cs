@@ -19,9 +19,9 @@ public abstract class PointsHUDBehaviourBase : MonoBehaviour, IObserver<PointsAr
         pointsSubject.Remove(this);
     }
 
-    public void OnNotify(PointsArg parameter)
+    public void OnNotify(PointsArg pointsArgs)
     {
-        UpdatePointsText(parameter.points);
+        UpdatePointsText(pointsArgs.points);
     }
 
     protected void UpdatePointsText(int points)

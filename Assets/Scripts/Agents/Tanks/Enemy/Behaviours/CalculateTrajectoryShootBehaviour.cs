@@ -7,8 +7,10 @@ public class CalculateTrajectoryShootBehaviour : MonoBehaviour, ICalculateTrajec
     [SerializeField] private float launchForce = 20f;
     [SerializeField] private Transform turret;
     [SerializeField] private bool isLowAngle = true;
-    [SerializeField] private float maxAngleDistanceDeviation = 0.1f;
-    [SerializeField] private float minAngleDistanceDeviation = 0.05f;
+    [SerializeField] private float maxAngleDistanceDeviation;
+    [SerializeField] private float minAngleDistanceDeviation;
+
+    private const float Gravity = 9.81f;
 
     public void CalculateTrajectoryShoot(Transform target)
     {
@@ -38,9 +40,8 @@ public class CalculateTrajectoryShootBehaviour : MonoBehaviour, ICalculateTrajec
         float height = targetDirection.y;
         targetDirection.y = 0f;
         float distance = targetDirection.magnitude;
-        float gravity = 9.81f;
         float speedSqr = launchForce * launchForce;
-        float underTheSqrt = (speedSqr * speedSqr) - gravity * (gravity * distance * distance + 2 * height * speedSqr);
+        float underTheSqrt = (speedSqr * speedSqr) - Gravity * (Gravity * distance * distance + 2 * height * speedSqr);
 
         if (underTheSqrt >= 0f)
         {
@@ -50,11 +51,11 @@ public class CalculateTrajectoryShootBehaviour : MonoBehaviour, ICalculateTrajec
 
             if (low)
             {
-                return Mathf.Atan2(lowAngle, gravity * distance) * Mathf.Rad2Deg * GetAngleDeviation(distance);
+                return Mathf.Atan2(lowAngle, Gravity * distance) * Mathf.Rad2Deg * GetAngleDeviation(distance);
             }
             else
             {
-                return Mathf.Atan2(highAngle, gravity * distance) * Mathf.Rad2Deg * GetAngleDeviation(distance);
+                return Mathf.Atan2(highAngle, Gravity * distance) * Mathf.Rad2Deg * GetAngleDeviation(distance);
             }
         }
         else

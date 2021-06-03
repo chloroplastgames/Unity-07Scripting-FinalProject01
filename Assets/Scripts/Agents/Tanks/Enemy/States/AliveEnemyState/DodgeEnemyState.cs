@@ -24,7 +24,7 @@
 
     public override void Update()
     {
-        if (navMeshAgent.GetRemainingDistance() <= enemyStateData.RemainingDistance)
+        if (navMeshAgent.RemainingDistance <= enemyStateData.RemainingDistance)
         {
             SwitchToChaseEnemyState();
         }
@@ -42,8 +42,10 @@
         navMeshAgent.Stop();
     }
 
+    // TODO: Same as ChaseEnemyState seems like
     private void SetDestination()
     {
+        // Return true if it can set destination and also sets destination
         if (navMeshAgent.CanSetDestinationInsideCircle(enemyStateData.MinDistance, enemyStateData.MaxDistance))
         {
             return;

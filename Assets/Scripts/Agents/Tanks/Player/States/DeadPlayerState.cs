@@ -1,6 +1,4 @@
-﻿// TODO: Event => ActivePlayerState
-
-public class DeadPlayerState : State, IObserver<StartRoundArgs>
+﻿public class DeadPlayerState : State, IObserver<StartRoundArgs>
 {
     public DeadPlayerState(
         IStateController controller
@@ -33,7 +31,7 @@ public class DeadPlayerState : State, IObserver<StartRoundArgs>
         GameManagerSingleton.Instance.RoundStarter.Remove(this);
     }
 
-    public void OnNotify(StartRoundArgs parameter)
+    public void OnNotify(StartRoundArgs startRoundArgs)
     {
         SwitchToAlivePlayerState();
     }

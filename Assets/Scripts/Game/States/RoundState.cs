@@ -53,14 +53,14 @@ public class RoundState : State, IObserver<TimerArgs>, IObserver<DieArgs>
         GameManagerSingleton.Instance.Tank2Instance.GetComponent<ISubject<DieArgs>>().Remove(this);
     }
 
-    public void OnNotify(TimerArgs parameter)
+    public void OnNotify(TimerArgs timerArgs)
     {
         EndRound();
 
         CheckGameWinner();
     }
 
-    public void OnNotify(DieArgs parameter)
+    public void OnNotify(DieArgs dieArgs)
     {
         EndRound();
 

@@ -4,6 +4,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshAgentBehaviour : MonoBehaviour, INavMeshAgent
 {
+    public float RemainingDistance => navMeshAgent.remainingDistance;
+
     private NavMeshAgent navMeshAgent;
 
     private void Awake()
@@ -19,15 +21,14 @@ public class NavMeshAgentBehaviour : MonoBehaviour, INavMeshAgent
 
         NavMeshPath path = new NavMeshPath();
         navMeshAgent.CalculatePath(destination, path);
+
         if (path.status == NavMeshPathStatus.PathComplete)
         {
             navMeshAgent.SetDestination(destination);
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
     public void Stop()
@@ -39,10 +40,5 @@ public class NavMeshAgentBehaviour : MonoBehaviour, INavMeshAgent
     public void Resume()
     {
         navMeshAgent.isStopped = false;
-    }
-
-    public float GetRemainingDistance()
-    {
-        return navMeshAgent.remainingDistance;
     }
 }

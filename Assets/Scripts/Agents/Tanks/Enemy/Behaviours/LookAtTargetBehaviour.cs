@@ -6,10 +6,10 @@ public class LookAtTargetBehaviour : MonoBehaviour, ILookAtTarget
 
     public Vector3 LookAtTarget(Transform target)
     {
-        Vector3 directionNormalized = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionNormalized.x, 0, directionNormalized.z));
+        Vector3 targetDirectionNormalized = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(targetDirectionNormalized.x, 0, targetDirectionNormalized.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, speed * Time.deltaTime);
 
-        return directionNormalized;
+        return targetDirectionNormalized;
     }
 }

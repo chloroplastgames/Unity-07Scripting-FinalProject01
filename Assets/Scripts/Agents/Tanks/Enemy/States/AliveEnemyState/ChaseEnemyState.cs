@@ -5,20 +5,20 @@ public class ChaseEnemyState : AliveEnemyStateBase
     private readonly EnemyStateData enemyStateData;
     private readonly INavMeshAgent navMeshAgent;
     private readonly Transform agent;
-    private readonly Transform player;
+    private readonly Transform target;
 
     public ChaseEnemyState(
         IStateController controller,
         EnemyStateData enemyStateData,
         INavMeshAgent navMeshAgent,
         Transform agent,
-        Transform player
+        Transform target
         ) : base(controller)
     {
         this.enemyStateData = enemyStateData;
         this.navMeshAgent = navMeshAgent;
         this.agent = agent;
-        this.player = player;
+        this.target = target;
     }
 
     public override void Enter()
@@ -32,13 +32,13 @@ public class ChaseEnemyState : AliveEnemyStateBase
 
     public override void Update()
     {
-        if (Vector3.SqrMagnitude(player.position - agent.position) <= enemyStateData.VisionRange * enemyStateData.VisionRange)
+        if (Vector3.SqrMagnitude(target.position - agent.position) <= enemyStateData.VisionRange * enemyStateData.VisionRange)
         {
             SwitchToAttackEnemyState();
             return;
         }
 
-        if (navMeshAgent.GetRemainingDistance() <= enemyStateData.RemainingDistance)
+        if (navMeshAgent.RemainingDistance <= enemyStateData.RemainingDistance)
         {
             SetDestination();
         }
@@ -58,6 +58,7 @@ public class ChaseEnemyState : AliveEnemyStateBase
 
     private void SetDestination()
     {
+        // Return true if it can set destination and also sets destination
         if (navMeshAgent.CanSetDestinationInsideCircle(enemyStateData.MinDistance, enemyStateData.MaxDistance))
         {
             return;

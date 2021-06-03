@@ -6,7 +6,7 @@ public class AttackEnemyState : AliveEnemyStateBase
     private readonly ICalculateTrajectoryShoot shooter;
     private readonly ILookAtTarget looker;
     private readonly Transform agent;
-    private readonly Transform player;
+    private readonly Transform target;
 
     private bool canShoot = true;
     private Coroutine dodgeRoutine;
@@ -17,14 +17,14 @@ public class AttackEnemyState : AliveEnemyStateBase
         ICalculateTrajectoryShoot shooter,
         ILookAtTarget looker,
         Transform agent,
-        Transform player
+        Transform target
         ) : base(controller)
     {
         this.attackEnemyStateData = attackEnemyStateData;
         this.shooter = shooter;
         this.looker = looker;
         this.agent = agent;
-        this.player = player;
+        this.target = target;
     }
 
     public override void Enter()
@@ -37,11 +37,11 @@ public class AttackEnemyState : AliveEnemyStateBase
 
     public override void Update()
     {
-        Vector3 direction = looker.LookAtTarget(player);
+        Vector3 direction = looker.LookAtTarget(target);
 
         if (Vector3.Angle(direction, agent.forward) < attackEnemyStateData.RotateToShootPrecision && canShoot)
         {
-            shooter.CalculateTrajectoryShoot(player);
+            shooter.CalculateTrajectoryShoot(target);
             canShoot = false;
             CanShootRoutine();
         }

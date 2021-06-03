@@ -68,7 +68,7 @@ public class CharacterSelectionPvsPState : State
 
     private bool PlayersAreReady()
     {
-        return player1CharacterSelector.IsReady() && player2CharacterSelector.IsReady();
+        return player1CharacterSelector.Ready && player2CharacterSelector.Ready;
     }
 
     private void SwitchToCountdownState()

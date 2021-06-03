@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class HealthHUDBehaviourBase : MonoBehaviour, IObserver<HealthArgs>
+public abstract class HealthHUDBehaviourBase : MonoBehaviour, IObserver<HealthChangedArgs>
 {
     [SerializeField] private Slider healthSlider;
 
-    protected ISubject<HealthArgs> healthSubject;
+    protected ISubject<HealthChangedArgs> healthSubject;
 
     protected abstract void Awake();
 
@@ -13,7 +13,7 @@ public abstract class HealthHUDBehaviourBase : MonoBehaviour, IObserver<HealthAr
     {
         healthSubject.Add(this);
 
-        UpdateHealthSlider(new HealthArgs((int)healthSlider.maxValue, (int)healthSlider.maxValue));
+        healthSlider.value = healthSlider.maxValue; // TODO: Update from the agent
     }
 
     private void OnDisable()
@@ -21,13 +21,13 @@ public abstract class HealthHUDBehaviourBase : MonoBehaviour, IObserver<HealthAr
         healthSubject.Remove(this);
     }
 
-    public void OnNotify(HealthArgs parameter)
+    public void OnNotify(HealthChangedArgs healthChangedArgs)
     {
-        UpdateHealthSlider(parameter);
+        UpdateHealthSlider(healthChangedArgs);
     }
 
-    private void UpdateHealthSlider(HealthArgs paramenter)
+    private void UpdateHealthSlider(HealthChangedArgs healthChangedArgs)
     {
-        healthSlider.value = (float)paramenter.currentHealth / paramenter.maxHealth;
+        healthSlider.value = (float)healthChangedArgs.currentHealth / healthChangedArgs.maxHealth;
     }
 }

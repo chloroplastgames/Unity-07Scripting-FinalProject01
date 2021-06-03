@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public abstract class PlayerCharacterSelectionBehaviourBase : MonoBehaviour, IPlayerCharacterSelection
 {
+    public bool Ready => ready;
+
     [SerializeField] private RawImage background;
     [SerializeField] private GameObject tank;
     [SerializeField] private Text colorName;
@@ -22,7 +24,7 @@ public abstract class PlayerCharacterSelectionBehaviourBase : MonoBehaviour, IPl
 
     public void PreviousSelection()
     {
-        index = ((index + 1) % colorList.Colors.Length + 1) % 3;
+        index = (index + (colorList.Colors.Length - 1)) % colorList.Colors.Length;
         ChangeSelection();
     }
 
@@ -41,11 +43,6 @@ public abstract class PlayerCharacterSelectionBehaviourBase : MonoBehaviour, IPl
         ready = true;
 
         SaveSelection();
-    }
-
-    public bool IsReady()
-    {
-        return ready;
     }
 
     public void ResetSelection()

@@ -2,6 +2,6 @@
 {
     protected override void Awake()
     {
-        healthSubject = GameManagerSingleton.Instance.Tank2Instance.GetComponent<ISubject<HealthArgs>>();
+        healthSubject = GameManagerSingleton.Instance.Tank2Instance.GetComponent<ISubject<HealthChangedArgs>>();
     }
 }

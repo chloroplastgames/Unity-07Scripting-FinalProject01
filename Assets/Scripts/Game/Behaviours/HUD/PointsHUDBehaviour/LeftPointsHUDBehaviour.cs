@@ -9,6 +9,6 @@
     {
         base.OnEnable();
 
-        UpdatePointsText(GameManagerSingleton.Instance.Tank1Wins); // TODO: redundancy
+        UpdatePointsText(GameManagerSingleton.Instance.Tank1Wins);
     }
 }

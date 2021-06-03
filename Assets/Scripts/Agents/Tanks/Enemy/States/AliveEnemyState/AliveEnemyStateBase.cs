@@ -29,7 +29,7 @@
         GameManagerSingleton.Instance.RoundEnder.Remove(this);
     }
 
-    public void OnNotify(EndRoundArgs parameter)
+    public void OnNotify(EndRoundArgs endRoundArgs)
     {
         SwitchToDeadEnemyState();
     }

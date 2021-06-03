@@ -10,18 +10,18 @@ public class PlayerStateController : StateController
         IRotate rotator = GetComponent<IRotate>();
         IShoot shooter = GetComponent<IShoot>();
 
-        IState activePlayerState = new AlivePlayerState(
+        IState alivePlayerState = new AlivePlayerState(
             this,
             translator,
             rotator,
             shooter,
             control
             );
-        IState inactivePlayerState = new DeadPlayerState(
+        IState deadPlayerState = new DeadPlayerState(
             this
             );
-        states.Add(typeof(AlivePlayerState), activePlayerState);
-        states.Add(typeof(DeadPlayerState), inactivePlayerState);
+        states.Add(typeof(AlivePlayerState), alivePlayerState);
+        states.Add(typeof(DeadPlayerState), deadPlayerState);
     }
 
     private void Start()

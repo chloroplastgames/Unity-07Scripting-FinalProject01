@@ -2,6 +2,8 @@
 
 public class SpawnEnemyState : AliveEnemyStateBase
 {
+    private const float TimeToChase = 0.25f; // TODO: ScriptableObject config
+
     private Coroutine chaseRoutine;
 
     public SpawnEnemyState(
@@ -15,7 +17,7 @@ public class SpawnEnemyState : AliveEnemyStateBase
     {
         base.Enter();
 
-        chaseRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(0.25f, () => SwitchToChaseEnemyState());
+        chaseRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(TimeToChase, () => SwitchToChaseEnemyState());
     }
 
     public override void Update()

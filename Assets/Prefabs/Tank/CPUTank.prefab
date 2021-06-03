@@ -559,7 +559,7 @@ MonoBehaviour:
   turret: {fileID: 5405183731308739375}
   isLowAngle: 1
   maxAngleDistanceDeviation: 0.1
-  minAngleDistanceDeviation: 0.02
+  minAngleDistanceDeviation: 0.05
 --- !u!114 &542369995901330671
 MonoBehaviour:
   m_ObjectHideFlags: 0

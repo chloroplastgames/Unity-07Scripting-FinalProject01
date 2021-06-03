@@ -31,7 +31,7 @@
         GameManagerSingleton.Instance.RoundStarter.Remove(this);
     }
 
-    public void OnNotify(StartRoundArgs parameter)
+    public void OnNotify(StartRoundArgs startRoundArgs)
     {
         SwitchToSpawnEnemyState();
     }

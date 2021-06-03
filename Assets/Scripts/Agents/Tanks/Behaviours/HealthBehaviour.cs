@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HealthBehaviour : Subject<HealthArgs>, IDamageable, IResetHealth, ICurrentHealth
+public class HealthBehaviour : Subject<HealthChangedArgs>, IDamageable, IResetHealth, ICurrentHealth
 {
     public int CurrentHealth => currentHealth;
 
@@ -20,8 +20,6 @@ public class HealthBehaviour : Subject<HealthArgs>, IDamageable, IResetHealth, I
     {
         currentHealth = Mathf.Max(0, currentHealth - damageAmount);
 
-        print($"{gameObject} took {damageAmount} damage! {currentHealth} health left");
-
         Notify();
 
         if (currentHealth == 0)
@@ -39,11 +37,11 @@ public class HealthBehaviour : Subject<HealthArgs>, IDamageable, IResetHealth, I
 
     public override void Notify()
     {
-        IObserver<HealthArgs>[] observersPhoto = observers.ToArray();
+        IObserver<HealthChangedArgs>[] observersPhoto = observers.ToArray();
 
-        foreach (IObserver<HealthArgs> observer in observersPhoto)
+        foreach (IObserver<HealthChangedArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new HealthArgs(currentHealth, maxHealth));
+            observer.OnNotify(new HealthChangedArgs(currentHealth, maxHealth));
         }
     }
 }

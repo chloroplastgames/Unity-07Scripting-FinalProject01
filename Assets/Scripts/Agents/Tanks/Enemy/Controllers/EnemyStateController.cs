@@ -7,7 +7,8 @@ public class EnemyStateController : StateController
 
     private void Awake()
     {
-        Transform player = FindObjectOfType<PlayerStateController>().transform; // TODO
+        Transform player = FindObjectOfType<PlayerStateController>().transform;
+        Transform myAgent = gameObject.transform;
         INavMeshAgent navMeshAgent = GetComponent<INavMeshAgent>();
         ICalculateTrajectoryShoot shooter = GetComponent<ICalculateTrajectoryShoot>();
         ILookAtTarget looker = GetComponent<ILookAtTarget>();
@@ -19,7 +20,7 @@ public class EnemyStateController : StateController
             this,
             enemyStateData,
             navMeshAgent,
-            gameObject.transform,
+            myAgent,
             player
             );
         IState attackEnemyState = new AttackEnemyState(
@@ -27,7 +28,7 @@ public class EnemyStateController : StateController
             attackEnemyStateData,
             shooter,
             looker,
-            gameObject.transform,
+            myAgent,
             player
             );
         IState dodgeEnemyState = new DodgeEnemyState(

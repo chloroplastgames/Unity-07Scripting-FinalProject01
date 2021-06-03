@@ -16,7 +16,7 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
     public int Tank2Wins => tank2Wins;
 
     // TODO: Config => ScriptableObject
-    [SerializeField] private CameraController cameraController;
+    [SerializeField] private GameplayCameraController gameplayCameraController;
     [SerializeField] private GameObject player1Tank;
     [SerializeField] private GameObject player2Tank;
     [SerializeField] private GameObject cpuTank;
@@ -83,7 +83,7 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
         tank2Instance = Instantiate(tank2, spawnPoint2.position, spawnPoint2.rotation);
         UtilityFunctionsHelper.ColorGameObject(tank2Instance, tank2Color);
 
-        cameraController.Targets = new Transform[] { tank1Instance.transform, tank2Instance.transform };
+        gameplayCameraController.Targets = new Transform[] { tank1Instance.transform, tank2Instance.transform };
     }
 
     public void SetupRound()
@@ -100,7 +100,7 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
         tank2Instance.GetComponent<IResetHealth>().ResetHealth();
 
         // Reset camera
-        cameraController.ResetCamera();
+        gameplayCameraController.ResetCamera();
     }
 
     public void StartRound()

@@ -14,7 +14,7 @@ public class TranslateBehaviour : MonoBehaviour, ITranslate
 
     public void Translate(float sense)
     {
-        Vector3 movement = transform.forward * sense * speed * Time.deltaTime;
+        Vector3 movement = sense * speed * Time.deltaTime * transform.forward;
         myRigidbody.MovePosition(myRigidbody.position + movement);
     }
 }

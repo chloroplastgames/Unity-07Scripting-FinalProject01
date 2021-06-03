@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 124b83c7f97455c4a9d80a314db915a5, type: 3}
-  m_Name: White
+  m_Name: Black
   m_EditorClassIdentifier: 
-  colorName: white
-  color: {r: 1, g: 1, b: 1, a: 1}
+  colorName: black
+  color: {r: 0, g: 0, b: 0, a: 1}

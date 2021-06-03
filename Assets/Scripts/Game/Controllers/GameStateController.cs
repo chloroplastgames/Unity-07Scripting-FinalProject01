@@ -20,6 +20,7 @@ public class GameStateController : StateController
             canvasCharacterSelectionPvsP.GetComponent<Player1CharacterSelectionBehaviour>();
         IPlayerCharacterSelection player2CharacterSelectorPvsP =
             canvasCharacterSelectionPvsP.GetComponent<Player2CharacterSelectionBehaviour>();
+
         IPlayerCharacterSelection playerCharacterSelectorPvsCPU =
             canvasCharacterSelectionPvsCPU.GetComponent<Player1CharacterSelectionBehaviour>();
 
