@@ -2,56 +2,41 @@
 
 public class GameStateController : StateController
 {
-    [SerializeField] private GameObject cameraMainMenuParent;
-    [SerializeField] private GameObject cameraGameplayParent;
-    [SerializeField] private CanvasMainMenu canvasMainMenu;
-    [SerializeField] private GameObject canvasCharacterSelectionPvsP;
-    [SerializeField] private GameObject canvasCharacterSelectionPvsCPU;
-    [SerializeField] private CanvasCountdown canvasCountdown;
+    [SerializeField] private GameObject cameraMainMenu;
+    [SerializeField] private GameObject cameraGameplay;
     [SerializeField] private GameObject canvasHUD;
     [SerializeField] private TimerHUDBehaviour timerHUDBehaviour;
     [SerializeField] private CanvasGameOver canvasGameOver;
-    [SerializeField] private PlayerControlData player1Control;
-    [SerializeField] private PlayerControlData player2Control;
 
     private void Awake()
     {
-        IPlayerCharacterSelection player1CharacterSelectorPvsP =
-            canvasCharacterSelectionPvsP.GetComponent<Player1CharacterSelectionBehaviour>();
-        IPlayerCharacterSelection player2CharacterSelectorPvsP =
-            canvasCharacterSelectionPvsP.GetComponent<Player2CharacterSelectionBehaviour>();
-
-        IPlayerCharacterSelection playerCharacterSelectorPvsCPU =
-            canvasCharacterSelectionPvsCPU.GetComponent<Player1CharacterSelectionBehaviour>();
+        IMainMenu mainMenu = FindObjectOfType<MainMenuController>();
+        ICharacterSelectionPvsP characterSelectionPvsP = FindObjectOfType<CharacterSelectionPvsPController>();
+        ICharacterSelectionPvsCPU characterSelectionPvsCPU = FindObjectOfType<CharacterSelectionPvsCPUController>();
+        ICountdown countdown = FindObjectOfType<CountdownController>();
 
         IShowWinner winnerShower =
             canvasGameOver.gameObject.GetComponent<IShowWinner>();
 
         IState mainMenuState = new MainMenuState(
             this,
-            canvasMainMenu,
-            cameraMainMenuParent,
-            cameraGameplayParent
+            mainMenu,
+            cameraMainMenu,
+            cameraGameplay
             );
         IState characterSelectionPvsPState = new CharacterSelectionPvsPState(
             this,
-            canvasCharacterSelectionPvsP,
-            player1CharacterSelectorPvsP,
-            player2CharacterSelectorPvsP,
-            player1Control,
-            player2Control
+            characterSelectionPvsP
             );
         IState characterSelectionPvsCPUState = new CharacterSelectionPvsCPUSTate(
             this,
-            canvasCharacterSelectionPvsCPU,
-            playerCharacterSelectorPvsCPU,
-            player1Control
+            characterSelectionPvsCPU
             );
         IState countdownState = new CountdownState(
             this,
-            canvasCountdown,
-            cameraGameplayParent,
-            cameraMainMenuParent
+            countdown,
+            cameraGameplay,
+            cameraMainMenu
             );
         IState roundState = new RoundState(
             this,

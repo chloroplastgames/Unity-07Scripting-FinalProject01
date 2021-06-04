@@ -1,18 +1,14 @@
 ﻿using UnityEngine;
 
-public class CountdownState : State
+public class CountdownState : State, IObserver<CountdownArgs>
 {
-    private readonly CanvasCountdown countdown;
+    private readonly ICountdown countdown;
     private readonly GameObject cameraGameplay;
     private readonly GameObject cameraMainMenu;
 
-    private const int CountdownTime = 3;
-
-    private int time;
-
     public CountdownState(
         IStateController controller,
-        CanvasCountdown countdown,
+        ICountdown countdown,
         GameObject cameraGameplay,
         GameObject cameraMainMenu
         ) : base(controller)
@@ -26,16 +22,16 @@ public class CountdownState : State
     {
         base.Enter();
 
-        cameraMainMenu.SetActive(false);
+        GameManagerSingleton.Instance.SetupGame(); // TODO
+        GameManagerSingleton.Instance.SetupRound(); // TODO
+
+        countdown.CounterSubject.Add(this);
+
         cameraGameplay.SetActive(true);
-        countdown.gameObject.SetActive(true);
+        cameraMainMenu.SetActive(false);
+        countdown.CanvasCountdown.SetActive(true);
 
-        // Gameplay camera must be active
-        GameManagerSingleton.Instance.SetupRound();
-
-        time = CountdownTime;
-
-        ChangeCountdownText(time);
+        countdown.StartCountdown();
     }
 
     public override void Update()
@@ -52,21 +48,14 @@ public class CountdownState : State
     {
         base.Exit();
 
-        countdown.gameObject.SetActive(false);
+        countdown.CounterSubject.Remove(this);
+
+        countdown.CanvasCountdown.SetActive(false);
     }
 
-    private void ChangeCountdownText(int time)
+    public void OnNotify(CountdownArgs parameter)
     {
-        if (time == 0)
-        {
-            SwitchToRoundState();
-            return;
-        }
-
-        countdown.CountdownText.text = time.ToString();
-        time--;
-
-        CoroutinesHelperSingleton.Instance.WaitForSeconds(1f, () => ChangeCountdownText(time));
+        SwitchToRoundState();
     }
 
     private void SwitchToRoundState()

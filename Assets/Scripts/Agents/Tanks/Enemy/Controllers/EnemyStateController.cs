@@ -13,6 +13,8 @@ public class EnemyStateController : StateController
         ICalculateTrajectoryShoot shooter = GetComponent<ICalculateTrajectoryShoot>();
         ILookAtTarget looker = GetComponent<ILookAtTarget>();
 
+        ICountdownEvents countdownEvents = FindObjectOfType<CountdownController>();
+
         IState spawnEnemyState = new SpawnEnemyState(
             this
             );
@@ -37,7 +39,8 @@ public class EnemyStateController : StateController
             navMeshAgent
             );
         IState deadEnemyState = new DeadEnemyState(
-            this
+            this,
+            countdownEvents
             );
         states.Add(typeof(SpawnEnemyState), spawnEnemyState);
         states.Add(typeof(ChaseEnemyState), chaseEnemyState);

@@ -1,17 +1,20 @@
-﻿public class DeadPlayerState : State, IObserver<StartRoundArgs>
+﻿public class DeadPlayerState : State, IObserver<CountdownArgs>
 {
+    private readonly ICountdownEvents countdownEvents;
+
     public DeadPlayerState(
-        IStateController controller
+        IStateController controller,
+        ICountdownEvents countdownEvents
         ) : base(controller)
     {
-        
+        this.countdownEvents = countdownEvents;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        GameManagerSingleton.Instance.RoundStarter.Add(this);
+        countdownEvents.CounterSubject.Add(this);
     }
 
     public override void Update()
@@ -28,10 +31,10 @@
     {
         base.Exit();
 
-        GameManagerSingleton.Instance.RoundStarter.Remove(this);
+        countdownEvents.CounterSubject.Remove(this);
     }
 
-    public void OnNotify(StartRoundArgs startRoundArgs)
+    public void OnNotify(CountdownArgs countdownArgs)
     {
         SwitchToAlivePlayerState();
     }

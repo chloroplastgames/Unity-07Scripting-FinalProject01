@@ -1,39 +1,27 @@
-﻿using UnityEngine;
-
-public class CharacterSelectionPvsCPUSTate : State
+﻿public class CharacterSelectionPvsCPUSTate : State, IObserver<Player1CharacterSelectionArgs>
 {
-    private readonly GameObject canvas;
-    private readonly IPlayerCharacterSelection playerCharacterSelector;
-    private readonly PlayerControlData player1Control;
-
-    private bool routineStarted;
+    private readonly ICharacterSelectionPvsCPU characterSelectionPvsCPU;
 
     public CharacterSelectionPvsCPUSTate(
         IStateController controller,
-        GameObject canvas,
-        IPlayerCharacterSelection playerCharacterSelector,
-        PlayerControlData player1Control
+        ICharacterSelectionPvsCPU characterSelectionPvsCPU
         ) : base(controller)
     {
-        this.canvas = canvas;
-        this.playerCharacterSelector = playerCharacterSelector;
-        this.player1Control = player1Control;
+        this.characterSelectionPvsCPU = characterSelectionPvsCPU;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        routineStarted = false;
+        characterSelectionPvsCPU.Player1CharacterSelectorSubject.Add(this);
 
-        canvas.SetActive(true);
+        characterSelectionPvsCPU.CanvasCharacterSelectionPvsCPU.SetActive(true);
     }
 
     public override void Update()
     {
-        if (routineStarted) return;
-
-        GetPlayerInput();
+        characterSelectionPvsCPU.GetPlayer1Input();
     }
 
     public override void FixedUpdate()
@@ -45,44 +33,25 @@ public class CharacterSelectionPvsCPUSTate : State
     {
         base.Exit();
 
-        canvas.SetActive(false);
+        characterSelectionPvsCPU.Player1CharacterSelectorSubject.Remove(this);
 
-        playerCharacterSelector.ResetSelection();
+        characterSelectionPvsCPU.CanvasCharacterSelectionPvsCPU.SetActive(true);
+
+        characterSelectionPvsCPU.ResetPlayer1Selection();
+    }
+
+    public void OnNotify(Player1CharacterSelectionArgs parameter)
+    {
+        SwitchToCountdownState();
     }
 
     private void SwitchToCountdownState()
     {
-        GameManagerSingleton.Instance.SetupGame();
-
         controller.SwitchState<CountdownState>();
     }
 
     private void SwitchToMainMenuState()
     {
         controller.SwitchState<MainMenuState>();
-    }
-
-    private void GetPlayerInput()
-    {
-        if (Input.GetKeyDown(player1Control.TurnLeft))
-        {
-            playerCharacterSelector.PreviousSelection();
-        }
-        else if (Input.GetKeyDown(player1Control.TurnRight))
-        {
-            playerCharacterSelector.NextSelection();
-        }
-        else if (Input.GetKeyDown(player1Control.Shoot))
-        {
-            playerCharacterSelector.SetSelection();
-
-            CoroutinesHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
-
-            routineStarted = true;
-        }
-        else if (Input.GetKeyDown(player1Control.Special))
-        {
-            SwitchToMainMenuState();
-        }  
     }
 }

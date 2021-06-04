@@ -2,17 +2,12 @@
 
 public class CameraZoomBehaviour : MonoBehaviour, ICameraZoom
 {
+    [SerializeField] private Camera myCamera;
     [SerializeField] private float dampTime = 0.2f;
     [SerializeField] private float screenEdgeBuffer = 4f;
     [SerializeField] private float minSize = 6.5f;
 
-    private Camera myCamera;
     private float zoomSpeed;
-
-    private void Awake()
-    {
-        myCamera = GetComponentInChildren<Camera>();
-    }
 
     public void ResetZoom(Transform[] targets, Vector3 averagePosition)
     {

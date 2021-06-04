@@ -16,6 +16,8 @@ public class GameplayCameraController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (targets == null) return;
+
         cameraMover.MoveCamera(targets);
         cameraZoomer.ZoomCamera(targets, cameraMover.FindAveragePosition(targets));
     }

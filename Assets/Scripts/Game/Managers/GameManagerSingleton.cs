@@ -1,113 +1,151 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManagerSingleton : Singleton<GameManagerSingleton>
+public class GameManagerSingleton : Singleton<GameManagerSingleton>,
+    IObserver<ButtonPvsPArgs>, IObserver<ButtonPvsCPUArgs>,
+    IObserver<Player1CharacterSelectionArgs>, IObserver<Player2CharacterSelectionArgs>
 {
-    public GameObject Tank1Instance => tank1Instance;
-    public GameObject Tank2Instance => tank2Instance;
-    public Color Tank1Color => tank1Color;
-    public Color Tank2Color => tank2Color;
-    public Subject<StartRoundArgs> RoundStarter => roundStarter;
+    public GameObject Agent1Instance => agent1Instance;
+    public GameObject Agent2Instance => agent2Instance;
+    public Color Agent1Color => agent1Color;
+    public Color Agent2Color => agent2Color;
     public Subject<EndRoundArgs> RoundEnder => roundEnder;
     public GameObject GameWinner => gameWinner;
     public Player1RoundWinnerBehaviour Player1RoundWinner => player1RoundWinner;
     public Player2RoundWinnerBehaviour Player2RoundWinner => player2RoundWinner;
-    public int Tank1Wins => tank1Wins;
-    public int Tank2Wins => tank2Wins;
+    public int Agent1Wins => agent1Wins;
+    public int Agent2Wins => agent2Wins;
 
-    // TODO: Config => ScriptableObject
     [SerializeField] private GameplayCameraController gameplayCameraController;
-    [SerializeField] private GameObject player1Tank;
-    [SerializeField] private GameObject player2Tank;
-    [SerializeField] private GameObject cpuTank;
     [SerializeField] private Transform spawnPoint1;
     [SerializeField] private Transform spawnPoint2;
     [SerializeField] private int roundsToWin = 4;
 
-    private StartRoundBehaviour roundStarter;
     private EndRoundBehaviour roundEnder;
 
-    private GameObject tank1;
-    private GameObject tank2;
-    private Color tank1Color = Color.black;
-    private Color tank2Color = Color.black;
+    private GameObject agent1;
+    private GameObject agent2;
+    private Color agent1Color = Color.black;
+    private Color agent2Color = Color.black;
 
-    private GameObject tank1Instance;
-    private GameObject tank2Instance;
+    private GameObject agent1Instance;
+    private GameObject agent2Instance;
 
-    private int tank1Wins;
-    private int tank2Wins;
+    private int agent1Wins;
+    private int agent2Wins;
     private GameObject gameWinner;
+
+    private bool gameIsSet;
 
     private Player1RoundWinnerBehaviour player1RoundWinner;
     private Player2RoundWinnerBehaviour player2RoundWinner;
+
+    private IMainMenuEvents mainMenuEvents;
+    private ICharacterSelectionPvsPEvents characterSelectionPvsPEvents;
+    private ICharacterSelectionPvsCPUEvents characterSelectionPvsCPUEvents;
 
     protected override void Awake()
     {
         base.Awake();
 
-        roundStarter = GetComponent<StartRoundBehaviour>();
         roundEnder = GetComponent<EndRoundBehaviour>();
 
         player1RoundWinner = GetComponent<Player1RoundWinnerBehaviour>();
         player2RoundWinner = GetComponent<Player2RoundWinnerBehaviour>();
+
+        mainMenuEvents = FindObjectOfType<MainMenuController>();
+        characterSelectionPvsPEvents = FindObjectOfType<CharacterSelectionPvsPController>();
+        characterSelectionPvsCPUEvents = FindObjectOfType<CharacterSelectionPvsCPUController>();
     }
 
-    public void SetPvsP()
+    private void Start()
     {
-        tank1 = player1Tank;
-        tank2 = player2Tank;
+        mainMenuEvents.ButtonPvsPSubject.Add(this);
+        mainMenuEvents.ButtonPvsCPUSubject.Add(this);
+
+        characterSelectionPvsPEvents.Player1CharacterSelectorSubject.Add(this);
+        characterSelectionPvsPEvents.Player2CharacterSelectorSubject.Add(this);
+
+        characterSelectionPvsCPUEvents.Player1CharacterSelectorSubject.Add(this);
     }
 
-    public void SetPvsCPU()
+    private void OnDestroy()
     {
-        tank1 = player1Tank;
-        tank2 = cpuTank;
+        mainMenuEvents.ButtonPvsPSubject.Remove(this);
+        mainMenuEvents.ButtonPvsCPUSubject.Remove(this);
+
+        characterSelectionPvsPEvents.Player1CharacterSelectorSubject.Remove(this);
+        characterSelectionPvsPEvents.Player2CharacterSelectorSubject.Remove(this);
+
+        characterSelectionPvsCPUEvents.Player1CharacterSelectorSubject.Add(this);
     }
 
-    public void SetTank1Color(Color color)
+    public void OnNotify(ButtonPvsPArgs buttonPvsPArgs)
     {
-        tank1Color = color;
+        SetAgents(buttonPvsPArgs.agent1, buttonPvsPArgs.agent2);
     }
 
-    public void SetTank2Color(Color color)
+    public void OnNotify(ButtonPvsCPUArgs buttonPvsCPUArgs)
     {
-        tank2Color = color;
+        SetAgents(buttonPvsCPUArgs.agent1, buttonPvsCPUArgs.agent2);
+    }
+
+    public void OnNotify(Player1CharacterSelectionArgs player1ColorArgs)
+    {
+        SetAgent1Color(player1ColorArgs.player1Color);
+    }
+
+    public void OnNotify(Player2CharacterSelectionArgs player2ColorArgs)
+    {
+        SetAgent2Color(player2ColorArgs.player2Color);
+    }
+
+    private void SetAgents(GameObject agent1, GameObject agent2)
+    {
+        this.agent1 = agent1;
+        this.agent2 = agent2;
+    }
+
+    private void SetAgent1Color(Color color)
+    {
+        agent1Color = color;
+    }
+
+    private void SetAgent2Color(Color color)
+    {
+        agent2Color = color;
     }
 
     public void SetupGame()
     {
-        tank1Instance = Instantiate(tank1, spawnPoint1.position, spawnPoint1.rotation);
-        UtilityFunctionsHelper.ColorGameObject(tank1Instance, tank1Color);
+        if (gameIsSet) return;
 
-        tank2Instance = Instantiate(tank2, spawnPoint2.position, spawnPoint2.rotation);
-        UtilityFunctionsHelper.ColorGameObject(tank2Instance, tank2Color);
+        agent1Instance = Instantiate(agent1, spawnPoint1.position, spawnPoint1.rotation);
+        UtilityFunctionsHelper.ColorGameObject(agent1Instance, agent1Color);
 
-        gameplayCameraController.Targets = new Transform[] { tank1Instance.transform, tank2Instance.transform };
+        agent2Instance = Instantiate(agent2, spawnPoint2.position, spawnPoint2.rotation);
+        UtilityFunctionsHelper.ColorGameObject(agent2Instance, agent2Color);
+
+        gameplayCameraController.Targets = new Transform[] { agent1Instance.transform, agent2Instance.transform };
+
+        gameIsSet = true;
     }
 
     public void SetupRound()
     {
         // Reset position and rotation
-        tank1Instance.transform.position = spawnPoint1.transform.position;
-        tank2Instance.transform.position = spawnPoint2.transform.position;
+        agent1Instance.transform.position = spawnPoint1.transform.position;
+        agent2Instance.transform.position = spawnPoint2.transform.position;
 
-        tank1Instance.transform.rotation = spawnPoint1.transform.rotation;
-        tank2Instance.transform.rotation = spawnPoint2.transform.rotation;
+        agent1Instance.transform.rotation = spawnPoint1.transform.rotation;
+        agent2Instance.transform.rotation = spawnPoint2.transform.rotation;
 
         // Reset health
-        tank1Instance.GetComponent<IResetHealth>().ResetHealth();
-        tank2Instance.GetComponent<IResetHealth>().ResetHealth();
+        agent1Instance.GetComponent<IResetHealth>().ResetHealth();
+        agent2Instance.GetComponent<IResetHealth>().ResetHealth();
 
         // Reset camera
         gameplayCameraController.ResetCamera();
-    }
-
-    public void StartRound()
-    {
-        // After countdown
-        // Set alive states
-        roundStarter.StartRound();
     }
 
     public void EndRound()
@@ -117,34 +155,34 @@ public class GameManagerSingleton : Singleton<GameManagerSingleton>
         roundEnder.EndRound();
 
         // Get tanks health
-        int tank1Health = tank1Instance.GetComponent<ICurrentHealth>().CurrentHealth;
-        int tank2Health = tank2Instance.GetComponent<ICurrentHealth>().CurrentHealth;
+        int tank1Health = agent1Instance.GetComponent<ICurrentHealth>().CurrentHealth;
+        int tank2Health = agent2Instance.GetComponent<ICurrentHealth>().CurrentHealth;
 
         // Get round winner
         if (player1RoundWinner.HasPlayer1WonRound(tank1Health, tank2Health))
         {
-            tank1Wins++; // TODO: Redundancy with points in round winner behaviour
+            agent1Wins++; // TODO: Redundancy with points in round winner behaviour
         }
         else if (player2RoundWinner.HasPlayer2WonRound(tank1Health, tank2Health))
         {
-            tank2Wins++;
+            agent2Wins++;
         }
 
         // Get game winner
-        if (tank1Wins == roundsToWin)
+        if (agent1Wins == roundsToWin)
         {
-            gameWinner = tank1Instance;
+            gameWinner = agent1Instance;
         }
-        else if (tank2Wins == roundsToWin)
+        else if (agent2Wins == roundsToWin)
         {
-            gameWinner = tank2Instance;
+            gameWinner = agent2Instance;
         }
     }
 
     public void ResetGameSoft()
     {
-        tank1Wins = 0;
-        tank2Wins = 0;
+        agent1Wins = 0;
+        agent2Wins = 0;
         gameWinner = null;
 
         player1RoundWinner.ResetPoints();

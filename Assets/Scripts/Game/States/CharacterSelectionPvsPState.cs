@@ -1,54 +1,36 @@
-﻿using UnityEngine;
-
-public class CharacterSelectionPvsPState : State
+﻿public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSelectionArgs>, IObserver<Player2CharacterSelectionArgs>
 {
-    private readonly GameObject canvas;
-    private readonly IPlayerCharacterSelection player1CharacterSelector;
-    private readonly IPlayerCharacterSelection player2CharacterSelector;
-    private readonly PlayerControlData player1Control;
-    private readonly PlayerControlData player2Control;
+    private readonly ICharacterSelectionPvsP characterSelectionPvsP;
 
-    private bool routineStarted;
+    private bool player1Ready;
+    private bool player2Ready;
 
     public CharacterSelectionPvsPState(
         IStateController controller,
-        GameObject canvas,
-        IPlayerCharacterSelection player1CharacterSelector,
-        IPlayerCharacterSelection player2CharacterSelector,
-        PlayerControlData player1Control,
-        PlayerControlData player2Control
+        ICharacterSelectionPvsP characterSelectionPvsP
         ) : base(controller)
     {
-        this.canvas = canvas;
-        this.player1CharacterSelector = player1CharacterSelector;
-        this.player2CharacterSelector = player2CharacterSelector;
-        this.player1Control = player1Control;
-        this.player2Control = player2Control;
+        this.characterSelectionPvsP = characterSelectionPvsP;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        routineStarted = false;
+        characterSelectionPvsP.Player1CharacterSelectorSubject.Add(this);
+        characterSelectionPvsP.Player2CharacterSelectorSubject.Add(this);
 
-        canvas.SetActive(true);
+        characterSelectionPvsP.CanvasCharacterSelectionPvsP.SetActive(true);
+
+        player1Ready = false;
+        player2Ready = false;
     }
 
     public override void Update()
     {
-        if (routineStarted) return;
+        characterSelectionPvsP.GetPlayer1Input();
 
-        GetPlayer1Input();
-
-        GetPlayer2Input();
-
-        if (PlayersAreReady())
-        {
-            CoroutinesHelperSingleton.Instance.WaitForSeconds(1f, () => SwitchToCountdownState());
-
-            routineStarted = true;
-        }
+        characterSelectionPvsP.GetPlayer2Input();
     }
 
     public override void FixedUpdate()
@@ -60,62 +42,42 @@ public class CharacterSelectionPvsPState : State
     {
         base.Exit();
 
-        canvas.SetActive(false);
+        characterSelectionPvsP.Player1CharacterSelectorSubject.Remove(this);
+        characterSelectionPvsP.Player2CharacterSelectorSubject.Remove(this);
 
-        player1CharacterSelector.ResetSelection();
-        player2CharacterSelector.ResetSelection();
+        characterSelectionPvsP.CanvasCharacterSelectionPvsP.SetActive(false);
+
+        characterSelectionPvsP.ResetPlayer1Selection();
+        characterSelectionPvsP.ResetPlayer2Selection();
     }
 
-    private bool PlayersAreReady()
+    public void OnNotify(Player1CharacterSelectionArgs parameter)
     {
-        return player1CharacterSelector.Ready && player2CharacterSelector.Ready;
+        player1Ready = true;
+
+        if (player2Ready)
+        {
+            SwitchToCountdownState();
+        }
+    }
+
+    public void OnNotify(Player2CharacterSelectionArgs parameter)
+    {
+        player2Ready = true;
+
+        if (player1Ready)
+        {
+            SwitchToCountdownState();
+        }
     }
 
     private void SwitchToCountdownState()
     {
-        GameManagerSingleton.Instance.SetupGame();
-
         controller.SwitchState<CountdownState>();
     }
 
     private void SwitchToMainMenuState()
     {
         controller.SwitchState<MainMenuState>();
-    }
-
-    private void GetPlayer1Input()
-    {
-        if (Input.GetKeyDown(player1Control.TurnLeft))
-        {
-            player1CharacterSelector.PreviousSelection();
-        }
-        else if (Input.GetKeyDown(player1Control.TurnRight))
-        {
-            player1CharacterSelector.NextSelection();
-        }
-        else if (Input.GetKeyDown(player1Control.Shoot))
-        {
-            player1CharacterSelector.SetSelection();
-        }
-        else if (Input.GetKeyDown(player1Control.Special))
-        {
-            SwitchToMainMenuState();
-        }
-    }
-
-    private void GetPlayer2Input()
-    {
-        if (Input.GetKeyDown(player2Control.TurnLeft))
-        {
-            player2CharacterSelector.PreviousSelection();
-        }
-        else if (Input.GetKeyDown(player2Control.TurnRight))
-        {
-            player2CharacterSelector.NextSelection();
-        }
-        else if (Input.GetKeyDown(player2Control.Shoot))
-        {
-            player2CharacterSelector.SetSelection();
-        }
     }
 }

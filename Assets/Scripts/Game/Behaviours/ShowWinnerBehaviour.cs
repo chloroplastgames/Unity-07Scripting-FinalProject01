@@ -15,15 +15,15 @@ public class ShowWinnerBehaviour : MonoBehaviour, IShowWinner
         {
             if (winner.name.Contains("Player1"))
             {
-                SetCanvas(GameManagerSingleton.Instance.Tank1Color, "P1");
+                SetCanvas(GameManagerSingleton.Instance.Agent1Color, "P1");
             }
             else if (winner.name.Contains("Player2"))
             {
-                SetCanvas(GameManagerSingleton.Instance.Tank2Color, "P2");
+                SetCanvas(GameManagerSingleton.Instance.Agent2Color, "P2");
             }
             else
             {
-                SetCanvas(GameManagerSingleton.Instance.Tank2Color, "CPU");
+                SetCanvas(GameManagerSingleton.Instance.Agent2Color, "CPU");
             }
         }
     }

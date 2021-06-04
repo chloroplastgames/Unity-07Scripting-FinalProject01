@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e2855d4dea990541b73a11284b100bf, type: 3}
+  m_Name: DefaultAgents
+  m_EditorClassIdentifier: 
+  player1Tank: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  player2Tank: {fileID: 173472, guid: 950937eaa4ae8a5438362118c3b55bf2, type: 3}
+  cpuTank: {fileID: 5405183731309056573, guid: e32eb3488fce49e42980bbb34be65216, type: 3}

@@ -24,10 +24,8 @@ public class RoundState : State, IObserver<TimerArgs>, IObserver<DieArgs>
         timer.Add(this);
         timer.ResetTimer();
 
-        GameManagerSingleton.Instance.Tank1Instance.GetComponent<ISubject<DieArgs>>().Add(this);
-        GameManagerSingleton.Instance.Tank2Instance.GetComponent<ISubject<DieArgs>>().Add(this);
-
-        GameManagerSingleton.Instance.StartRound();
+        GameManagerSingleton.Instance.Agent1Instance.GetComponent<ISubject<DieArgs>>().Add(this);
+        GameManagerSingleton.Instance.Agent2Instance.GetComponent<ISubject<DieArgs>>().Add(this);
     }
 
     public override void Update()
@@ -49,8 +47,8 @@ public class RoundState : State, IObserver<TimerArgs>, IObserver<DieArgs>
         timer.Remove(this);
         timer.StopTimer();
 
-        GameManagerSingleton.Instance.Tank1Instance.GetComponent<ISubject<DieArgs>>().Remove(this);
-        GameManagerSingleton.Instance.Tank2Instance.GetComponent<ISubject<DieArgs>>().Remove(this);
+        GameManagerSingleton.Instance.Agent1Instance.GetComponent<ISubject<DieArgs>>().Remove(this);
+        GameManagerSingleton.Instance.Agent2Instance.GetComponent<ISubject<DieArgs>>().Remove(this);
     }
 
     public void OnNotify(TimerArgs timerArgs)
