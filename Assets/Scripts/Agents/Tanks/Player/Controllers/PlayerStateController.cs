@@ -11,13 +11,15 @@ public class PlayerStateController : StateController
         IShoot shooter = GetComponent<IShoot>();
 
         ICountdownEvents countdownEvents = FindObjectOfType<CountdownController>();
+        IHUDEvents hudEvents = FindObjectOfType<HUDController>();
 
         IState alivePlayerState = new AlivePlayerState(
             this,
             translator,
             rotator,
             shooter,
-            control
+            control,
+            hudEvents
             );
         IState deadPlayerState = new DeadPlayerState(
             this,

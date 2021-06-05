@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class AlivePlayerState : State, IObserver<EndRoundArgs>
+public class AlivePlayerState : State, IObserver<EndRoundArgs>, IObserver<TimerArgs>
 {
     private readonly ITranslate translator;
     private readonly IRotate rotator;
     private readonly IShoot shooter;
     private readonly PlayerControlData control;
-
+    private readonly IHUDEvents hudEvents;
     private float translationSense;
     private float rotationSense;
 
@@ -15,20 +15,24 @@ public class AlivePlayerState : State, IObserver<EndRoundArgs>
         ITranslate translator,
         IRotate rotator,
         IShoot shooter,
-        PlayerControlData control
+        PlayerControlData control,
+        IHUDEvents hudEvents
         ) : base(controller)
     {
         this.translator = translator;
         this.rotator = rotator;
         this.shooter = shooter;
         this.control = control;
+        this.hudEvents = hudEvents;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        GameManagerSingleton.Instance.RoundEnder.Add(this);
+        hudEvents.TimerSubject.Add(this);
+
+        GameManagerSingleton.Instance.RoundEnder.Add(this); // TODO
     }
 
     public override void Update()
@@ -54,10 +58,17 @@ public class AlivePlayerState : State, IObserver<EndRoundArgs>
     {
         base.Exit();
 
-        GameManagerSingleton.Instance.RoundEnder.Remove(this);
+        hudEvents.TimerSubject.Remove(this);
+
+        GameManagerSingleton.Instance.RoundEnder.Remove(this); // TODO
     }
 
-    public void OnNotify(EndRoundArgs endRoundArgs)
+    public void OnNotify(TimerArgs parameter)
+    {
+        SwitchToDeadPlayerState();
+    }
+
+    public void OnNotify(EndRoundArgs endRoundArgs) // TODO
     {
         SwitchToDeadPlayerState();
     }

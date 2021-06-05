@@ -5,9 +5,10 @@
 
     public DodgeEnemyState(
         IStateController controller,
+        IHUDEvents hudEvents,
         EnemyStateData enemyStateData,
         INavMeshAgent navMeshAgent
-        ) : base(controller)
+        ) : base(controller, hudEvents)
     {
         this.enemyStateData = enemyStateData;
         this.navMeshAgent = navMeshAgent;

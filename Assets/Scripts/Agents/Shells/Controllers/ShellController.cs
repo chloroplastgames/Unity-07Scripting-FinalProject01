@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 
-public class ShellController : MonoBehaviour
+public class ShellController : MonoBehaviour, IObserver<TimerArgs>, IObserver<DieArgs>
 {
     private IKillable killer;
     private IDealDamage damageDealer;
     private IFaceVelocityDirection velocityDirectionFacer;
+
+    // TODO: Subscribe to events
+    private ICountdownEvents countdownEvents;
+    // TODO: Setup dieSubjects
 
     private void Awake()
     {
@@ -27,6 +31,16 @@ public class ShellController : MonoBehaviour
             damageDealer.DealDamage(target);
         }
 
+        killer.Kill();
+    }
+
+    public void OnNotify(TimerArgs parameter)
+    {
+        killer.Kill();
+    }
+
+    public void OnNotify(DieArgs parameter)
+    {
         killer.Kill();
     }
 }
