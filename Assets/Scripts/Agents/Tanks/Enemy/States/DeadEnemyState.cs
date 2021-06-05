@@ -1,4 +1,6 @@
-﻿public class DeadEnemyState : State
+﻿// TODO: Observe start round event
+
+public class DeadEnemyState : State
 {
     public DeadEnemyState(
         IStateController controller

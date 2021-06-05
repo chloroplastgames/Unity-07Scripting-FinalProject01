@@ -1,15 +1,20 @@
-﻿public class DeadPlayerState : State
+﻿public class DeadPlayerState : State, IObserver<StartRoundEventArgs>
 {
+    private readonly GameController gameController;
+
     public DeadPlayerState(
-        IStateController controller
+        IStateController controller,
+        GameController gameController
         ) : base(controller)
     {
-
+        this.gameController = gameController;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        gameController.StartRoundSubject.Add(this);
     }
 
     public override void Update()
@@ -25,6 +30,13 @@
     public override void Exit()
     {
         base.Exit();
+
+        gameController.StartRoundSubject.Remove(this);
+    }
+
+    public void OnNotify(StartRoundEventArgs parameter)
+    {
+        SwitchToAlivePlayerState();
     }
 
     private void SwitchToAlivePlayerState()

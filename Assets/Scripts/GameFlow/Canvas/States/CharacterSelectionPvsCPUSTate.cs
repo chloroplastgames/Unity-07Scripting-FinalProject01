@@ -1,4 +1,6 @@
-﻿public class CharacterSelectionPvsCPUSTate : State, IObserver<Player1CharacterSelectionEventArgs>
+﻿// TODO: Switch to Countdown state with SetupGameEvent
+
+public class CharacterSelectionPvsCPUSTate : State, IObserver<Player1CharacterSelectionEventArgs>
 {
     private readonly ICharacterSelectionPvsCPU characterSelectionPvsCPU;
 

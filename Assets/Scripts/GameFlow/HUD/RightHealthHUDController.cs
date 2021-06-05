@@ -1,15 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class RightHealthHUDBehaviour : MonoBehaviour, IObserver<HealthChangedEventArgs>, IObserver<SetupGameEventArgs>
+public class RightHealthHUDController : MonoBehaviour, IObserver<SetupGameEventArgs>, IObserver<HealthChangedEventArgs>
 {
     [SerializeField] private Slider healthSlider;
 
     private ISubject<HealthChangedEventArgs> healthSubject;
 
-    private void OnDisable()
+    private GameController gameController;
+
+    private void Awake()
     {
-        healthSubject.Remove(this);
+        gameController = FindObjectOfType<GameController>();
+    }
+
+    private void Start()
+    {
+        gameController.SetupGameSubject.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        healthSubject?.Remove(this);
+        gameController.SetupGameSubject?.Remove(this);
     }
 
     public void OnNotify(SetupGameEventArgs setupGameArgs)

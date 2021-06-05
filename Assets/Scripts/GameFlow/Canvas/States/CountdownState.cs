@@ -52,10 +52,10 @@ public class CountdownState : State, IObserver<CountdownEventArgs>
 
     public void OnNotify(CountdownEventArgs parameter)
     {
-        SwitchToRoundState();
+        SwitchToHUDState();
     }
 
-    private void SwitchToRoundState()
+    private void SwitchToHUDState()
     {
         controller.SwitchState<HUDState>();
     }

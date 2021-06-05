@@ -2,40 +2,19 @@
 
 public class SetupGameBehaviour : Subject<SetupGameEventArgs>
 {
-    [SerializeField] private Transform spawnPoint1;
-    [SerializeField] private Transform spawnPoint2;
-
-    private GameObject agent1;
-    private GameObject agent2;
-    private Color agent1Color;
-    private Color agent2Color;
     private GameObject agent1Instance;
     private GameObject agent2Instance;
 
-    public void SetAgents(GameObject agent1, GameObject agent2)
+    public void SetupGame(GameObject agent1, Transform spawnPoint1, Color agent1Color,
+        GameObject agent2, Transform spawnPoint2, Color agent2Color)
     {
-        this.agent1 = agent1;
-        this.agent2 = agent2;
-    }
+        agent1Instance = Instantiate(agent1, spawnPoint1.position, spawnPoint1.rotation);
+        UtilityFunctionsHelper.ColorGameObject(agent1Instance, agent1Color);
 
-    public void SetAgent1Color(Color agent1Color)
-    {
-        this.agent1Color = agent1Color;
+        agent2Instance = Instantiate(agent2, spawnPoint2.position, spawnPoint2.rotation);
+        UtilityFunctionsHelper.ColorGameObject(agent2Instance, agent2Color);
 
-        if (agent2Color != default)
-        {
-            SetupGame();
-        }
-    }
-
-    public void SetAgent2Color(Color agent2Color)
-    {
-        this.agent2Color = agent2Color;
-
-        if (agent1Color != default)
-        {
-            SetupGame();
-        }
+        Notify();
     }
 
     public override void Notify()
@@ -46,16 +25,5 @@ public class SetupGameBehaviour : Subject<SetupGameEventArgs>
         {
             observer.OnNotify(new SetupGameEventArgs(agent1Instance, agent2Instance));
         }
-    }
-
-    private void SetupGame()
-    {
-        agent1Instance = Instantiate(agent1, spawnPoint1.position, spawnPoint1.rotation);
-        UtilityFunctionsHelper.ColorGameObject(agent1Instance, agent1Color);
-
-        agent2Instance = Instantiate(agent2, spawnPoint2.position, spawnPoint2.rotation);
-        UtilityFunctionsHelper.ColorGameObject(agent2Instance, agent2Color);
-
-        Notify();
     }
 }

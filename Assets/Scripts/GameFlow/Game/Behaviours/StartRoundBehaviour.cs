@@ -1,6 +1,6 @@
 ﻿public class StartRoundBehaviour : Subject<StartRoundEventArgs>
 {
-    public void SetupRound()
+    public void StartRound()
     {
         Notify();
     }

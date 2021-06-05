@@ -1,33 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LeftBackgroundHUDBehaviour : MonoBehaviour, IObserver<Player1CharacterSelectionEventArgs>
+public class LeftBackgroundHUDBehaviour : MonoBehaviour
 {
     [SerializeField] protected RawImage background;
 
-    private ICharacterSelectionPvsPEvents characterSelectionPvsPEvents;
-    private ICharacterSelectionPvsCPUEvents characterSelectionPvsCPUEvents;
-
-    private void Awake()
+    public void ChangeBackgroundColor(Color color)
     {
-        characterSelectionPvsPEvents = FindObjectOfType<CharacterSelectionPvsPController>();
-        characterSelectionPvsCPUEvents = FindObjectOfType<CharacterSelectionPvsCPUController>();
-    }
-
-    private void Start()
-    {
-        characterSelectionPvsPEvents.Player1CharacterSelectorSubject.Add(this);
-        characterSelectionPvsCPUEvents.Player1CharacterSelectorSubject.Add(this);
-    }
-
-    private void OnDisable()
-    {
-        characterSelectionPvsPEvents.Player1CharacterSelectorSubject.Remove(this);
-        characterSelectionPvsCPUEvents.Player1CharacterSelectorSubject.Remove(this);
-    }
-
-    public void OnNotify(Player1CharacterSelectionEventArgs player1CharacterSelectionArgs)
-    {
-        background.color = player1CharacterSelectionArgs.player1Color;
+        background.color = color;
     }
 }

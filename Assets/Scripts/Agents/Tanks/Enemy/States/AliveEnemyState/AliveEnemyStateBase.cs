@@ -1,4 +1,6 @@
-﻿public abstract class AliveEnemyStateBase : State
+﻿// TODO: Observe end round event
+
+public abstract class AliveEnemyStateBase : State
 {
     protected AliveEnemyStateBase(
         IStateController controller

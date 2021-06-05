@@ -1657,6 +1657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633d465d3c491a1439074bb26f321642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoint1: {fileID: 194018016}
+  spawnPoint2: {fileID: 2083660209}
 --- !u!114 &1361985613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,8 +1671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a3fe7561a6e2848941826b744a4f87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint1: {fileID: 194018016}
-  spawnPoint2: {fileID: 2083660209}
 --- !u!114 &1361985614
 MonoBehaviour:
   m_ObjectHideFlags: 0

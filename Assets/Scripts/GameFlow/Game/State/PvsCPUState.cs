@@ -42,6 +42,6 @@ public class PvsCPUState : State, IObserver<Player1CharacterSelectionEventArgs>
     public void OnNotify(Player1CharacterSelectionEventArgs player1CharacterSelectionArgs)
     {
         gameController.SetAgent1Color(player1CharacterSelectionArgs.player1Color);
-        gameController.SetAgent2Color(new Color(Random.value, Random.value, Random.value));
+        gameController.SetAgent2Color(Color.black);
     }
 }

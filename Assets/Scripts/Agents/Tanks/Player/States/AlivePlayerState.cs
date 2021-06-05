@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// TODO: Observe end round event
+
+using UnityEngine;
 
 public class AlivePlayerState : State
 {

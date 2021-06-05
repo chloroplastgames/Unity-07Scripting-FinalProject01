@@ -1,4 +1,6 @@
-﻿public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSelectionEventArgs>, IObserver<Player2CharacterSelectionEventArgs>
+﻿// TODO: Switch to Countdown state with SetupGameEvent
+
+public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSelectionEventArgs>, IObserver<Player2CharacterSelectionEventArgs>
 {
     private readonly ICharacterSelectionPvsP characterSelectionPvsP;
 

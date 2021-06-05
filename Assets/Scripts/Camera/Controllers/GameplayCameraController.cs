@@ -16,10 +16,10 @@ public class GameplayCameraController : MonoBehaviour, IObserver<SetupGameEventA
         gameController = FindObjectOfType<GameController>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
         gameController.SetupGameSubject.Add(this);
-        gameController.SetupRoundSubject.Add(this);
+        gameController.StartRoundSubject.Add(this);
     }
 
     private void LateUpdate()
@@ -30,20 +30,25 @@ public class GameplayCameraController : MonoBehaviour, IObserver<SetupGameEventA
         cameraZoomer.ZoomCamera(targets, cameraMover.FindAveragePosition(targets));
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        gameController.SetupGameSubject.Remove(this);
-        gameController.SetupRoundSubject.Remove(this);
+        gameController.SetupGameSubject?.Remove(this);
+        gameController.StartRoundSubject?.Remove(this);
     }
 
     public void OnNotify(SetupGameEventArgs setupGameArgs)
     {
-        targets = new Transform[] { setupGameArgs.agent1Instance.transform, setupGameArgs.agent2Instance.transform };
+        SetTargets(new Transform[] { setupGameArgs.agent1Instance.transform, setupGameArgs.agent2Instance.transform });
     }
 
     public void OnNotify(StartRoundEventArgs parameter)
     {
         ResetCamera();
+    }
+
+    private void SetTargets(Transform[] targets)
+    {
+        this.targets = targets;
     }
 
     private void ResetCamera()

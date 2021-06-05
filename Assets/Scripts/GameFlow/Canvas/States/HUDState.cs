@@ -1,4 +1,6 @@
-﻿public class HUDState : State
+﻿// TODO: Switch to CountdownState or GameOverState with EndRoundEvent
+
+public class HUDState : State
 {
     private readonly IHUD hud;
 

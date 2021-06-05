@@ -10,6 +10,8 @@ public class PlayerStateController : StateController
         IRotate rotator = GetComponent<IRotate>();
         IShoot shooter = GetComponent<IShoot>();
 
+        GameController gameController = FindObjectOfType<GameController>();
+
         IState alivePlayerState = new AlivePlayerState(
             this,
             translator,
@@ -18,7 +20,8 @@ public class PlayerStateController : StateController
             control
             );
         IState deadPlayerState = new DeadPlayerState(
-            this
+            this,
+            gameController
             );
         states.Add(typeof(AlivePlayerState), alivePlayerState);
         states.Add(typeof(DeadPlayerState), deadPlayerState);
