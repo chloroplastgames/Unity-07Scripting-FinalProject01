@@ -9,12 +9,11 @@ public class ChaseEnemyState : AliveEnemyStateBase
 
     public ChaseEnemyState(
         IStateController controller,
-        IHUDEvents hudEvents,
         EnemyStateData enemyStateData,
         INavMeshAgent navMeshAgent,
         Transform agent,
         Transform target
-        ) : base(controller, hudEvents)
+        ) : base(controller)
     {
         this.enemyStateData = enemyStateData;
         this.navMeshAgent = navMeshAgent;

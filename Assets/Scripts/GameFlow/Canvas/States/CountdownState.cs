@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CountdownState : State, IObserver<CountdownArgs>
+public class CountdownState : State, IObserver<CountdownEventArgs>
 {
     private readonly ICountdown countdown;
     private readonly GameObject cameraGameplay;
@@ -21,9 +21,6 @@ public class CountdownState : State, IObserver<CountdownArgs>
     public override void Enter()
     {
         base.Enter();
-
-        GameManagerSingleton.Instance.SetupGame(); // TODO
-        GameManagerSingleton.Instance.SetupRound(); // TODO
 
         countdown.CounterSubject.Add(this);
 
@@ -53,7 +50,7 @@ public class CountdownState : State, IObserver<CountdownArgs>
         countdown.CanvasCountdown.SetActive(false);
     }
 
-    public void OnNotify(CountdownArgs parameter)
+    public void OnNotify(CountdownEventArgs parameter)
     {
         SwitchToRoundState();
     }

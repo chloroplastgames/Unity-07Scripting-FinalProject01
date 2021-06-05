@@ -10,20 +10,15 @@ public class PlayerStateController : StateController
         IRotate rotator = GetComponent<IRotate>();
         IShoot shooter = GetComponent<IShoot>();
 
-        ICountdownEvents countdownEvents = FindObjectOfType<CountdownController>();
-        IHUDEvents hudEvents = FindObjectOfType<HUDController>();
-
         IState alivePlayerState = new AlivePlayerState(
             this,
             translator,
             rotator,
             shooter,
-            control,
-            hudEvents
+            control
             );
         IState deadPlayerState = new DeadPlayerState(
-            this,
-            countdownEvents
+            this
             );
         states.Add(typeof(AlivePlayerState), alivePlayerState);
         states.Add(typeof(DeadPlayerState), deadPlayerState);

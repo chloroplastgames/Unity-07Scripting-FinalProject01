@@ -1,20 +1,15 @@
-﻿public class DeadPlayerState : State, IObserver<CountdownArgs>
+﻿public class DeadPlayerState : State
 {
-    private readonly ICountdownEvents countdownEvents;
-
     public DeadPlayerState(
-        IStateController controller,
-        ICountdownEvents countdownEvents
+        IStateController controller
         ) : base(controller)
     {
-        this.countdownEvents = countdownEvents;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        countdownEvents.CounterSubject.Add(this);
     }
 
     public override void Update()
@@ -30,13 +25,6 @@
     public override void Exit()
     {
         base.Exit();
-
-        countdownEvents.CounterSubject.Remove(this);
-    }
-
-    public void OnNotify(CountdownArgs countdownArgs)
-    {
-        SwitchToAlivePlayerState();
     }
 
     private void SwitchToAlivePlayerState()

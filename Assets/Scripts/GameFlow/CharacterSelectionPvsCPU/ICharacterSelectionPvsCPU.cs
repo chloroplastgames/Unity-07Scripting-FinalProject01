@@ -5,5 +5,5 @@ public interface ICharacterSelectionPvsCPU
     GameObject CanvasCharacterSelectionPvsCPU { get; }
     void GetPlayer1Input();
     void ResetPlayer1Selection();
-    ISubject<Player1CharacterSelectionArgs> Player1CharacterSelectorSubject { get; }
+    ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject { get; }
 }

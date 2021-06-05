@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerHUDBehaviour : Subject<TimerArgs>, ITimer
+public class TimerHUDBehaviour : Subject<TimerEventArgs>, ITimer
 {
     [SerializeField] private Text timerText;
     [SerializeField] private float time;
@@ -46,11 +46,11 @@ public class TimerHUDBehaviour : Subject<TimerArgs>, ITimer
 
     public override void Notify()
     {
-        IObserver<TimerArgs>[] observersPhoto = observers.ToArray();
+        IObserver<TimerEventArgs>[] observersPhoto = observers.ToArray();
 
-        foreach (IObserver<TimerArgs> observer in observersPhoto)
+        foreach (IObserver<TimerEventArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new TimerArgs());
+            observer.OnNotify(new TimerEventArgs());
         }
     }
 

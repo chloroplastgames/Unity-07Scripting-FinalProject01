@@ -1,4 +1,4 @@
-﻿public class HUDState : State, IObserver<TimerArgs>, IObserver<DieArgs>
+﻿public class HUDState : State
 {
     private readonly IHUD hud;
 
@@ -14,14 +14,9 @@
     {
         base.Enter();
 
-        hud.TimerSubject.Add(this);
-
         hud.CanvasHUD.SetActive(true);
 
         hud.ResetTimer();
-
-        GameManagerSingleton.Instance.Agent1Instance.GetComponent<ISubject<DieArgs>>().Add(this); // TODO
-        GameManagerSingleton.Instance.Agent2Instance.GetComponent<ISubject<DieArgs>>().Add(this); // TODO
     }
 
     public override void Update()
@@ -38,36 +33,9 @@
     {
         base.Exit();
 
-        hud.TimerSubject.Remove(this);
-
         hud.CanvasHUD.SetActive(false);
 
         hud.StopTimer();
-
-        GameManagerSingleton.Instance.Agent1Instance.GetComponent<ISubject<DieArgs>>().Remove(this); // TODO
-        GameManagerSingleton.Instance.Agent2Instance.GetComponent<ISubject<DieArgs>>().Remove(this); // TODO
-    }
-
-    public void OnNotify(TimerArgs timerArgs) // TODO
-    {
-        CheckGameWinner();
-    }
-
-    public void OnNotify(DieArgs dieArgs) // TODO
-    {
-        CheckGameWinner();
-    }
-
-    private void CheckGameWinner() // TODO
-    {
-        if (GameManagerSingleton.Instance.GameWinner == null)
-        {
-            SwitchToCountdownState();
-        }
-        else
-        {
-            SwitchToGameOverState();
-        }
     }
 
     private void SwitchToCountdownState()

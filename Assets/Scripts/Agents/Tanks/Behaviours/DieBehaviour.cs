@@ -1,4 +1,4 @@
-﻿public class DieBehaviour : Subject<DieArgs>, IKillable
+﻿public class DieBehaviour : Subject<DieEventArgs>, IKillable
 {
     public void Kill()
     {
@@ -7,11 +7,11 @@
 
     public override void Notify()
     {
-        IObserver<DieArgs>[] observersPhoto = observers.ToArray();
+        IObserver<DieEventArgs>[] observersPhoto = observers.ToArray();
 
-        foreach(IObserver<DieArgs> observer in observersPhoto)
+        foreach(IObserver<DieEventArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new DieArgs());
+            observer.OnNotify(new DieEventArgs());
         }
     }
 }

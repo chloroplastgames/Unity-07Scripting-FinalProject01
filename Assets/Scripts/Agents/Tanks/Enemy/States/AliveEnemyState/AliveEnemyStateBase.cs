@@ -1,22 +1,15 @@
-﻿public abstract class AliveEnemyStateBase : State, IObserver<EndRoundArgs>, IObserver<TimerArgs>
+﻿public abstract class AliveEnemyStateBase : State
 {
-    private readonly IHUDEvents hudEvents;
-
     protected AliveEnemyStateBase(
-        IStateController controller,
-        IHUDEvents hudEvents
+        IStateController controller
         ) : base(controller)
     {
-        this.hudEvents = hudEvents;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        hudEvents.TimerSubject.Add(this);
-
-        GameManagerSingleton.Instance.RoundEnder.Add(this);
     }
 
     public override void Update()
@@ -32,23 +25,9 @@
     public override void Exit()
     {
         base.Exit();
-
-        hudEvents.TimerSubject.Remove(this);
-
-        GameManagerSingleton.Instance.RoundEnder.Remove(this);
     }
 
-    public void OnNotify(TimerArgs parameter)
-    {
-        SwitchToDeadEnemyState();
-    }
-
-    public void OnNotify(EndRoundArgs endRoundArgs)
-    {
-        SwitchToDeadEnemyState();
-    }
-
-    protected void SwitchToDeadEnemyState()
+    private void SwitchToDeadEnemyState()
     {
         controller.SwitchState<DeadEnemyState>();
     } 

@@ -2,18 +2,18 @@
 
 public class MainMenuController : MonoBehaviour, IMainMenu, IMainMenuEvents
 {
-    public ISubject<ButtonPvsPArgs> ButtonPvsPSubject => buttonPvsPSubject;
-    public ISubject<ButtonPvsCPUArgs> ButtonPvsCPUSubject => buttonPvsCPUSubject;
+    public ISubject<ButtonPvsPEventArgs> ButtonPvsPSubject => buttonPvsPSubject;
+    public ISubject<ButtonPvsCPUEventArgs> ButtonPvsCPUSubject => buttonPvsCPUSubject;
     public GameObject CanvasMainMenu => canvasMainMenu;
 
     [SerializeField] private GameObject canvasMainMenu;
 
-    private ISubject<ButtonPvsPArgs> buttonPvsPSubject;
-    private ISubject<ButtonPvsCPUArgs> buttonPvsCPUSubject;
+    private ISubject<ButtonPvsPEventArgs> buttonPvsPSubject;
+    private ISubject<ButtonPvsCPUEventArgs> buttonPvsCPUSubject;
 
     private void Awake()
     {
-        buttonPvsPSubject = GetComponent<ISubject<ButtonPvsPArgs>>();
-        buttonPvsCPUSubject = GetComponent<ISubject<ButtonPvsCPUArgs>>();
+        buttonPvsPSubject = GetComponent<ISubject<ButtonPvsPEventArgs>>();
+        buttonPvsCPUSubject = GetComponent<ISubject<ButtonPvsCPUEventArgs>>();
     }
 }

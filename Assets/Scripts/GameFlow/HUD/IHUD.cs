@@ -6,5 +6,5 @@ public interface IHUD
     void ResetTimer();
     void StopTimer();
     void StartTimer();
-    ISubject<TimerArgs> TimerSubject { get; }
+    ISubject<TimerEventArgs> TimerSubject { get; }
 }

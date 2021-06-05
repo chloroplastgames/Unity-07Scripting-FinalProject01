@@ -7,6 +7,6 @@ public interface ICharacterSelectionPvsP
     void GetPlayer2Input();
     void ResetPlayer1Selection();
     void ResetPlayer2Selection();
-    ISubject<Player1CharacterSelectionArgs> Player1CharacterSelectorSubject { get; }
-    ISubject<Player2CharacterSelectionArgs> Player2CharacterSelectorSubject { get; }
+    ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject { get; }
+    ISubject<Player2CharacterSelectionEventArgs> Player2CharacterSelectorSubject { get; }
 }

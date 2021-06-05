@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HealthBehaviour : Subject<HealthChangedArgs>, IDamageable, IResetHealth, ICurrentHealth
+public class HealthBehaviour : Subject<HealthChangedEventArgs>, IDamageable, IResetHealth, ICurrentHealth
 {
     public int CurrentHealth => currentHealth;
 
@@ -37,11 +37,11 @@ public class HealthBehaviour : Subject<HealthChangedArgs>, IDamageable, IResetHe
 
     public override void Notify()
     {
-        IObserver<HealthChangedArgs>[] observersPhoto = observers.ToArray();
+        IObserver<HealthChangedEventArgs>[] observersPhoto = observers.ToArray();
 
-        foreach (IObserver<HealthChangedArgs> observer in observersPhoto)
+        foreach (IObserver<HealthChangedEventArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new HealthChangedArgs(currentHealth, maxHealth));
+            observer.OnNotify(new HealthChangedEventArgs(currentHealth, maxHealth));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CountdownBehaviour : Subject<CountdownArgs>, IStartCountdown
+public class CountdownBehaviour : Subject<CountdownEventArgs>, IStartCountdown
 {
     [SerializeField] private Text countdownText;
 
@@ -18,11 +18,11 @@ public class CountdownBehaviour : Subject<CountdownArgs>, IStartCountdown
 
     public override void Notify()
     {
-        IObserver<CountdownArgs>[] observersPhoto = observers.ToArray();
+        IObserver<CountdownEventArgs>[] observersPhoto = observers.ToArray();
 
-        foreach (IObserver<CountdownArgs> observer in observersPhoto)
+        foreach (IObserver<CountdownEventArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new CountdownArgs());
+            observer.OnNotify(new CountdownEventArgs());
         }
     }
 

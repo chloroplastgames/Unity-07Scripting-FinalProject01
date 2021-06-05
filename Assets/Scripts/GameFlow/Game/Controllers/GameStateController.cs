@@ -1,18 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GameStateController : MonoBehaviour
+﻿public class GameStateController : StateController
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        GameController gameController = GetComponent<GameController>();
+
+        IMainMenuEvents mainMenuEvents = FindObjectOfType<MainMenuController>();
+        ICharacterSelectionPvsPEvents characterSelectionPvsPEvents = FindObjectOfType<CharacterSelectionPvsPController>();
+        ICharacterSelectionPvsCPUEvents characterSelectionPvsCPUEvents = FindObjectOfType<CharacterSelectionPvsCPUController>();
+
+        IState startState = new StartState(
+            this,
+            mainMenuEvents,
+            gameController
+            );
+        IState pvspState = new PvsPState(
+            this,
+            characterSelectionPvsPEvents,
+            gameController
+            );
+        IState pvscpuState = new PvsCPUState(
+            this,
+            characterSelectionPvsCPUEvents,
+            gameController
+            );
+        states.Add(typeof(StartState), startState);
+        states.Add(typeof(PvsPState), pvspState);
+        states.Add(typeof(PvsCPUState), pvscpuState);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        SwitchState<StartState>();
+    }
+
+    private void Update()
+    {
+        currentState.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdate();
     }
 }

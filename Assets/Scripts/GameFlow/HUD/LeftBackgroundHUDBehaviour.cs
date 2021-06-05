@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LeftBackgroundHUDBehaviour : MonoBehaviour, IObserver<Player1CharacterSelectionArgs>
+public class LeftBackgroundHUDBehaviour : MonoBehaviour, IObserver<Player1CharacterSelectionEventArgs>
 {
     [SerializeField] protected RawImage background;
 
@@ -26,7 +26,7 @@ public class LeftBackgroundHUDBehaviour : MonoBehaviour, IObserver<Player1Charac
         characterSelectionPvsCPUEvents.Player1CharacterSelectorSubject.Remove(this);
     }
 
-    public void OnNotify(Player1CharacterSelectionArgs player1CharacterSelectionArgs)
+    public void OnNotify(Player1CharacterSelectionEventArgs player1CharacterSelectionArgs)
     {
         background.color = player1CharacterSelectionArgs.player1Color;
     }

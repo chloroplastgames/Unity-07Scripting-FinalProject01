@@ -2,7 +2,7 @@
 
 public class CharacterSelectionPvsCPUController : MonoBehaviour, ICharacterSelectionPvsCPU, ICharacterSelectionPvsCPUEvents
 {
-    public ISubject<Player1CharacterSelectionArgs> Player1CharacterSelectorSubject => player1CharacterSelectorSubject;
+    public ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject => player1CharacterSelectorSubject;
 
     public GameObject CanvasCharacterSelectionPvsCPU => canvasCharacterSelectionPvsCPU;
 
@@ -11,7 +11,7 @@ public class CharacterSelectionPvsCPUController : MonoBehaviour, ICharacterSelec
 
     private IPlayerCharacterSelection player1CharacterSelector;
 
-    private ISubject<Player1CharacterSelectionArgs> player1CharacterSelectorSubject;
+    private ISubject<Player1CharacterSelectionEventArgs> player1CharacterSelectorSubject;
 
     private void Awake()
     {

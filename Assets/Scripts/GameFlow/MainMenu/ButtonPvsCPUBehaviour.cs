@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonPvsCPUBehaviour : Subject<ButtonPvsCPUArgs>
+public class ButtonPvsCPUBehaviour : Subject<ButtonPvsCPUEventArgs>
 {
     [SerializeField] private Button buttonPvsCPU;
     [SerializeField] private AgentsData agents;
@@ -18,11 +18,11 @@ public class ButtonPvsCPUBehaviour : Subject<ButtonPvsCPUArgs>
 
     public override void Notify()
     {
-        IObserver<ButtonPvsCPUArgs>[] observersPhoto = observers.ToArray();
+        IObserver<ButtonPvsCPUEventArgs>[] observersPhoto = observers.ToArray();
 
-        foreach (IObserver<ButtonPvsCPUArgs> observer in observersPhoto)
+        foreach (IObserver<ButtonPvsCPUEventArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new ButtonPvsCPUArgs(agents.Player1Tank, agents.CPUTank));
+            observer.OnNotify(new ButtonPvsCPUEventArgs(agents.Player1Tank, agents.CPUTank));
         }
     }
 

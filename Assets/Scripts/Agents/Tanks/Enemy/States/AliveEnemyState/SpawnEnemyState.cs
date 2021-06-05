@@ -7,9 +7,8 @@ public class SpawnEnemyState : AliveEnemyStateBase
     private Coroutine chaseRoutine;
 
     public SpawnEnemyState(
-        IStateController controller,
-        IHUDEvents hudEvents
-        ) : base(controller, hudEvents)
+        IStateController controller
+        ) : base(controller)
     {
 
     }

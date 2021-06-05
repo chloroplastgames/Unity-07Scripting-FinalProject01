@@ -1,4 +1,4 @@
-﻿public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSelectionArgs>, IObserver<Player2CharacterSelectionArgs>
+﻿public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSelectionEventArgs>, IObserver<Player2CharacterSelectionEventArgs>
 {
     private readonly ICharacterSelectionPvsP characterSelectionPvsP;
 
@@ -51,7 +51,7 @@
         characterSelectionPvsP.ResetPlayer2Selection();
     }
 
-    public void OnNotify(Player1CharacterSelectionArgs parameter)
+    public void OnNotify(Player1CharacterSelectionEventArgs parameter)
     {
         player1Ready = true;
 
@@ -61,7 +61,7 @@
         }
     }
 
-    public void OnNotify(Player2CharacterSelectionArgs parameter)
+    public void OnNotify(Player2CharacterSelectionEventArgs parameter)
     {
         player2Ready = true;
 

@@ -1,4 +1,4 @@
 ﻿public interface ICharacterSelectionPvsCPUEvents
 {
-    ISubject<Player1CharacterSelectionArgs> Player1CharacterSelectorSubject { get; }
+    ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject { get; }
 }

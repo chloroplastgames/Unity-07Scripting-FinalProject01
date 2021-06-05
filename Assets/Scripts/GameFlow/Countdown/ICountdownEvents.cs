@@ -1,4 +1,4 @@
 ﻿public interface ICountdownEvents
 {
-    ISubject<CountdownArgs> CounterSubject { get; }
+    ISubject<CountdownEventArgs> CounterSubject { get; }
 }

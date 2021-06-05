@@ -1,4 +1,4 @@
 ﻿public interface IHUDEvents
 {
-    ISubject<TimerArgs> TimerSubject { get; }
+    ISubject<TimerEventArgs> TimerSubject { get; }
 }

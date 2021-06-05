@@ -1,20 +1,15 @@
-﻿public class DeadEnemyState : State, IObserver<CountdownArgs>
+﻿public class DeadEnemyState : State
 {
-    private readonly ICountdownEvents countdownEvents;
-
     public DeadEnemyState(
-        IStateController controller,
-        ICountdownEvents countdownEvents
+        IStateController controller
         ) : base(controller)
     {
-        this.countdownEvents = countdownEvents;
+
     }
 
     public override void Enter()
     {
         base.Enter();
-
-        countdownEvents.CounterSubject.Add(this);
     }
 
     public override void Update()
@@ -30,13 +25,6 @@
     public override void Exit()
     {
         base.Exit();
-
-        countdownEvents.CounterSubject.Remove(this);
-    }
-
-    public void OnNotify(CountdownArgs parameter)
-    {
-        SwitchToSpawnEnemyState();
     }
 
     private void SwitchToSpawnEnemyState()

@@ -13,13 +13,12 @@ public class AttackEnemyState : AliveEnemyStateBase
 
     public AttackEnemyState(
         IStateController controller,
-        IHUDEvents hudEvents,
         AttackEnemyStateData attackEnemyStateData,
         ICalculateTrajectoryShoot shooter,
         ILookAtTarget looker,
         Transform agent,
         Transform target
-        ) : base(controller, hudEvents)
+        ) : base(controller)
     {
         this.attackEnemyStateData = attackEnemyStateData;
         this.shooter = shooter;

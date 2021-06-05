@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MainMenuState : State, IObserver<ButtonPvsPArgs>, IObserver<ButtonPvsCPUArgs>
+public class MainMenuState : State, IObserver<ButtonPvsPEventArgs>, IObserver<ButtonPvsCPUEventArgs>
 {
     private readonly IMainMenu mainMenu;
     private readonly GameObject cameraMainMenu;
@@ -50,12 +50,12 @@ public class MainMenuState : State, IObserver<ButtonPvsPArgs>, IObserver<ButtonP
         mainMenu.CanvasMainMenu.SetActive(false);   
     }
 
-    public void OnNotify(ButtonPvsPArgs parameter)
+    public void OnNotify(ButtonPvsPEventArgs parameter)
     {
         SwitchToCharacterSelectionPvsPState();
     }
 
-    public void OnNotify(ButtonPvsCPUArgs parameter)
+    public void OnNotify(ButtonPvsCPUEventArgs parameter)
     {
         SwitchToCharacterSelectionPvsCPUState();
     }

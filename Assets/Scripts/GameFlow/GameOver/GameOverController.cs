@@ -9,17 +9,17 @@ public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents
     [SerializeField] private GameObject canvasGameOver;
 
     private ISubject<ButtonRestartEventArgs> buttonRestartSubject;
-    private IShowWinner winnerShower;
+    private ShowWinnerBehaviour winnerShower;
 
     private void Awake()
     {
         buttonRestartSubject = GetComponent<ISubject<ButtonRestartEventArgs>>();
 
-        winnerShower = GetComponent<IShowWinner>();
+        winnerShower = GetComponent<ShowWinnerBehaviour>();
     }
 
     public void ShowWinner()
     {
-        winnerShower.ShowWinner();
+        // winnerShower.ShowWinner();
     }
 }

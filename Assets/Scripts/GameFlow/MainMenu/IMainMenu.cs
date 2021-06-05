@@ -2,7 +2,7 @@
 
 public interface IMainMenu
 {
-    ISubject<ButtonPvsPArgs> ButtonPvsPSubject { get; }
-    ISubject<ButtonPvsCPUArgs> ButtonPvsCPUSubject { get; }
+    ISubject<ButtonPvsPEventArgs> ButtonPvsPSubject { get; }
+    ISubject<ButtonPvsCPUEventArgs> ButtonPvsCPUSubject { get; }
     GameObject CanvasMainMenu { get; }
 }

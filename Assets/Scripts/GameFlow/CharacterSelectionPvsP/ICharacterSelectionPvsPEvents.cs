@@ -1,5 +1,5 @@
 ﻿public interface ICharacterSelectionPvsPEvents
 {
-    ISubject<Player1CharacterSelectionArgs> Player1CharacterSelectorSubject { get; }
-    ISubject<Player2CharacterSelectionArgs> Player2CharacterSelectorSubject { get; }
+    ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject { get; }
+    ISubject<Player2CharacterSelectionEventArgs> Player2CharacterSelectorSubject { get; }
 }

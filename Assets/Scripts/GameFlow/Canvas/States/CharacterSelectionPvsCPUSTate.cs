@@ -1,4 +1,4 @@
-﻿public class CharacterSelectionPvsCPUSTate : State, IObserver<Player1CharacterSelectionArgs>
+﻿public class CharacterSelectionPvsCPUSTate : State, IObserver<Player1CharacterSelectionEventArgs>
 {
     private readonly ICharacterSelectionPvsCPU characterSelectionPvsCPU;
 
@@ -40,7 +40,7 @@
         characterSelectionPvsCPU.ResetPlayer1Selection();
     }
 
-    public void OnNotify(Player1CharacterSelectionArgs parameter)
+    public void OnNotify(Player1CharacterSelectionEventArgs parameter)
     {
         SwitchToCountdownState();
     }

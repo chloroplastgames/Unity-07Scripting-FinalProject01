@@ -2,8 +2,8 @@
 
 public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelectionPvsP, ICharacterSelectionPvsPEvents
 {
-    public ISubject<Player1CharacterSelectionArgs> Player1CharacterSelectorSubject => player1CharacterSelectorSubject;
-    public ISubject<Player2CharacterSelectionArgs> Player2CharacterSelectorSubject => player2CharacterSelectorSubject;
+    public ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject => player1CharacterSelectorSubject;
+    public ISubject<Player2CharacterSelectionEventArgs> Player2CharacterSelectorSubject => player2CharacterSelectorSubject;
 
     public GameObject CanvasCharacterSelectionPvsP => canvasCharacterSelectionPvsP;
 
@@ -14,8 +14,8 @@ public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelecti
     private IPlayerCharacterSelection player1CharacterSelector;
     private IPlayerCharacterSelection player2CharacterSelector;
 
-    private ISubject<Player1CharacterSelectionArgs> player1CharacterSelectorSubject;
-    private ISubject<Player2CharacterSelectionArgs> player2CharacterSelectorSubject;
+    private ISubject<Player1CharacterSelectionEventArgs> player1CharacterSelectorSubject;
+    private ISubject<Player2CharacterSelectionEventArgs> player2CharacterSelectorSubject;
 
     private void Awake()
     {

@@ -2,7 +2,7 @@
 
 public class CountdownController : MonoBehaviour, ICountdown, ICountdownEvents
 {
-    public ISubject<CountdownArgs> CounterSubject => counterSubject;
+    public ISubject<CountdownEventArgs> CounterSubject => counterSubject;
 
     public GameObject CanvasCountdown => canvasCountdown;
 
@@ -10,13 +10,13 @@ public class CountdownController : MonoBehaviour, ICountdown, ICountdownEvents
 
     private IStartCountdown counter;
 
-    private ISubject<CountdownArgs> counterSubject;
+    private ISubject<CountdownEventArgs> counterSubject;
 
     private void Awake()
     {
         counter = GetComponent<IStartCountdown>();
 
-        counterSubject = GetComponent<ISubject<CountdownArgs>>();
+        counterSubject = GetComponent<ISubject<CountdownEventArgs>>();
     }
 
     public void StartCountdown()
