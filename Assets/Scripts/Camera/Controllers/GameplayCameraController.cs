@@ -4,8 +4,11 @@ public class GameplayCameraController : MonoBehaviour,
     IObserver<SetupGameEventArgs>,
     IObserver<StartRoundEventArgs>,
     IObserver<GameWinnerEventArgs>,
-    IObserver<ButtonRestartEventArgs>
+    IObserver<ButtonRestartEventArgs>,
+    IObserver<HealthChangedEventArgs>
 {
+    [SerializeField] private CameraShakeBehaviour cameraShaker;
+
     private Transform[] targets;
     private ICameraMove cameraMover;
     private ICameraZoom cameraZoomer;
@@ -15,6 +18,9 @@ public class GameplayCameraController : MonoBehaviour,
 
     private Vector3 initialPosition;
     private bool isFixed;
+
+    private ISubject<HealthChangedEventArgs> player1HealthChanged;
+    private ISubject<HealthChangedEventArgs> player2HealthChanged;
 
     private void Awake()
     {
@@ -51,11 +57,15 @@ public class GameplayCameraController : MonoBehaviour,
         gameController.StartRoundSubject?.Remove(this);
         gameController.GameWinnerSubject?.Remove(this);
         gameOverEvents.ButtonRestartSubject?.Remove(this);
+
+        player1HealthChanged?.Remove(this);
+        player2HealthChanged?.Remove(this);
     }
 
     public void OnNotify(SetupGameEventArgs setupGameArgs)
     {
         SetTargets(new Transform[] { setupGameArgs.agent1Instance.transform, setupGameArgs.agent2Instance.transform });
+        Setup(setupGameArgs.agent1Instance, setupGameArgs.agent2Instance);
     }
 
     public void OnNotify(StartRoundEventArgs parameter)
@@ -76,9 +86,26 @@ public class GameplayCameraController : MonoBehaviour,
         UnFix();
     }
 
+    public void OnNotify(HealthChangedEventArgs healthChangedEventArgs)
+    {
+        if (healthChangedEventArgs.currentHealth != healthChangedEventArgs.maxHealth)
+        {
+            StartCoroutine(cameraShaker.ShakeRoutine());
+        }
+    }
+
     private void SetTargets(Transform[] targets)
     {
         this.targets = targets;
+    }
+
+    private void Setup(GameObject agent1Instace, GameObject agent2Instance)
+    {
+        player1HealthChanged = agent1Instace.GetComponent<ISubject<HealthChangedEventArgs>>();
+        player1HealthChanged.Add(this);
+
+        player2HealthChanged = agent2Instance.GetComponent<ISubject<HealthChangedEventArgs>>();
+        player2HealthChanged.Add(this);
     }
 
     private void ResetCamera()

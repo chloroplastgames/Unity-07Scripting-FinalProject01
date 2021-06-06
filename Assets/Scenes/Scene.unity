@@ -137,6 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 125174002}
+  - component: {fileID: 125174003}
   m_Layer: 0
   m_Name: CameraGameplay
   m_TagString: Untagged
@@ -159,6 +160,20 @@ Transform:
   m_Father: {fileID: 206359382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &125174003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125174001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99a082a0c7dade2478a869f62432db4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.15
+  magnitude: 0.4
 --- !u!1 &173395577
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d153418d0f8a29429c42f56c2208d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShaker: {fileID: 125174003}
 --- !u!1 &249793216 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1375724234304866877, guid: 61e5ec1773290a04c950de8b3d22cec8,
