@@ -33,6 +33,8 @@ public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents, IOb
 
     public void OnNotify(GameWinnerEventArgs gameWinnerEventArgs)
     {
+        if (gameWinnerEventArgs.gameWinner.instance == null) return;
+
         ShowWinner(gameWinnerEventArgs.gameWinner);
     }
 

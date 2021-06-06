@@ -188,19 +188,11 @@ public class GameController : MonoBehaviour,
     {
         if (loser == agent2Instance)
         {
-            int agent1Points = agent1RoundWinner.IncrementPoints();
-
-            IsGameWinner(agent1Points, new GameWinner(agent1Instance, "Player 1", agent1Color));
+            CheckAgent1Win();
         }
         else if (loser == agent1Instance)
         {
-            int agent2Points = agent2RoundWinner.IncrementPoints();
-
-            IsGameWinner(agent2Points, new GameWinner(agent2Instance, "Player 2", agent2Color));
-        }
-        else
-        {
-            Debug.LogError("GameController GetRoundWinner(loser): loser not equal to an agent instance!");
+            CheckAgent2Win();
         }
     }
 
@@ -208,16 +200,30 @@ public class GameController : MonoBehaviour,
     {
         if (agent1HealthGetter.CurrentHealth > agent2HealthGetter.CurrentHealth)
         {
-            int agent1Points = agent1RoundWinner.IncrementPoints();
-
-            IsGameWinner(agent1Points, new GameWinner(agent1Instance, "Player 1", agent1Color));
+            CheckAgent1Win();
         }
         else if (agent2HealthGetter.CurrentHealth > agent1HealthGetter.CurrentHealth)
         {
-            int agent2Points = agent2RoundWinner.IncrementPoints();
-
-            IsGameWinner(agent2Points, new GameWinner(agent2Instance, "Player 2", agent2Color));
+            CheckAgent2Win();
         }
+        else
+        {
+            IsGameWinner(0, new GameWinner());
+        }
+    }
+
+    private void CheckAgent1Win()
+    {
+        int agent1Points = agent1RoundWinner.IncrementPoints();
+
+        IsGameWinner(agent1Points, new GameWinner(agent1Instance, "Player 1", agent1Color));
+    }
+
+    private void CheckAgent2Win()
+    {
+        int agent2Points = agent2RoundWinner.IncrementPoints();
+
+        IsGameWinner(agent2Points, new GameWinner(agent2Instance, "Player 2", agent2Color));
     }
 
     private void IsGameWinner(int points, GameWinner winner)

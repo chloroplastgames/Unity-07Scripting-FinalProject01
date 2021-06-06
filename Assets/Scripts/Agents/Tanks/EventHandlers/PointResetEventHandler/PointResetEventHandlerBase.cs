@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class PointResetEventHandlerBase : MonoBehaviour, IObserver<StartRoundEventArgs>
+public abstract class PointResetEventHandlerBase : MonoBehaviour, IObserver<EndRoundEventArgs>
 {
     protected GameController gameController;
 
@@ -11,15 +11,15 @@ public abstract class PointResetEventHandlerBase : MonoBehaviour, IObserver<Star
 
     private void OnEnable()
     {
-        gameController.StartRoundSubject.Add(this);
+        gameController.EndRoundSubject.Add(this);
     }
 
     private void OnDisable()
     {
-        gameController.StartRoundSubject.Remove(this);
+        gameController.EndRoundSubject.Remove(this);
     }
 
-    public void OnNotify(StartRoundEventArgs parameter)
+    public void OnNotify(EndRoundEventArgs parameter)
     {
         ResetPoint();
     }

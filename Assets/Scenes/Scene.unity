@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &125174002
 Transform:
   m_ObjectHideFlags: 0
@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633d465d3c491a1439074bb26f321642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundsToWin: 0
+  roundsToWin: 1
   spawnPoint1: {fileID: 194018016}
   spawnPoint2: {fileID: 2083660209}
 --- !u!114 &1361985613

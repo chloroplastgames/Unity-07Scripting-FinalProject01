@@ -18,6 +18,8 @@ public class HealthBehaviour : Subject<HealthChangedEventArgs>, IDamageable, IRe
 
     public void TakeDamage(int damageAmount)
     {
+        if (currentHealth == 0) return;
+
         currentHealth = Mathf.Max(0, currentHealth - damageAmount);
 
         Notify();

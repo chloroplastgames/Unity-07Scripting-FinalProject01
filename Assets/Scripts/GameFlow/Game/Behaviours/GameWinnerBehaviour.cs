@@ -1,19 +1,19 @@
-﻿using UnityEngine;
-
-public class GameWinnerBehaviour : Subject<GameWinnerEventArgs>
+﻿public class GameWinnerBehaviour : Subject<GameWinnerEventArgs>
 {
     public GameWinner GameWinner
     {
         get
         {
-            return GameWinner;
+            return gameWinner;
         }
         set
         {
-            GameWinner = value;
+            gameWinner = value;
             Notify();
         }
     }
+
+    private GameWinner gameWinner;
 
     public override void Notify()
     {
@@ -21,7 +21,7 @@ public class GameWinnerBehaviour : Subject<GameWinnerEventArgs>
 
         foreach (IObserver<GameWinnerEventArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new GameWinnerEventArgs(GameWinner));
+            observer.OnNotify(new GameWinnerEventArgs(gameWinner));
         }
     }
 }
