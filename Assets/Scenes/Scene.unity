@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1020611326}
-  time: 30
+  time: 60
 --- !u!114 &173395586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633d465d3c491a1439074bb26f321642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundsToWin: 1
+  roundsToWin: 4
   spawnPoint1: {fileID: 194018016}
   spawnPoint2: {fileID: 2083660209}
 --- !u!114 &1361985613
@@ -1798,6 +1798,7 @@ GameObject:
   - component: {fileID: 1363286119}
   - component: {fileID: 1363286121}
   - component: {fileID: 1363286120}
+  - component: {fileID: 1363286122}
   m_Layer: 0
   m_Name: CharacterSelectionPvsCPU
   m_TagString: Untagged
@@ -1849,7 +1850,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasCharacterSelectionPvsCPU: {fileID: 1822816148}
-  player1Control: {fileID: 11400000, guid: ff1f941a621017844980ecd87b0bb842, type: 2}
+  player1Control: {fileID: 11400000, guid: fa085d8a72e7cf647b745e673bc4719b, type: 2}
+--- !u!114 &1363286122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363286118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfe5375300a84a4cb9ff4ac247c753c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1391056259
 GameObject:
   m_ObjectHideFlags: 0
@@ -2391,6 +2404,7 @@ GameObject:
   - component: {fileID: 1935339220}
   - component: {fileID: 1935339219}
   - component: {fileID: 1935339218}
+  - component: {fileID: 1935339221}
   m_Layer: 0
   m_Name: CharacterSelectionPvsP
   m_TagString: Untagged
@@ -2458,8 +2472,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasCharacterSelectionPvsP: {fileID: 2070993489}
-  player1Control: {fileID: 11400000, guid: ff1f941a621017844980ecd87b0bb842, type: 2}
+  player1Control: {fileID: 11400000, guid: fa085d8a72e7cf647b745e673bc4719b, type: 2}
   player2Control: {fileID: 11400000, guid: 099f27ce1a3d9f346a59a7b250b0619d, type: 2}
+--- !u!114 &1935339221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935339216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfe5375300a84a4cb9ff4ac247c753c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1942075141 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6041730844376175439, guid: 35029bcd20114b54e8314270be116366,

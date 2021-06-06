@@ -9,4 +9,5 @@ public interface ICharacterSelectionPvsP
     void ResetPlayer2Selection();
     ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject { get; }
     ISubject<Player2CharacterSelectionEventArgs> Player2CharacterSelectorSubject { get; }
+    ISubject<CancelEventArgs> CancelCharacterSelectionSubject { get; }
 }

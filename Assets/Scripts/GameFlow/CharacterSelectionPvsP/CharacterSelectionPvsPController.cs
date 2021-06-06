@@ -4,6 +4,7 @@ public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelecti
 {
     public ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject => player1CharacterSelectorSubject;
     public ISubject<Player2CharacterSelectionEventArgs> Player2CharacterSelectorSubject => player2CharacterSelectorSubject;
+    public ISubject<CancelEventArgs> CancelCharacterSelectionSubject => cancelCharacterSelectionSubject;
 
     public GameObject CanvasCharacterSelectionPvsP => canvasCharacterSelectionPvsP;
 
@@ -13,17 +14,21 @@ public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelecti
 
     private IPlayerCharacterSelection player1CharacterSelector;
     private IPlayerCharacterSelection player2CharacterSelector;
+    private CancelCharacterSelectionBehaviour cancelCharacterSelectionBehaviour;
 
     private ISubject<Player1CharacterSelectionEventArgs> player1CharacterSelectorSubject;
     private ISubject<Player2CharacterSelectionEventArgs> player2CharacterSelectorSubject;
+    private ISubject<CancelEventArgs> cancelCharacterSelectionSubject;
 
     private void Awake()
     {
         player1CharacterSelector = GetComponent<Player1CharacterSelectionBehaviour>();
         player2CharacterSelector = GetComponent<Player2CharacterSelectionBehaviour>();
+        cancelCharacterSelectionBehaviour = GetComponent<CancelCharacterSelectionBehaviour>();
 
         player1CharacterSelectorSubject = GetComponent<Player1CharacterSelectionBehaviour>();
         player2CharacterSelectorSubject = GetComponent<Player2CharacterSelectionBehaviour>();
+        cancelCharacterSelectionSubject = GetComponent<CancelCharacterSelectionBehaviour>();
     }
 
     public void GetPlayer1Input()
@@ -42,7 +47,7 @@ public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelecti
         }
         else if (Input.GetKeyDown(player1Control.Special))
         {
-            // SwitchToMainMenuState(); // TODO
+            cancelCharacterSelectionBehaviour.CancelSelection();
         }
     }
 
@@ -59,6 +64,10 @@ public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelecti
         else if (Input.GetKeyDown(player2Control.Shoot))
         {
             player2CharacterSelector.SetSelection();
+        }
+        else if (Input.GetKeyDown(player2Control.Special))
+        {
+            cancelCharacterSelectionBehaviour.CancelSelection();
         }
     }
 

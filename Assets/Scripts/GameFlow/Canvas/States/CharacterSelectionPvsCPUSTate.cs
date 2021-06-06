@@ -1,4 +1,6 @@
-﻿public class CharacterSelectionPvsCPUSTate : State, IObserver<SetupGameEventArgs>
+﻿using UnityEngine;
+
+public class CharacterSelectionPvsCPUSTate : State, IObserver<SetupGameEventArgs>, IObserver<CancelEventArgs>
 {
     private readonly ICharacterSelectionPvsCPU characterSelectionPvsCPU;
     private readonly GameController gameController;
@@ -18,6 +20,7 @@
         base.Enter();
 
         gameController.SetupGameSubject.Add(this);
+        characterSelectionPvsCPU.CancelCharacterSelectionSubject.Add(this);
 
         characterSelectionPvsCPU.CanvasCharacterSelectionPvsCPU.SetActive(true);
     }
@@ -37,8 +40,9 @@
         base.Exit();
 
         gameController.SetupGameSubject.Remove(this);
+        characterSelectionPvsCPU.CancelCharacterSelectionSubject.Remove(this);
 
-        characterSelectionPvsCPU.CanvasCharacterSelectionPvsCPU.SetActive(true);
+        characterSelectionPvsCPU.CanvasCharacterSelectionPvsCPU.SetActive(false);
 
         characterSelectionPvsCPU.ResetPlayer1Selection();
     }
@@ -46,6 +50,11 @@
     public void OnNotify(SetupGameEventArgs parameter)
     {
         SwitchToCountdownState();
+    }
+
+    public void OnNotify(CancelEventArgs parameter)
+    {
+        SwitchToMainMenuState();
     }
 
     private void SwitchToCountdownState()

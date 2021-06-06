@@ -6,4 +6,5 @@ public interface ICharacterSelectionPvsCPU
     void GetPlayer1Input();
     void ResetPlayer1Selection();
     ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject { get; }
+    ISubject<CancelEventArgs> CancelCharacterSelectionSubject { get; }
 }

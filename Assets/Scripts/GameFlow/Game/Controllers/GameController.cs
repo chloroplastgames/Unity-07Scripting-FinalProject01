@@ -3,7 +3,8 @@
 public class GameController : MonoBehaviour,
     IObserver<SetupGameEventArgs>, IObserver<CountdownEventArgs>,
     IObserver<TimerEventArgs>, IObserver<DieEventArgs>,
-    IObserver<ButtonRestartEventArgs>
+    IObserver<ButtonRestartEventArgs>,
+    IObserver<CancelEventArgs>
 {
     public ISubject<SetupGameEventArgs> SetupGameSubject => setupGameSubject;
     public ISubject<StartRoundEventArgs> StartRoundSubject => startRoundSubject;
@@ -27,6 +28,8 @@ public class GameController : MonoBehaviour,
     private GameObject agent2;
     private Color agent1Color;
     private Color agent2Color;
+    private bool color1Set;
+    private bool color2Set;
 
     private SetupGameBehaviour gameSetup;
     private StartRoundBehaviour roundStart;
@@ -47,6 +50,7 @@ public class GameController : MonoBehaviour,
     private ICountdownEvents countdownEvents;
     private IHUDEvents hudEvents;
     private IGameOverEvents gameOverEvents;
+    private ICharacterSelectionPvsPEvents characterSelectionPvsPEvents;
 
     private GameObject agent1Instance;
     private GameObject agent2Instance;
@@ -78,6 +82,7 @@ public class GameController : MonoBehaviour,
         countdownEvents = FindObjectOfType<CountdownController>();
         hudEvents = FindObjectOfType<HUDController>();
         gameOverEvents = FindObjectOfType<GameOverController>();
+        characterSelectionPvsPEvents = FindObjectOfType<CharacterSelectionPvsPController>();
     }
 
     private void Start()
@@ -86,6 +91,7 @@ public class GameController : MonoBehaviour,
         countdownEvents.CounterSubject.Add(this);
         hudEvents.TimerSubject.Add(this);
         gameOverEvents.ButtonRestartSubject.Add(this);
+        characterSelectionPvsPEvents.CancelCharacterSelectionSubject.Add(this);
     }
 
     private void OnDestroy()
@@ -94,6 +100,7 @@ public class GameController : MonoBehaviour,
         countdownEvents.CounterSubject?.Remove(this);
         hudEvents.TimerSubject?.Remove(this);
         gameOverEvents.ButtonRestartSubject?.Remove(this);
+        characterSelectionPvsPEvents.CancelCharacterSelectionSubject?.Remove(this);
 
         agent1DieSubject?.Remove(this);
         agent2DieSubject?.Remove(this);
@@ -108,8 +115,9 @@ public class GameController : MonoBehaviour,
     public void SetAgent1Color(Color agent1Color)
     {
         this.agent1Color = agent1Color;
+        color1Set = true;
 
-        if (agent2Color != default)
+        if (color2Set)
         {
             SetupGame();
         }
@@ -118,8 +126,9 @@ public class GameController : MonoBehaviour,
     public void SetAgent2Color(Color agent2Color)
     {
         this.agent2Color = agent2Color;
+        color2Set = true;
 
-        if (agent1Color != default)
+        if (color1Set)
         {
             SetupGame();
         }
@@ -152,6 +161,11 @@ public class GameController : MonoBehaviour,
     public void OnNotify(ButtonRestartEventArgs parameter)
     {
         ResetScore();
+    }
+
+    public void OnNotify(CancelEventArgs parameter)
+    {
+        CancelCharacterSelection();
     }
 
     private void Setup(GameObject agent1Instance, GameObject agent2Instance)
@@ -242,5 +256,11 @@ public class GameController : MonoBehaviour,
     {
         agent1RoundWinner.ResetPoints();
         agent2RoundWinner.ResetPoints();
+    }
+
+    private void CancelCharacterSelection()
+    {
+        color1Set = false;
+        color2Set = false;
     }
 }

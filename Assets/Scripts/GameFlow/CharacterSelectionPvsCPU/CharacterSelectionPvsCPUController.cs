@@ -3,6 +3,7 @@
 public class CharacterSelectionPvsCPUController : MonoBehaviour, ICharacterSelectionPvsCPU, ICharacterSelectionPvsCPUEvents
 {
     public ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject => player1CharacterSelectorSubject;
+    public ISubject<CancelEventArgs> CancelCharacterSelectionSubject => cancelCharacterSelectionSubject;
 
     public GameObject CanvasCharacterSelectionPvsCPU => canvasCharacterSelectionPvsCPU;
 
@@ -10,14 +11,18 @@ public class CharacterSelectionPvsCPUController : MonoBehaviour, ICharacterSelec
     [SerializeField] private PlayerControlData player1Control;
 
     private IPlayerCharacterSelection player1CharacterSelector;
+    private CancelCharacterSelectionBehaviour cancelCharacterSelectionBehaviour;
 
     private ISubject<Player1CharacterSelectionEventArgs> player1CharacterSelectorSubject;
+    private ISubject<CancelEventArgs> cancelCharacterSelectionSubject;
 
     private void Awake()
     {
         player1CharacterSelector = GetComponent<Player1CharacterSelectionBehaviour>();
+        cancelCharacterSelectionBehaviour = GetComponent<CancelCharacterSelectionBehaviour>();
 
         player1CharacterSelectorSubject = GetComponent<Player1CharacterSelectionBehaviour>();
+        cancelCharacterSelectionSubject = GetComponent<CancelCharacterSelectionBehaviour>();
     }
 
     public void GetPlayer1Input()
@@ -36,7 +41,7 @@ public class CharacterSelectionPvsCPUController : MonoBehaviour, ICharacterSelec
         }
         else if (Input.GetKeyDown(player1Control.Special))
         {
-            // SwitchToMainMenuState(); // TODO
+            cancelCharacterSelectionBehaviour.CancelSelection();
         }
     }
 
