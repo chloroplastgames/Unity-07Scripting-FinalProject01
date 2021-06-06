@@ -1,22 +1,23 @@
-﻿// TODO: Switch to Countdown state with SetupGameEvent
-
-public class CharacterSelectionPvsCPUSTate : State, IObserver<Player1CharacterSelectionEventArgs>
+﻿public class CharacterSelectionPvsCPUSTate : State, IObserver<SetupGameEventArgs>
 {
     private readonly ICharacterSelectionPvsCPU characterSelectionPvsCPU;
+    private readonly GameController gameController;
 
     public CharacterSelectionPvsCPUSTate(
         IStateController controller,
-        ICharacterSelectionPvsCPU characterSelectionPvsCPU
+        ICharacterSelectionPvsCPU characterSelectionPvsCPU,
+        GameController gameController
         ) : base(controller)
     {
         this.characterSelectionPvsCPU = characterSelectionPvsCPU;
+        this.gameController = gameController;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        characterSelectionPvsCPU.Player1CharacterSelectorSubject.Add(this);
+        gameController.SetupGameSubject.Add(this);
 
         characterSelectionPvsCPU.CanvasCharacterSelectionPvsCPU.SetActive(true);
     }
@@ -35,14 +36,14 @@ public class CharacterSelectionPvsCPUSTate : State, IObserver<Player1CharacterSe
     {
         base.Exit();
 
-        characterSelectionPvsCPU.Player1CharacterSelectorSubject.Remove(this);
+        gameController.SetupGameSubject.Remove(this);
 
         characterSelectionPvsCPU.CanvasCharacterSelectionPvsCPU.SetActive(true);
 
         characterSelectionPvsCPU.ResetPlayer1Selection();
     }
 
-    public void OnNotify(Player1CharacterSelectionEventArgs parameter)
+    public void OnNotify(SetupGameEventArgs parameter)
     {
         SwitchToCountdownState();
     }

@@ -11,7 +11,7 @@
 
         foreach(IObserver<DieEventArgs> observer in observersPhoto)
         {
-            observer.OnNotify(new DieEventArgs());
+            observer.OnNotify(new DieEventArgs(gameObject));
         }
     }
 }

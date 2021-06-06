@@ -1,31 +1,25 @@
-﻿// TODO: Switch to Countdown state with SetupGameEvent
-
-public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSelectionEventArgs>, IObserver<Player2CharacterSelectionEventArgs>
+﻿public class CharacterSelectionPvsPState : State, IObserver<SetupGameEventArgs>
 {
     private readonly ICharacterSelectionPvsP characterSelectionPvsP;
-
-    private bool player1Ready;
-    private bool player2Ready;
+    private readonly GameController gameController;
 
     public CharacterSelectionPvsPState(
         IStateController controller,
-        ICharacterSelectionPvsP characterSelectionPvsP
+        ICharacterSelectionPvsP characterSelectionPvsP,
+        GameController gameController
         ) : base(controller)
     {
         this.characterSelectionPvsP = characterSelectionPvsP;
+        this.gameController = gameController;
     }
 
     public override void Enter()
     {
         base.Enter();
 
-        characterSelectionPvsP.Player1CharacterSelectorSubject.Add(this);
-        characterSelectionPvsP.Player2CharacterSelectorSubject.Add(this);
+        gameController.SetupGameSubject.Add(this);
 
         characterSelectionPvsP.CanvasCharacterSelectionPvsP.SetActive(true);
-
-        player1Ready = false;
-        player2Ready = false;
     }
 
     public override void Update()
@@ -44,8 +38,7 @@ public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSele
     {
         base.Exit();
 
-        characterSelectionPvsP.Player1CharacterSelectorSubject.Remove(this);
-        characterSelectionPvsP.Player2CharacterSelectorSubject.Remove(this);
+        gameController.SetupGameSubject.Remove(this);
 
         characterSelectionPvsP.CanvasCharacterSelectionPvsP.SetActive(false);
 
@@ -53,24 +46,9 @@ public class CharacterSelectionPvsPState : State, IObserver<Player1CharacterSele
         characterSelectionPvsP.ResetPlayer2Selection();
     }
 
-    public void OnNotify(Player1CharacterSelectionEventArgs parameter)
+    public void OnNotify(SetupGameEventArgs parameter)
     {
-        player1Ready = true;
-
-        if (player2Ready)
-        {
-            SwitchToCountdownState();
-        }
-    }
-
-    public void OnNotify(Player2CharacterSelectionEventArgs parameter)
-    {
-        player2Ready = true;
-
-        if (player1Ready)
-        {
-            SwitchToCountdownState();
-        }
+        SwitchToCountdownState();
     }
 
     private void SwitchToCountdownState()

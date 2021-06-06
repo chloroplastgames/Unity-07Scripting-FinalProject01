@@ -1,10 +1,8 @@
-﻿// TODO: get round winner, get game winner?
-
-public class EndRoundBehaviour : Subject<EndRoundEventArgs>
+﻿public class EndRoundBehaviour : Subject<EndRoundEventArgs>
 {
     public void EndRound()
     {
-
+        Notify();
     }
 
     public override void Notify()

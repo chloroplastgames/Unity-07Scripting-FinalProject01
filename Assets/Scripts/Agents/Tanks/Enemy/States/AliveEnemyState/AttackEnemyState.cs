@@ -17,8 +17,9 @@ public class AttackEnemyState : AliveEnemyStateBase
         ICalculateTrajectoryShoot shooter,
         ILookAtTarget looker,
         Transform agent,
-        Transform target
-        ) : base(controller)
+        Transform target,
+        GameController gameController
+        ) : base(controller, gameController)
     {
         this.attackEnemyStateData = attackEnemyStateData;
         this.shooter = shooter;

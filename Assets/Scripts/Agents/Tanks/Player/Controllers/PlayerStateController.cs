@@ -17,7 +17,8 @@ public class PlayerStateController : StateController
             translator,
             rotator,
             shooter,
-            control
+            control,
+            gameController
             );
         IState deadPlayerState = new DeadPlayerState(
             this,

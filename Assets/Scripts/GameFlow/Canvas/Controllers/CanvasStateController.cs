@@ -14,6 +14,8 @@ public class CanvasStateController : StateController
         IHUD hud = FindObjectOfType<HUDController>();
         IGameOver gameOver = FindObjectOfType<GameOverController>();
 
+        GameController gameController = FindObjectOfType<GameController>();
+
         IState mainMenuState = new MainMenuState(
             this,
             mainMenu,
@@ -22,11 +24,13 @@ public class CanvasStateController : StateController
             );
         IState characterSelectionPvsPState = new CharacterSelectionPvsPState(
             this,
-            characterSelectionPvsP
+            characterSelectionPvsP,
+            gameController
             );
         IState characterSelectionPvsCPUState = new CharacterSelectionPvsCPUSTate(
             this,
-            characterSelectionPvsCPU
+            characterSelectionPvsCPU,
+            gameController
             );
         IState countdownState = new CountdownState(
             this,
@@ -36,7 +40,8 @@ public class CanvasStateController : StateController
             );
         IState roundState = new HUDState(
             this,
-            hud
+            hud,
+            gameController
             );
         IState gameOverState = new GameOverState(
             this,

@@ -12,8 +12,9 @@ public class ChaseEnemyState : AliveEnemyStateBase
         EnemyStateData enemyStateData,
         INavMeshAgent navMeshAgent,
         Transform agent,
-        Transform target
-        ) : base(controller)
+        Transform target,
+        GameController gameController
+        ) : base(controller, gameController)
     {
         this.enemyStateData = enemyStateData;
         this.navMeshAgent = navMeshAgent;

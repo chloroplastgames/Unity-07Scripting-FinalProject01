@@ -9794,6 +9794,7 @@ GameObject:
   - component: {fileID: -3709291175885122702}
   - component: {fileID: 5681119833771036373}
   - component: {fileID: 2613518093583307544}
+  - component: {fileID: -1421893928737201237}
   m_Layer: 9
   m_Name: Player2Tank
   m_TagString: Untagged
@@ -10131,6 +10132,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aa62eea5087407479b38f902c7eae15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1421893928737201237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c587ca96b51b34ca62921ce51dd4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &192314

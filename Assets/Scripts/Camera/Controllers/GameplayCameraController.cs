@@ -22,7 +22,7 @@ public class GameplayCameraController : MonoBehaviour, IObserver<SetupGameEventA
         gameController.StartRoundSubject.Add(this);
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (targets == null) return;
 

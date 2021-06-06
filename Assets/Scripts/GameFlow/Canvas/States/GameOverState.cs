@@ -16,9 +16,7 @@
 
         gameOver.ButtonRestartSubject.Add(this);
 
-        gameOver.CanvasGameOver.SetActive(true);
-
-        gameOver.ShowWinner();        
+        gameOver.CanvasGameOver.SetActive(true);        
     }
 
     public override void Update()

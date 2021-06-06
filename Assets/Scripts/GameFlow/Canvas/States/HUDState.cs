@@ -1,20 +1,23 @@
-﻿// TODO: Switch to CountdownState or GameOverState with EndRoundEvent
-
-public class HUDState : State
+﻿public class HUDState : State, IObserver<GameWinnerEventArgs>
 {
     private readonly IHUD hud;
+    private readonly GameController gameController;
 
     public HUDState(
         IStateController controller,
-        IHUD hud
+        IHUD hud,
+        GameController gameController
         ) : base(controller)
     {
         this.hud = hud;
+        this.gameController = gameController;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        gameController.GameWinnerSubject.Add(this);
 
         hud.CanvasHUD.SetActive(true);
 
@@ -35,9 +38,23 @@ public class HUDState : State
     {
         base.Exit();
 
+        gameController.GameWinnerSubject.Remove(this);
+
         hud.CanvasHUD.SetActive(false);
 
         hud.StopTimer();
+    }
+
+    public void OnNotify(GameWinnerEventArgs gameWinnerEventArgs)
+    {
+        if (gameWinnerEventArgs.gameWinner.instance == null)
+        {
+            SwitchToCountdownState();
+        }
+        else
+        {
+            SwitchToGameOverState();
+        }
     }
 
     private void SwitchToCountdownState()

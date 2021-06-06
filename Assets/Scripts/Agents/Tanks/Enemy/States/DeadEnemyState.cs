@@ -1,17 +1,20 @@
-﻿// TODO: Observe start round event
-
-public class DeadEnemyState : State
+﻿public class DeadEnemyState : State, IObserver<StartRoundEventArgs>
 {
+    private readonly GameController gameController;
+
     public DeadEnemyState(
-        IStateController controller
+        IStateController controller,
+        GameController gameController
         ) : base(controller)
     {
-
+        this.gameController = gameController;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        gameController.StartRoundSubject.Add(this);
     }
 
     public override void Update()
@@ -27,6 +30,13 @@ public class DeadEnemyState : State
     public override void Exit()
     {
         base.Exit();
+
+        gameController.StartRoundSubject.Remove(this);
+    }
+
+    public void OnNotify(StartRoundEventArgs parameter)
+    {
+        SwitchToSpawnEnemyState();
     }
 
     private void SwitchToSpawnEnemyState()

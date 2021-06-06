@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents
+public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents, IObserver<GameWinnerEventArgs>
 {
     public ISubject<ButtonRestartEventArgs> ButtonRestartSubject => buttonRestartSubject;
 
@@ -9,17 +9,35 @@ public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents
     [SerializeField] private GameObject canvasGameOver;
 
     private ISubject<ButtonRestartEventArgs> buttonRestartSubject;
-    private ShowWinnerBehaviour winnerShower;
+    private ShowWinnerBehaviour showWinner;
+
+    private GameController gameController;
 
     private void Awake()
     {
         buttonRestartSubject = GetComponent<ISubject<ButtonRestartEventArgs>>();
+        showWinner = GetComponent<ShowWinnerBehaviour>();
 
-        winnerShower = GetComponent<ShowWinnerBehaviour>();
+        gameController = FindObjectOfType<GameController>();
     }
 
-    public void ShowWinner()
+    private void OnEnable()
     {
-        // winnerShower.ShowWinner();
+        gameController.GameWinnerSubject.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        gameController.GameWinnerSubject.Remove(this);
+    }
+
+    public void OnNotify(GameWinnerEventArgs gameWinnerEventArgs)
+    {
+        ShowWinner(gameWinnerEventArgs.gameWinner);
+    }
+
+    private void ShowWinner(GameWinner winner)
+    {
+        showWinner.ShowWinner(winner);
     }
 }

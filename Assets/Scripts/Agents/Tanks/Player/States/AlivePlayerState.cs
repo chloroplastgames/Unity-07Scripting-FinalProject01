@@ -1,14 +1,12 @@
-﻿// TODO: Observe end round event
+﻿using UnityEngine;
 
-using UnityEngine;
-
-public class AlivePlayerState : State
+public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
 {
     private readonly ITranslate translator;
     private readonly IRotate rotator;
     private readonly IShoot shooter;
     private readonly PlayerControlData control;
-
+    private readonly GameController gameController;
     private float translationSense;
     private float rotationSense;
 
@@ -17,18 +15,22 @@ public class AlivePlayerState : State
         ITranslate translator,
         IRotate rotator,
         IShoot shooter,
-        PlayerControlData control
+        PlayerControlData control,
+        GameController gameController
         ) : base(controller)
     {
         this.translator = translator;
         this.rotator = rotator;
         this.shooter = shooter;
         this.control = control;
+        this.gameController = gameController;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        gameController.EndRoundSubject.Add(this);
     }
 
     public override void Update()
@@ -53,6 +55,13 @@ public class AlivePlayerState : State
     public override void Exit()
     {
         base.Exit();
+
+        gameController.EndRoundSubject.Add(this);
+    }
+
+    public void OnNotify(EndRoundEventArgs parameter)
+    {
+        SwitchToDeadPlayerState();
     }
 
     private void SwitchToDeadPlayerState()
