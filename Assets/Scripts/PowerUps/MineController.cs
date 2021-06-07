@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-public class ShellController : MonoBehaviour, IObserver<EndRoundEventArgs>
+public class MineController : MonoBehaviour, IObserver<EndRoundEventArgs>
 {
+    [SerializeField] private float timeToArm = 3;
+
     private IDealDamage damageDealer;
     private IKillable killer;
-    private IFaceVelocityDirection velocityDirectionFacer;
 
     private GameController gameController;
+
+    private bool armed = false;
+    private Coroutine armRoutine;
 
     private void Awake()
     {
         damageDealer = GetComponent<IDealDamage>();
         killer = GetComponent<IKillable>();
-        velocityDirectionFacer = GetComponent<IFaceVelocityDirection>();
 
         gameController = FindObjectOfType<GameController>();
     }
@@ -20,6 +23,8 @@ public class ShellController : MonoBehaviour, IObserver<EndRoundEventArgs>
     private void Start()
     {
         gameController.EndRoundSubject.Add(this);
+
+        armRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(timeToArm, () => ArmMine());
     }
 
     private void OnDestroy()
@@ -27,13 +32,10 @@ public class ShellController : MonoBehaviour, IObserver<EndRoundEventArgs>
         gameController.EndRoundSubject?.Remove(this);
     }
 
-    private void LateUpdate()
-    {
-        velocityDirectionFacer.FaceVelocityDirection();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
+        if (!armed) return;
+
         IDamageable target = other.GetComponent<IDamageable>();
 
         if (target != null)
@@ -46,6 +48,13 @@ public class ShellController : MonoBehaviour, IObserver<EndRoundEventArgs>
 
     public void OnNotify(EndRoundEventArgs parameter)
     {
+        CoroutinesHelperSingleton.Instance.StopCoroutine(armRoutine);
+
         Destroy(gameObject);
+    }
+
+    private void ArmMine()
+    {
+        armed = true;
     }
 }

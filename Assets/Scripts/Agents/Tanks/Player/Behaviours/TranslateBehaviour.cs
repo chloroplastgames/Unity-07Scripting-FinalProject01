@@ -3,6 +3,8 @@
 [RequireComponent(typeof(Rigidbody))]
 public class TranslateBehaviour : MonoBehaviour, ITranslate
 {
+    public float Speed { get => speed; set => speed = value; }
+
     [SerializeField] private float speed = 12f;
 
     private Rigidbody myRigidbody;

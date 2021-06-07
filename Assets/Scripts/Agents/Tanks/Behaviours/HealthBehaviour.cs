@@ -30,6 +30,13 @@ public class HealthBehaviour : Subject<HealthChangedEventArgs>, IDamageable, IRe
         }
     }
 
+    public void Heal(int healAmount)
+    {
+        currentHealth = Mathf.Min(maxHealth, currentHealth + healAmount);
+
+        Notify();
+    }
+
     public void ResetHealth()
     {
         currentHealth = maxHealth;

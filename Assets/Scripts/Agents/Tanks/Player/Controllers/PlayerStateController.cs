@@ -9,6 +9,7 @@ public class PlayerStateController : StateController
         ITranslate translator = GetComponent<ITranslate>();
         IRotate rotator = GetComponent<IRotate>();
         IShoot shooter = GetComponent<IShoot>();
+        IConsumePowerUp powerUpConsumer = GetComponent<IConsumePowerUp>();
 
         GameController gameController = FindObjectOfType<GameController>();
 
@@ -18,7 +19,8 @@ public class PlayerStateController : StateController
             rotator,
             shooter,
             control,
-            gameController
+            gameController,
+            powerUpConsumer
             );
         IState deadPlayerState = new DeadPlayerState(
             this,

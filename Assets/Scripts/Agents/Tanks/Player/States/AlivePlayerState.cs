@@ -7,6 +7,7 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
     private readonly IShoot shooter;
     private readonly PlayerControlData control;
     private readonly GameController gameController;
+    private readonly IConsumePowerUp powerUpConsumer;
     private float translationSense;
     private float rotationSense;
 
@@ -16,7 +17,8 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
         IRotate rotator,
         IShoot shooter,
         PlayerControlData control,
-        GameController gameController
+        GameController gameController,
+        IConsumePowerUp powerUpConsumer
         ) : base(controller)
     {
         this.translator = translator;
@@ -24,6 +26,7 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
         this.shooter = shooter;
         this.control = control;
         this.gameController = gameController;
+        this.powerUpConsumer = powerUpConsumer;
     }
 
     public override void Enter()
@@ -44,6 +47,11 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
         else rotationSense = 0f;
 
         shooter.Shoot();
+
+        if (Input.GetKey(control.Special))
+        {
+            powerUpConsumer.ConsumePowerUp();
+        }
     }
 
     public override void FixedUpdate()

@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class HoldShootController : MonoBehaviour, IShoot, IObserver<StartRoundEventArgs>
+public class HoldShootController : MonoBehaviour, IShoot, IObserver<EndRoundEventArgs>
 {
+    public float Multiplier { get => multiplier; set => multiplier = value; }
+
     [SerializeField] private PlayerControlData playerControl;
     [SerializeField] private Rigidbody shellPrefab;
     [SerializeField] private Transform fireTransform;
@@ -22,6 +24,8 @@ public class HoldShootController : MonoBehaviour, IShoot, IObserver<StartRoundEv
     private bool fired;
     private GameController gameController;
 
+    private float multiplier = 1f;
+
     private void Awake()
     {
         gameController = FindObjectOfType<GameController>();
@@ -39,15 +43,15 @@ public class HoldShootController : MonoBehaviour, IShoot, IObserver<StartRoundEv
 
     private void OnEnable()
     {
-        gameController.StartRoundSubject.Add(this);
+        gameController.EndRoundSubject.Add(this);
     }
 
     private void OnDisable()
     {
-        gameController.StartRoundSubject.Remove(this);
+        gameController.EndRoundSubject.Remove(this);
     }
 
-    public void OnNotify(StartRoundEventArgs parameter)
+    public void OnNotify(EndRoundEventArgs parameter)
     {
         ResetSlider();
     }
@@ -90,8 +94,8 @@ public class HoldShootController : MonoBehaviour, IShoot, IObserver<StartRoundEv
 
         Rigidbody shellInstance = Instantiate(shellPrefab, fireTransform.position, fireTransform.rotation);
 
-        shellInstance.velocity = currentLaunchForce * fireTransform.forward;
-        shellInstance.GetComponent<IDealDamage>().Damage = currentShellDamage;
+        shellInstance.velocity = currentLaunchForce * multiplier * fireTransform.forward;
+        shellInstance.GetComponent<IDealDamage>().Damage = Mathf.FloorToInt(currentShellDamage * multiplier);
 
         shootingAudio.clip = fireClip;
         shootingAudio.Play();
