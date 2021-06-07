@@ -19,6 +19,11 @@ public class CountdownController : MonoBehaviour, ICountdown, ICountdownEvents
         counterSubject = GetComponent<ISubject<CountdownEventArgs>>();
     }
 
+    private void Start()
+    {
+        canvasCountdown.SetActive(false);
+    }
+
     public void StartCountdown()
     {
         counter.StartCountdown();

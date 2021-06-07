@@ -2,10 +2,12 @@
 
 public class DealDamageBehaviour : MonoBehaviour, IDealDamage
 {
-    [SerializeField] private int damage;
+    public int Damage { get => minDamage; set => minDamage = value; }
+
+    [SerializeField] private int minDamage = 1;
 
     public void DealDamage(IDamageable target)
     {
-        target.TakeDamage(damage);
+        target.TakeDamage(minDamage);
     }
 }

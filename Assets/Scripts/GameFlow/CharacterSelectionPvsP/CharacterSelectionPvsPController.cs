@@ -31,6 +31,11 @@ public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelecti
         cancelCharacterSelectionSubject = GetComponent<CancelCharacterSelectionBehaviour>();
     }
 
+    private void Start()
+    {
+        canvasCharacterSelectionPvsP.SetActive(false);
+    }
+
     public void GetPlayer1Input()
     {
         if (Input.GetKeyDown(player1Control.TurnLeft))

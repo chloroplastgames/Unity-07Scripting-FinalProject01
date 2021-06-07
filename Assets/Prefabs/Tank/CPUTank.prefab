@@ -557,11 +557,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellPrefab: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   fireTransform: {fileID: 5405183731308794319}
-  launchForce: 20
+  launchForce: 30
   turret: {fileID: 5405183731308739375}
   isLowAngle: 1
-  maxAngleDistanceDeviation: 0.1
-  minAngleDistanceDeviation: 0.05
+  maxAngleDistanceDeviation: 0.05
+  minAngleDistanceDeviation: 0.025
 --- !u!114 &542369995901330671
 MonoBehaviour:
   m_ObjectHideFlags: 0

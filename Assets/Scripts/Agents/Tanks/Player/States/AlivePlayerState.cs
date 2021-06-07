@@ -43,7 +43,7 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
         else if (Input.GetKey(control.TurnLeft)) rotationSense = -1f;
         else rotationSense = 0f;
 
-        if (Input.GetKeyDown(control.Shoot)) shooter.Shoot();
+        shooter.Shoot();
     }
 
     public override void FixedUpdate()

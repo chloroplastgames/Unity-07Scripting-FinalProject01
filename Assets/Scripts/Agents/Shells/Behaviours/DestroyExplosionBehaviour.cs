@@ -2,13 +2,15 @@
 
 public class DestroyExplosionBehaviour : MonoBehaviour, IKillable
 {
-    [SerializeField] private ParticleSystem shellExplosion;
+    [SerializeField] private ParticleSystem explosionParticles;
+    [SerializeField] private AudioSource explosionAudio;
 
     public void Kill()
     {
-        ParticleSystem shellExplosionInstance = Instantiate(shellExplosion, transform.position, transform.rotation);
-        shellExplosionInstance.Play();
-        Destroy(shellExplosionInstance.gameObject, shellExplosion.main.duration);
+        explosionParticles.transform.parent = null;
+        explosionParticles.Play();
+        explosionAudio.Play();
+        Destroy(explosionParticles.gameObject, explosionParticles.main.duration);
 
         Destroy(gameObject);
     }

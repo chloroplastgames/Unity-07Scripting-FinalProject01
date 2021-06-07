@@ -7,11 +7,10 @@ public class GameplayCameraController : MonoBehaviour,
     IObserver<ButtonRestartEventArgs>,
     IObserver<HealthChangedEventArgs>
 {
-    [SerializeField] private CameraShakeBehaviour cameraShaker;
-
     private Transform[] targets;
     private ICameraMove cameraMover;
     private ICameraZoom cameraZoomer;
+    private ICameraShake cameraShaker;
 
     GameController gameController;
     IGameOverEvents gameOverEvents;
@@ -26,6 +25,7 @@ public class GameplayCameraController : MonoBehaviour,
     {
         cameraMover = GetComponent<ICameraMove>();
         cameraZoomer = GetComponent<ICameraZoom>();
+        cameraShaker = GetComponentInChildren<ICameraShake>();
 
         gameController = FindObjectOfType<GameController>();
         gameOverEvents = FindObjectOfType<GameOverController>();

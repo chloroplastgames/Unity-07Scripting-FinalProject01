@@ -26,6 +26,11 @@ public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents, IOb
         gameController.GameWinnerSubject.Add(this);
     }
 
+    private void Start()
+    {
+        canvasGameOver.SetActive(false);
+    }
+
     private void OnDisable()
     {
         gameController.GameWinnerSubject.Remove(this);

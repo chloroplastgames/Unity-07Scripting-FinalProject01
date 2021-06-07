@@ -4,7 +4,7 @@ public class CalculateTrajectoryShootBehaviour : MonoBehaviour, ICalculateTrajec
 {
     [SerializeField] private Rigidbody shellPrefab;
     [SerializeField] private Transform fireTransform;
-    [SerializeField] private float launchForce = 20f;
+    [SerializeField] private float launchForce = 30f;
     [SerializeField] private Transform turret;
     [SerializeField] private bool isLowAngle = true;
     [SerializeField] private float maxAngleDistanceDeviation;

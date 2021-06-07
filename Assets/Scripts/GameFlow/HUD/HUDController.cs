@@ -32,6 +32,8 @@ public class HUDController : MonoBehaviour, IHUD, IHUDEvents,
 
     private void Start()
     {
+        canvasHUD.SetActive(false);
+
         characterSelectionPvsPEvents.Player1CharacterSelectorSubject.Add(this);
         characterSelectionPvsPEvents.Player2CharacterSelectorSubject.Add(this);
 
