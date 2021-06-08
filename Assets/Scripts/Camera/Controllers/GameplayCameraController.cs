@@ -34,6 +34,7 @@ public class GameplayCameraController : MonoBehaviour,
     private void Start()
     {
         initialPosition = transform.position;
+        print("initial position: " + initialPosition);
 
         gameController.SetupGameSubject.Add(this);
         gameController.StartRoundSubject.Add(this);
@@ -113,8 +114,8 @@ public class GameplayCameraController : MonoBehaviour,
 
     private void SetToInitialPosition()
     {
-        transform.position = initialPosition;
         isFixed = true;
+        transform.position = initialPosition;
     }
 
     private void UnFix()

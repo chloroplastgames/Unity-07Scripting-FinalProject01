@@ -2,6 +2,9 @@
 
 public abstract class PointResetEventHandlerBase : MonoBehaviour, IObserver<EndRoundEventArgs>
 {
+    [SerializeField] protected GameObject leftDustTrail;
+    [SerializeField] protected GameObject rightDustTrail;
+
     protected GameController gameController;
 
     private void Awake()

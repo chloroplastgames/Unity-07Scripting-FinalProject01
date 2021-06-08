@@ -10140,6 +10140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d88243ac17c2504c8c83f05bf495ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftDustTrail: {fileID: 169526}
+  rightDustTrail: {fileID: 126470}
 --- !u!114 &-3249661961175948190
 MonoBehaviour:
   m_ObjectHideFlags: 0
