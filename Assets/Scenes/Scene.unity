@@ -1983,7 +1983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 633d465d3c491a1439074bb26f321642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundsToWin: 1
+  roundsToWin: 4
   spawnPoint1: {fileID: 194018016}
   spawnPoint2: {fileID: 2083660209}
 --- !u!114 &1361985613
