@@ -1,4 +1,8 @@
-﻿public class GameStateController : StateController
+﻿/// <summary>
+/// Controller to control de state of the game, PvsP or PvsCPU
+/// </summary>
+
+public class GameStateController : StateController
 {
     private void Awake()
     {

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Controller and behaviour
 public class RightHealthHUDController : MonoBehaviour, IObserver<SetupGameEventArgs>,
     IObserver<DecrementHealthEventArgs>, IObserver<IncrementHealthEventArgs>
 {

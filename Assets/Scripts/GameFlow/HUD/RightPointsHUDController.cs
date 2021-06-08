@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Controller and behaviour
 public class RightPointsHUDController : MonoBehaviour, IObserver<PointsEventArgs>
 {
     [SerializeField] private Text pointsText;

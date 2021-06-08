@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 
-// SHOW
-
 public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents, IObserver<GameWinnerEventArgs>
 {
     public ISubject<ButtonRestartEventArgs> ButtonRestartSubject => buttonRestartSubject;
@@ -11,8 +9,9 @@ public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents, IOb
     [SerializeField] private GameObject canvasGameOver;
 
     private ISubject<ButtonRestartEventArgs> buttonRestartSubject;
-    private ShowWinnerBehaviour showWinner;
 
+    //TODO: interface
+    private ShowWinnerBehaviour showWinner;
     private GameController gameController;
 
     private void Awake()
@@ -40,6 +39,7 @@ public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents, IOb
 
     public void OnNotify(GameWinnerEventArgs gameWinnerEventArgs)
     {
+        // Only show winner if there is a winner
         if (gameWinnerEventArgs.gameWinner.instance == null) return;
 
         ShowWinner(gameWinnerEventArgs.gameWinner);

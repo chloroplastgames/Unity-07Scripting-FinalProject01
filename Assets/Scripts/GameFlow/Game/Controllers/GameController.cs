@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Game Controller
+/// </summary>
+
+// TODO: refactor
+
 public class GameController : MonoBehaviour,
     IObserver<SetupGameEventArgs>, IObserver<CountdownEventArgs>,
     IObserver<TimerEventArgs>, IObserver<DieEventArgs>,
@@ -39,8 +45,8 @@ public class GameController : MonoBehaviour,
     private ISubject<StartRoundEventArgs> startRoundSubject;
     private ISubject<EndRoundEventArgs> endRoundSubject;
 
-    private Agent1RoundWinnerBehaviour agent1RoundWinner;
-    private Agent2RoundWinnerBehaviour agent2RoundWinner;
+    private Agent1PointsBehaviour agent1RoundWinner;
+    private Agent2PointsBehaviour agent2RoundWinner;
     private GameWinnerBehaviour gameWinner;
 
     private ISubject<PointsEventArgs> agent1PointsSubject;
@@ -71,12 +77,12 @@ public class GameController : MonoBehaviour,
         startRoundSubject = GetComponent<StartRoundBehaviour>();
         endRoundSubject = GetComponent<EndRoundBehaviour>();
 
-        agent1RoundWinner = GetComponent<Agent1RoundWinnerBehaviour>();
-        agent2RoundWinner = GetComponent<Agent2RoundWinnerBehaviour>();
+        agent1RoundWinner = GetComponent<Agent1PointsBehaviour>();
+        agent2RoundWinner = GetComponent<Agent2PointsBehaviour>();
         gameWinner = GetComponent<GameWinnerBehaviour>();
 
-        agent1PointsSubject = GetComponent<Agent1RoundWinnerBehaviour>();
-        agent2PointsSubject = GetComponent<Agent2RoundWinnerBehaviour>();
+        agent1PointsSubject = GetComponent<Agent1PointsBehaviour>();
+        agent2PointsSubject = GetComponent<Agent2PointsBehaviour>();
         gameWinnerSubject = GetComponent<GameWinnerBehaviour>();
 
         countdownEvents = FindObjectOfType<CountdownController>();
@@ -134,16 +140,19 @@ public class GameController : MonoBehaviour,
         }
     }
 
+    // Get instances of the agents
     public void OnNotify(SetupGameEventArgs setupGameEventArgs)
     {
         Setup(setupGameEventArgs.agent1Instance, setupGameEventArgs.agent2Instance);
     }
 
+    // When countdown finishes, start round
     public void OnNotify(CountdownEventArgs parameter)
     {
         StartRound();
     }
 
+    // When agent die or time finishes, end round
     public void OnNotify(DieEventArgs dieEventArgs)
     {
         EndRound();
@@ -158,6 +167,7 @@ public class GameController : MonoBehaviour,
         GetRoundWinner();
     }
 
+    // When restart game, reset score
     public void OnNotify(ButtonRestartEventArgs parameter)
     {
         ResetScore();
@@ -168,6 +178,7 @@ public class GameController : MonoBehaviour,
         CancelCharacterSelection();
     }
 
+    // Suscribe to agent instances events
     private void Setup(GameObject agent1Instance, GameObject agent2Instance)
     {
         this.agent1Instance = agent1Instance;
@@ -183,6 +194,7 @@ public class GameController : MonoBehaviour,
         agent2HealthGetter = agent2Instance.GetComponent<ICurrentHealth>();
     }
 
+    // Create instances
     private void SetupGame()
     {
         gameSetup.SetupGame(agent1, spawnPoint1, agent1Color, agent2, spawnPoint2, agent2Color);
@@ -198,6 +210,7 @@ public class GameController : MonoBehaviour,
         roundEnd.EndRound();
     }
 
+    // Get round winner with die event, passing the dead agent or with timer, checking agents health
     private void GetRoundWinner(GameObject loser)
     {
         if (loser == agent2Instance)
@@ -226,6 +239,7 @@ public class GameController : MonoBehaviour,
         }
     }
 
+    // Check points of agent 1
     private void CheckAgent1Win()
     {
         int agent1Points = agent1RoundWinner.IncrementPoints();
@@ -233,6 +247,7 @@ public class GameController : MonoBehaviour,
         IsGameWinner(agent1Points, new GameWinner(agent1Instance, "Player 1", agent1Color));
     }
 
+    // Check points of agent 2
     private void CheckAgent2Win()
     {
         int agent2Points = agent2RoundWinner.IncrementPoints();
@@ -240,6 +255,7 @@ public class GameController : MonoBehaviour,
         IsGameWinner(agent2Points, new GameWinner(agent2Instance, "Player 2", agent2Color));
     }
 
+    // Compares points to get a winner
     private void IsGameWinner(int points, GameWinner winner)
     {
         if (points == roundsToWin)

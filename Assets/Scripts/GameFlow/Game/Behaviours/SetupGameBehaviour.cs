@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour to create the instances of the agents and pass them to other scripts
+/// </summary>
+
 public class SetupGameBehaviour : Subject<SetupGameEventArgs>
 {
     private GameObject agent1Instance;
     private GameObject agent2Instance;
 
+    // Instantiates agents and notifies, passing the instances as parameters with the event
     public void SetupGame(GameObject agent1, Transform spawnPoint1, Color agent1Color,
         GameObject agent2, Transform spawnPoint2, Color agent2Color)
     {

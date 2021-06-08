@@ -1,5 +1,6 @@
 ﻿public class GameWinnerBehaviour : Subject<GameWinnerEventArgs>
 {
+    // Set game winner and notifies about it
     public GameWinner GameWinner
     {
         get

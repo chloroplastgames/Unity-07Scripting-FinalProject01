@@ -7,10 +7,12 @@ public class ShowWinnerBehaviour : MonoBehaviour
     [SerializeField] private Text title;
     [SerializeField] private GameObject tank;
 
+    private const string WinText = " WINS!";
+
     public void ShowWinner(GameWinner winner)
     {
         background.color = winner.color;
-        title.text = winner.name.ToUpper() + " WINS!";
+        title.text = winner.name.ToUpper() + WinText;
         UtilityFunctionsHelper.ColorGameObject(tank, winner.color);
     }
 }

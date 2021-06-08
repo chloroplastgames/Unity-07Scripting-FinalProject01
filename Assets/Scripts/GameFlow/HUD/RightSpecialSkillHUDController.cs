@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Controller and behaviour
 public class RightSpecialSkillHUDController : MonoBehaviour, IObserver<SetupGameEventArgs>, IObserver<PowerUpEventArgs>
 {
     [SerializeField] private Text specialSkillText;

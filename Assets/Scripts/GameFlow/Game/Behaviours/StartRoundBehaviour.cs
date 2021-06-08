@@ -1,4 +1,6 @@
-﻿public class StartRoundBehaviour : Subject<StartRoundEventArgs>
+﻿
+// Behaviour to notify about the start of the round
+public class StartRoundBehaviour : Subject<StartRoundEventArgs>
 {
     public void StartRound()
     {

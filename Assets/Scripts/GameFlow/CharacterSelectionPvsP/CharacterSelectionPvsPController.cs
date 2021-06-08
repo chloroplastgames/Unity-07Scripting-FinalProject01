@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// SHOW
+
 public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelectionPvsP, ICharacterSelectionPvsPEvents
 {
     public ISubject<Player1CharacterSelectionEventArgs> Player1CharacterSelectorSubject => player1CharacterSelectorSubject;
@@ -14,7 +16,7 @@ public class CharacterSelectionPvsPController : MonoBehaviour, ICharacterSelecti
 
     private IPlayerCharacterSelection player1CharacterSelector;
     private IPlayerCharacterSelection player2CharacterSelector;
-    private CancelCharacterSelectionBehaviour cancelCharacterSelectionBehaviour;
+    private CancelCharacterSelectionBehaviour cancelCharacterSelectionBehaviour; // TODO: interface
 
     private ISubject<Player1CharacterSelectionEventArgs> player1CharacterSelectorSubject;
     private ISubject<Player2CharacterSelectionEventArgs> player2CharacterSelectorSubject;

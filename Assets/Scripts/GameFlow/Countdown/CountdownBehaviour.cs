@@ -5,6 +5,7 @@ public class CountdownBehaviour : Subject<CountdownEventArgs>, IStartCountdown
 {
     [SerializeField] private Text countdownText;
 
+    // Config
     private const int CountdownTime = 3;
 
     private int time;

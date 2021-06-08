@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class CharacterSelectionPvsPState : State, IObserver<SetupGameEventArgs>, IObserver<CancelEventArgs>
+﻿public class CharacterSelectionPvsPState : State, IObserver<SetupGameEventArgs>, IObserver<CancelEventArgs>
 {
     private readonly ICharacterSelectionPvsP characterSelectionPvsP;
     private readonly GameController gameController;

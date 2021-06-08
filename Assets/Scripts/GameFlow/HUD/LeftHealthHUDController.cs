@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Controller and behaviour
 public class LeftHealthHUDController : MonoBehaviour, IObserver<SetupGameEventArgs>,
     IObserver<DecrementHealthEventArgs>, IObserver<IncrementHealthEventArgs>
 {
     [SerializeField] private Slider healthSlider;
 
+    // TODO: interface
     private GameController gameController;
 
     private ISubject<DecrementHealthEventArgs> damageSubject;
@@ -28,6 +30,7 @@ public class LeftHealthHUDController : MonoBehaviour, IObserver<SetupGameEventAr
         gameController.SetupGameSubject?.Remove(this);
     }
 
+    // Get agent instances
     public void OnNotify(SetupGameEventArgs setupGameArgs)
     {
         ISubject<DecrementHealthEventArgs> damageSubject = setupGameArgs.agent1Instance.GetComponent<ISubject<DecrementHealthEventArgs>>();
@@ -36,6 +39,7 @@ public class LeftHealthHUDController : MonoBehaviour, IObserver<SetupGameEventAr
         Setup(damageSubject, healSubject);
     }
 
+    // Update slider with events
     public void OnNotify(DecrementHealthEventArgs decrementHealthEventArgs)
     {
         UpdateHealthSlider(decrementHealthEventArgs.currentHealth, decrementHealthEventArgs.maxHealth);
@@ -46,6 +50,7 @@ public class LeftHealthHUDController : MonoBehaviour, IObserver<SetupGameEventAr
         UpdateHealthSlider(incrementHealthEventArgs.currentHealth, incrementHealthEventArgs.maxHealth);
     }
 
+    // Suscribe to agent intances events
     private void Setup(ISubject<DecrementHealthEventArgs> damageSubject, ISubject<IncrementHealthEventArgs> healSubject)
     {
         this.damageSubject = damageSubject;

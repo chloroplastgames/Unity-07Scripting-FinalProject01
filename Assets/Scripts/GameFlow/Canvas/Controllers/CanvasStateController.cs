@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controller to controls the state of the canvas
+/// </summary>
+
 public class CanvasStateController : StateController
 {
     [SerializeField] private GameObject cameraMainMenu;
@@ -14,6 +18,7 @@ public class CanvasStateController : StateController
         IHUD hud = FindObjectOfType<HUDController>();
         IGameOver gameOver = FindObjectOfType<GameOverController>();
 
+        // TODO: interface
         GameController gameController = FindObjectOfType<GameController>();
 
         IState mainMenuState = new MainMenuState(

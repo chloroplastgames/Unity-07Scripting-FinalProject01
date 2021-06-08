@@ -1,4 +1,6 @@
-﻿public class Agent2RoundWinnerBehaviour : Subject<PointsEventArgs>
+﻿
+// Behaviour to notify the left hud about points
+public class Agent1PointsBehaviour : Subject<PointsEventArgs>
 {
     private int points;
 

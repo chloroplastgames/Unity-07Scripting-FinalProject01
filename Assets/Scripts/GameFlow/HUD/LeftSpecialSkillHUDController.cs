@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Controller and behaviour
 public class LeftSpecialSkillHUDController : MonoBehaviour, IObserver<SetupGameEventArgs>, IObserver<PowerUpEventArgs>
 {
     [SerializeField] private Text specialSkillText;
@@ -25,6 +26,7 @@ public class LeftSpecialSkillHUDController : MonoBehaviour, IObserver<SetupGameE
         gameController.SetupGameSubject?.Remove(this);
     }
 
+    // Suscribe
     public void OnNotify(SetupGameEventArgs setupGameEventArgs)
     {
         powerUpSubject = setupGameEventArgs.agent1Instance.GetComponent<ISubject<PowerUpEventArgs>>();

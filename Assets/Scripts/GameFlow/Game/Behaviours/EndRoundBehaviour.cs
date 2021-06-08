@@ -1,4 +1,6 @@
-﻿public class EndRoundBehaviour : Subject<EndRoundEventArgs>
+﻿
+// Behaviour to notify about round end
+public class EndRoundBehaviour : Subject<EndRoundEventArgs>
 {
     public void EndRound()
     {
