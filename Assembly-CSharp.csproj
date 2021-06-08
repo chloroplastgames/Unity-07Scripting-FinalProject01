@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FA470E05-34A9-DF96-F3A0-23198318BFE5}</ProjectGuid>
+    <ProjectGuid>{F5E25C23-B928-F634-784B-9BE2422B72B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -56,49 +56,57 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Interface\IObserver.cs" />
-    <Compile Include="Assets\Scripts\GameData.cs" />
-    <Compile Include="Assets\Scripts\IA\CameraIA\CameraZoomState.cs" />
-    <Compile Include="Assets\Scripts\Weapon\PrimaryWeapon.cs" />
-    <Compile Include="Assets\Scripts\System\HudController.cs" />
-    <Compile Include="Assets\Scripts\IA\TankIAStates\IAChangeDirection.cs" />
-    <Compile Include="Assets\Scripts\IA\TankIAStates\IAStop.cs" />
-    <Compile Include="Assets\Scripts\Inputs\TypeController.cs" />
-    <Compile Include="Assets\Scripts\Weapon\WeaponDataFactory.cs" />
-    <Compile Include="Assets\Scripts\Camera\CameraGameplayerController.cs" />
-    <Compile Include="Assets\Scripts\IA\TankIAStates\IAMove.cs" />
-    <Compile Include="Assets\Scripts\IA\CameraIA\CameraBehavior.cs" />
-    <Compile Include="Assets\Scripts\System\TankInstaller.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Projectle.cs" />
-    <Compile Include="Assets\Scripts\IA\IState.cs" />
-    <Compile Include="Assets\Scripts\IA\CameraIA\CameraState.cs" />
-    <Compile Include="Assets\Scripts\Interface\InputPlayer.cs" />
-    <Compile Include="Assets\Scripts\Tank\MotionControllerPlayer.cs" />
+    <Compile Include="Assets\Scripts\AI\CameraIAState.cs" />
+    <Compile Include="Assets\Scripts\Enums\TypeAction.cs" />
+    <Compile Include="Assets\Scripts\Util\IObserver.cs" />
+    <Compile Include="Assets\Scripts\Selection\ViewTank.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MenuController.cs" />
+    <Compile Include="Assets\Scripts\System\WeaponsDataFactory.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IInput.cs" />
+    <Compile Include="Assets\Scripts\AI\IASearch.cs" />
+    <Compile Include="Assets\Scripts\Controllers\WeaponsController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\SelectionController.cs" />
+    <Compile Include="Assets\Scripts\System\PlayerTank.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IMoveController.cs" />
+    <Compile Include="Assets\Scripts\Enums\Teams.cs" />
+    <Compile Include="Assets\Scripts\Controllers\FieldController.cs" />
+    <Compile Include="Assets\Scripts\Selection\SelectedTank.cs" />
+    <Compile Include="Assets\Scripts\AI\CameraFollowTank.cs" />
+    <Compile Include="Assets\Scripts\System\IProjectle.cs" />
+    <Compile Include="Assets\Scripts\Controllers\MotionController.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IStates.cs" />
+    <Compile Include="Assets\Scripts\System\InstallerTanks.cs" />
+    <Compile Include="Assets\Scripts\AI\TankBehaviorState.cs" />
+    <Compile Include="Assets\Scripts\System\GamePlayerData.cs" />
+    <Compile Include="Assets\Scripts\Util\IState.cs" />
+    <Compile Include="Assets\Scripts\DefaultPrimaryWeapon.cs" />
+    <Compile Include="Assets\Scripts\Controllers\FadeController.cs" />
+    <Compile Include="Assets\Scripts\Util\GenericStateMachine.cs" />
+    <Compile Include="Assets\Scripts\System\DBTanks.cs" />
+    <Compile Include="Assets\Scripts\System\Projectle.cs" />
+    <Compile Include="Assets\Scripts\AI\CameraStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Controllers\LifeController.cs" />
+    <Compile Include="Assets\Scripts\Tank\TankManager.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ILifeController.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IWeapon.cs" />
     <Compile Include="Assets\Scripts\Tank\TankData.cs" />
-    <Compile Include="Assets\Scripts\Menu\MenuController.cs" />
-    <Compile Include="Assets\Scripts\Interface\IInput.cs" />
-    <Compile Include="Assets\Scripts\SelectionMenu\SelectionController.cs" />
-    <Compile Include="Assets\Scripts\IA\CameraIA\CameraStateMachine.cs" />
-    <Compile Include="Assets\Scripts\SelectionMenu\ViewTank.cs" />
-    <Compile Include="Assets\Scripts\Interface\IViewController.cs" />
-    <Compile Include="Assets\Scripts\SelectionMenu\TypeAction.cs" />
-    <Compile Include="Assets\Scripts\SelectionMenu\SelectedTank.cs" />
-    <Compile Include="Assets\Scripts\Tank\Tank.cs" />
-    <Compile Include="Assets\Scripts\IA\GenericStateMachine.cs" />
-    <Compile Include="Assets\Scripts\IA\CameraIA\CameraMoveState.cs" />
-    <Compile Include="Assets\Scripts\Interface\ISubject.cs" />
-    <Compile Include="Assets\Scripts\Inputs\InputsController.cs" />
-    <Compile Include="Assets\Scripts\IA\TankIAStates\IAState.cs" />
-    <Compile Include="Assets\Scripts\IA\TankIAStates\IABehaviors.cs" />
-    <Compile Include="Assets\Scripts\Menu\LoadController.cs" />
-    <Compile Include="Assets\Scripts\Interface\IWeaponAdapter.cs" />
-    <Compile Include="Assets\Scripts\SelectionMenu\TankSelector.cs" />
-    <Compile Include="Assets\Scripts\IA\TankIAStates\IARush.cs" />
-    <Compile Include="Assets\Scripts\IA\TankIAStates\TankStateMachine.cs" />
-    <Compile Include="Assets\Scripts\Interface\IMotionController.cs" />
-    <Compile Include="Assets\GameplayerController.cs" />
-    <Compile Include="Assets\Scripts\SelectionMenu\SelectionData.cs" />
-    <Compile Include="Assets\Scripts\Weapon\Cannon.cs" />
+    <Compile Include="Assets\Scripts\System\CameraDataFactory.cs" />
+    <Compile Include="Assets\Scripts\Util\ISubject.cs" />
+    <Compile Include="Assets\Scripts\Util\GenericSingleton.cs" />
+    <Compile Include="Assets\Scripts\AI\IAMove.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ITanks.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IWeaponController.cs" />
+    <Compile Include="Assets\Scripts\AI\TankStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Inputs\InputSystemAdapter.cs" />
+    <Compile Include="Assets\Scripts\Inputs\Inputs.cs" />
+    <Compile Include="Assets\Scripts\Selection\TankSelector.cs" />
+    <Compile Include="Assets\Scripts\Selection\SelectionTank.cs" />
+    <Compile Include="Assets\Scripts\System\GamePlayerController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\HudController.cs" />
+    <Compile Include="Assets\Scripts\Controllers\TypeUpgrade.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Upgrade.cs" />
+    <Compile Include="Assets\Scripts\Controllers\AudioController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -719,14 +727,14 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.InputSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

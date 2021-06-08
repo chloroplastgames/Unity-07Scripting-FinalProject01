@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5c25f6b68bbef4ba2ed96385b513d4, type: 3}
+  m_Name: New Game Player Data
+  m_EditorClassIdentifier: 
+  _nPlayer: 2
+  _nAI: 0
+  _playerTanks:
+  - ID: 0
+    Tank: 0
+  - ID: 0
+    Tank: 0
+  - ID: 0
+    Tank: 0
+  - ID: 0
+    Tank: 0

@@ -1,24 +1,9 @@
 fileFormatVersion: 2
-guid: d1ef4ff0079d7b24d936acb54b0676e8
+guid: 898032401e185b84d98046dfd21ce380
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 01_Mat_Tank
-    second: {fileID: 2100000, guid: 32606e565983668438fbf821e3f005ec, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 02_Mat_Platform
-    second: {fileID: 2100000, guid: a133fedc0545a80499c9339db1e69620, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 03_Mat_AddElements
-    second: {fileID: 2100000, guid: 0ea86b9e644dd7f4cac0f1604a8874a9, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -60,7 +45,7 @@ ModelImporter:
     importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

@@ -1,15 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-[CreateAssetMenu(menuName ="Prototipo/Data/Tank")]
-public sealed class TankData : ScriptableObject
+[CreateAssetMenu(menuName ="Prototipo/Data/TankStatus")]
+public class TankData : ScriptableObject
 {
-    [SerializeField] private float _motionSpeed;
-
-    [SerializeField] private float _motionAcceleration;
-
     [SerializeField] private float _maxLife;
 
-    public float MotionSpeed { get => _motionSpeed; }
-    public float MotionAcceleration { get => _motionAcceleration;}
-    public float MaxLife { get => _maxLife; }
+    [SerializeField] private float _speed;
+
+    [SerializeField] private float _defense;
+
+    [SerializeField] private float _torque;
+
+    [SerializeField] private float _damage;
+
+    public float MaxLife { get => _maxLife;}
+    public float Speed { get => _speed;}
+    public float Defense { get => _defense;}
+    public float Torque { get => _torque;} 
+    public float Damage { get => _damage; }
 }
