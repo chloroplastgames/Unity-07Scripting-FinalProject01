@@ -9791,6 +9791,8 @@ GameObject:
   - component: {fileID: 1374353978}
   - component: {fileID: 1374353977}
   - component: {fileID: -3709291175885122702}
+  - component: {fileID: -3397225785735384241}
+  - component: {fileID: -8972517905930721818}
   - component: {fileID: 5681119833771036373}
   - component: {fileID: 2613518093583307544}
   - component: {fileID: -1421893928737201237}
@@ -9801,8 +9803,6 @@ GameObject:
   - component: {fileID: -1200724181212625465}
   - component: {fileID: 6159383389204479910}
   - component: {fileID: -6654350246308571688}
-  - component: {fileID: -3397225785735384241}
-  - component: {fileID: -8972517905930721818}
   m_Layer: 9
   m_Name: Player2Tank
   m_TagString: Untagged
@@ -10104,6 +10104,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+--- !u!114 &-3397225785735384241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778f20fbb19171344b6442fa6eaf647e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8972517905930721818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f944965e528838042ab71bb4b41b59f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5681119833771036373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10252,30 +10276,6 @@ MonoBehaviour:
   powerUpName: shock
   shockwaveParent: {fileID: 8713312117030375403}
   shockwaveAnimator: {fileID: 63171399267449333}
---- !u!114 &-3397225785735384241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778f20fbb19171344b6442fa6eaf647e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-8972517905930721818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f944965e528838042ab71bb4b41b59f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &192314
 GameObject:
   m_ObjectHideFlags: 0

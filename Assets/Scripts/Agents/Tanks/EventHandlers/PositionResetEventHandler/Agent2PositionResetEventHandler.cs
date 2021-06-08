@@ -1,4 +1,4 @@
-﻿public class Agent2PointResetEventHandler : PointResetEventHandlerBase
+﻿public class Agent2PositionResetEventHandler : PositionResetEventHandlerBase
 {
     protected override void ResetPoint()
     {
