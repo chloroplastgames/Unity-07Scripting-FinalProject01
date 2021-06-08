@@ -9801,6 +9801,8 @@ GameObject:
   - component: {fileID: -1222741917583418874}
   - component: {fileID: 2231207505341956356}
   - component: {fileID: 8137896891679256316}
+  - component: {fileID: 6416716376269948029}
+  - component: {fileID: -6947979464512042901}
   m_Layer: 9
   m_Name: Player1Tank
   m_TagString: Untagged
@@ -10248,6 +10250,30 @@ MonoBehaviour:
   powerUpName: shock
   shockwaveParent: {fileID: 71086158451943627}
   shockwaveAnimator: {fileID: 8716441398163185365}
+--- !u!114 &6416716376269948029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778f20fbb19171344b6442fa6eaf647e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6947979464512042901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f944965e528838042ab71bb4b41b59f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &192314
 GameObject:
   m_ObjectHideFlags: 0

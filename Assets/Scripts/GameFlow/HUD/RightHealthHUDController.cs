@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class RightHealthHUDController : MonoBehaviour, IObserver<SetupGameEventArgs>, IObserver<HealthChangedEventArgs>
+public class RightHealthHUDController : MonoBehaviour, IObserver<SetupGameEventArgs>,
+    IObserver<DecrementHealthEventArgs>, IObserver<IncrementHealthEventArgs>
 {
     [SerializeField] private Slider healthSlider;
 
-    private ISubject<HealthChangedEventArgs> healthSubject;
-
     private GameController gameController;
+
+    private ISubject<DecrementHealthEventArgs> damageSubject;
+    private ISubject<IncrementHealthEventArgs> healSubject;
 
     private void Awake()
     {
@@ -21,27 +23,36 @@ public class RightHealthHUDController : MonoBehaviour, IObserver<SetupGameEventA
 
     private void OnDestroy()
     {
-        healthSubject?.Remove(this);
+        damageSubject?.Remove(this);
+        healSubject?.Remove(this);
         gameController.SetupGameSubject?.Remove(this);
     }
 
     public void OnNotify(SetupGameEventArgs setupGameArgs)
     {
-        ISubject<HealthChangedEventArgs> healthSubject = setupGameArgs.agent2Instance.GetComponent<ISubject<HealthChangedEventArgs>>();
+        ISubject<DecrementHealthEventArgs> damageSubject = setupGameArgs.agent2Instance.GetComponent<ISubject<DecrementHealthEventArgs>>();
+        ISubject<IncrementHealthEventArgs> healSubject = setupGameArgs.agent2Instance.GetComponent<ISubject<IncrementHealthEventArgs>>();
 
-        Setup(healthSubject);
+        Setup(damageSubject, healSubject);
     }
 
-    public void OnNotify(HealthChangedEventArgs healthChangedArgs)
+    public void OnNotify(DecrementHealthEventArgs decrementHealthEventArgs)
     {
-        UpdateHealthSlider(healthChangedArgs.currentHealth, healthChangedArgs.maxHealth);
+        UpdateHealthSlider(decrementHealthEventArgs.currentHealth, decrementHealthEventArgs.maxHealth);
     }
 
-    private void Setup(ISubject<HealthChangedEventArgs> healthSubject)
+    public void OnNotify(IncrementHealthEventArgs incrementHealthEventArgs)
     {
-        this.healthSubject = healthSubject;
+        UpdateHealthSlider(incrementHealthEventArgs.currentHealth, incrementHealthEventArgs.maxHealth);
+    }
 
-        this.healthSubject.Add(this);
+    private void Setup(ISubject<DecrementHealthEventArgs> damageSubject, ISubject<IncrementHealthEventArgs> healSubject)
+    {
+        this.damageSubject = damageSubject;
+        this.damageSubject.Add(this);
+
+        this.healSubject = healSubject;
+        this.healSubject.Add(this);
     }
 
     private void UpdateHealthSlider(int currentHealth, int maxHealth)

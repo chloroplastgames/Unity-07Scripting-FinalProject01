@@ -1,9 +1,9 @@
-﻿public struct HealthChangedEventArgs
+﻿public struct IncrementHealthEventArgs
 {
     public readonly int currentHealth;
     public readonly int maxHealth;
 
-    public HealthChangedEventArgs(int currentHealth, int maxHealth)
+    public IncrementHealthEventArgs(int currentHealth, int maxHealth)
     {
         this.currentHealth = currentHealth;
         this.maxHealth = maxHealth;

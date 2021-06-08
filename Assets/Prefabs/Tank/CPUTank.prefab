@@ -133,6 +133,8 @@ GameObject:
   - component: {fileID: 4761818052294735104}
   - component: {fileID: 9017238408056383834}
   - component: {fileID: 542369995901330671}
+  - component: {fileID: -1813371260282093394}
+  - component: {fileID: 6499737883969882233}
   - component: {fileID: 420089946590574920}
   - component: {fileID: -1853920473562865402}
   - component: {fileID: -2908652750560085048}
@@ -443,10 +445,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellPrefab: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   fireTransform: {fileID: 5405183731308794319}
-  launchForce: 30
+  launchForce: 25
   turret: {fileID: 5405183731308739375}
   isLowAngle: 1
-  maxAngleDistanceDeviation: 0.05
+  maxAngleDistanceDeviation: 0.1
   minAngleDistanceDeviation: 0.01
 --- !u!114 &542369995901330671
 MonoBehaviour:
@@ -461,6 +463,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+--- !u!114 &-1813371260282093394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5405183731309056573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778f20fbb19171344b6442fa6eaf647e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6499737883969882233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5405183731309056573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f944965e528838042ab71bb4b41b59f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &420089946590574920
 MonoBehaviour:
   m_ObjectHideFlags: 0

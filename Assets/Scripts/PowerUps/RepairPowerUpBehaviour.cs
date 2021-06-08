@@ -7,11 +7,11 @@ public class RepairPowerUpBehaviour : MonoBehaviour, IPowerUp
     [SerializeField] private string powerUpName = "repair";
     [SerializeField] private int healAmount = 3;
 
-    private HealthBehaviour healthBehaviour;
+    private HealthController healthBehaviour;
 
     private void Awake()
     {
-        healthBehaviour = GetComponent<HealthBehaviour>();
+        healthBehaviour = GetComponent<HealthController>();
     }
 
     public void Consume()
