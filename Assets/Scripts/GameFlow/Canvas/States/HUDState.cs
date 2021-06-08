@@ -15,8 +15,6 @@
 
     public override void Enter()
     {
-        base.Enter();
-
         gameController.GameWinnerSubject.Add(this);
 
         hud.CanvasHUD.SetActive(true);
@@ -36,8 +34,6 @@
 
     public override void Exit()
     {
-        base.Exit();
-
         gameController.GameWinnerSubject.Remove(this);
 
         hud.CanvasHUD.SetActive(false);

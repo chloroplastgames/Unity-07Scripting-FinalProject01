@@ -12,8 +12,6 @@
 
     public override void Enter()
     {
-        base.Enter();
-
         gameOver.ButtonRestartSubject.Add(this);
 
         gameOver.CanvasGameOver.SetActive(true);        
@@ -31,8 +29,6 @@
 
     public override void Exit()
     {
-        base.Exit();
-
         gameOver.ButtonRestartSubject.Remove(this);
 
         gameOver.CanvasGameOver.SetActive(false);      

@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour to decrement agent health and launch DecrementHealthEvent
+/// </summary>
+
 public class DecrementHealthBehaviour : Subject<DecrementHealthEventArgs>
 {
     private int currentHealth;

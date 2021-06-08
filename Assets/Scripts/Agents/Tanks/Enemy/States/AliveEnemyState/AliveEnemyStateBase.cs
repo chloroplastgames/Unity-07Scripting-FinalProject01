@@ -1,4 +1,8 @@
-﻿public abstract class AliveEnemyStateBase : State, IObserver<EndRoundEventArgs>
+﻿/// <summary>
+/// Abstract class to hold observer for end round event
+/// </summary>
+
+public abstract class AliveEnemyStateBase : State, IObserver<EndRoundEventArgs>
 {
     private readonly GameController gameController;
 
@@ -12,8 +16,6 @@
 
     public override void Enter()
     {
-        base.Enter();
-
         gameController.EndRoundSubject.Add(this);
     }
 
@@ -29,8 +31,6 @@
 
     public override void Exit()
     {
-        base.Exit();
-
         gameController.EndRoundSubject.Remove(this);
     }
 

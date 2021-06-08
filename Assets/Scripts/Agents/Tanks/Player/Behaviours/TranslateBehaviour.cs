@@ -3,6 +3,7 @@
 [RequireComponent(typeof(Rigidbody))]
 public class TranslateBehaviour : MonoBehaviour, ITranslate
 {
+    // Speed power up can change Speed from outside
     public float Speed { get => speed; set => speed = value; }
 
     [SerializeField] private float speed = 12f;

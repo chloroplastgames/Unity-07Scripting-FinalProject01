@@ -12,8 +12,6 @@
 
     public override void Enter()
     {
-        base.Enter();
-
         gameController.StartRoundSubject.Add(this);
     }
 
@@ -29,8 +27,6 @@
 
     public override void Exit()
     {
-        base.Exit();
-
         gameController.StartRoundSubject.Remove(this);
     }
 

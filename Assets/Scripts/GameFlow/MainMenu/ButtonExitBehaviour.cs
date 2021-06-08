@@ -22,7 +22,6 @@ public class ButtonExitBehaviour : MonoBehaviour
 
     private void ExitGame()
     {
-        print("Exit game");
         Application.Quit();
     }
 }

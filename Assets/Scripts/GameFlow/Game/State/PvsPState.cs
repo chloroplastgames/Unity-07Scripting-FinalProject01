@@ -19,8 +19,6 @@ public class PvsPState : State,
 
     public override void Enter()
     {
-        base.Enter();
-
         characterSelectionPvsPEvents.Player1CharacterSelectorSubject.Add(this);
         characterSelectionPvsPEvents.Player2CharacterSelectorSubject.Add(this);
         characterSelectionPvsPEvents.CancelCharacterSelectionSubject.Add(this);
@@ -38,8 +36,6 @@ public class PvsPState : State,
 
     public override void Exit()
     {
-        base.Exit();
-
         characterSelectionPvsPEvents.Player1CharacterSelectorSubject.Remove(this);
         characterSelectionPvsPEvents.Player2CharacterSelectorSubject.Remove(this);
         characterSelectionPvsPEvents.CancelCharacterSelectionSubject.Remove(this);

@@ -14,6 +14,7 @@ public class RepairPowerUpBehaviour : MonoBehaviour, IPowerUp
         healthBehaviour = GetComponent<HealthController>();
     }
 
+    // Has access to agent health
     public void Consume()
     {
         healthBehaviour.Heal(healAmount);

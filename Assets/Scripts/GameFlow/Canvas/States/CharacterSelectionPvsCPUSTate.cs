@@ -17,8 +17,6 @@ public class CharacterSelectionPvsCPUSTate : State, IObserver<SetupGameEventArgs
 
     public override void Enter()
     {
-        base.Enter();
-
         gameController.SetupGameSubject.Add(this);
         characterSelectionPvsCPU.CancelCharacterSelectionSubject.Add(this);
 
@@ -37,8 +35,6 @@ public class CharacterSelectionPvsCPUSTate : State, IObserver<SetupGameEventArgs
 
     public override void Exit()
     {
-        base.Exit();
-
         gameController.SetupGameSubject.Remove(this);
         characterSelectionPvsCPU.CancelCharacterSelectionSubject.Remove(this);
 

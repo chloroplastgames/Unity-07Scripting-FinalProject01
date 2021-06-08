@@ -12,8 +12,6 @@
 
     public override void Enter()
     {
-        base.Enter();
-
         gameController.StartRoundSubject.Add(this);
     }
 
@@ -29,11 +27,10 @@
 
     public override void Exit()
     {
-        base.Exit();
-
         gameController.StartRoundSubject.Remove(this);
     }
 
+    // Respawns when the round ends
     public void OnNotify(StartRoundEventArgs parameter)
     {
         SwitchToSpawnEnemyState();

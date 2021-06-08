@@ -23,7 +23,6 @@ public class ButtonMenuBehaviour : MonoBehaviour
 
     private void ReloadScene()
     {
-        print("Reload scene");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

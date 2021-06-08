@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controller to handle player states
+/// </summary>
+
 public class PlayerStateController : StateController
 {
     [SerializeField] private PlayerControlData control;
@@ -11,6 +15,7 @@ public class PlayerStateController : StateController
         IShoot shooter = GetComponent<IShoot>();
         IConsumePowerUp powerUpConsumer = GetComponent<IConsumePowerUp>();
 
+        // TODO: interface
         GameController gameController = FindObjectOfType<GameController>();
 
         IState alivePlayerState = new AlivePlayerState(

@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Handler to reset the health of the agent when the round starts
+/// </summary>
+
+
 public class AgentHealthResetEventHandler : MonoBehaviour, IObserver<StartRoundEventArgs>
 {
-    private GameController gameController;
     private IResetHealth healthReset;
+    
+    // TODO: interface
+    private GameController gameController;
 
     private void Awake()
     {

@@ -1,18 +1,26 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controller to control CPU agent state
+/// </summary>
+
 public class EnemyStateController : StateController
 {
+    // Config
     [SerializeField] private EnemyStateData enemyStateData;
     [SerializeField] private AttackEnemyStateData attackEnemyStateData;
 
     private void Awake()
     {
+        // Player gets instantiated first
         Transform player = FindObjectOfType<PlayerStateController>().transform;
+
         Transform myAgent = gameObject.transform;
         INavMeshAgent navMeshAgent = GetComponent<INavMeshAgent>();
         ICalculateTrajectoryShoot shooter = GetComponent<ICalculateTrajectoryShoot>();
         ILookAtTarget looker = GetComponent<ILookAtTarget>();
 
+        // TODO: interface
         GameController gameController = FindObjectOfType<GameController>();
 
         IState spawnEnemyState = new SpawnEnemyState(

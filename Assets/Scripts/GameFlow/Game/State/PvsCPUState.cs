@@ -17,8 +17,6 @@ public class PvsCPUState : State, IObserver<Player1CharacterSelectionEventArgs>,
 
     public override void Enter()
     {
-        base.Enter();
-
         characterSelectionPvsCPUEvents.Player1CharacterSelectorSubject.Add(this);
         characterSelectionPvsCPUEvents.CancelCharacterSelectionSubject.Add(this);
     }
@@ -35,8 +33,6 @@ public class PvsCPUState : State, IObserver<Player1CharacterSelectionEventArgs>,
 
     public override void Exit()
     {
-        base.Exit();
-
         characterSelectionPvsCPUEvents.Player1CharacterSelectorSubject.Remove(this);
         characterSelectionPvsCPUEvents.CancelCharacterSelectionSubject.Remove(this);
     }

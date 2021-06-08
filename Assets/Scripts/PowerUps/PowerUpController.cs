@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controller to apply this power up to the target when triggered
+/// </summary>
+
 public class PowerUpController : MonoBehaviour
 {
     private IApplyPowerUp powerUpApplier;

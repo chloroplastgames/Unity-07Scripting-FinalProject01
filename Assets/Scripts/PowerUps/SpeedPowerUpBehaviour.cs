@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour of the speed powerup. Increments translation for a time, don't stack and don't reset duration
+/// </summary>
+
 public class SpeedPowerUpBehaviour : MonoBehaviour, IPowerUp, IObserver<EndRoundEventArgs>
 {
     public string PowerUpName => powerUpName;
@@ -33,6 +37,7 @@ public class SpeedPowerUpBehaviour : MonoBehaviour, IPowerUp, IObserver<EndRound
         gameController.EndRoundSubject.Remove(this);
     }
 
+    // Has acess to agent translation speed
     public void Consume()
     {
         if (speedRoutine != null) return;

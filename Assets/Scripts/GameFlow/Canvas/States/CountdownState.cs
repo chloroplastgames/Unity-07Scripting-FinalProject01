@@ -20,8 +20,6 @@ public class CountdownState : State, IObserver<CountdownEventArgs>
 
     public override void Enter()
     {
-        base.Enter();
-
         countdown.CounterSubject.Add(this);
 
         cameraGameplay.SetActive(true);
@@ -43,8 +41,6 @@ public class CountdownState : State, IObserver<CountdownEventArgs>
 
     public override void Exit()
     {
-        base.Exit();
-
         countdown.CounterSubject.Remove(this);
 
         countdown.CanvasCountdown.SetActive(false);

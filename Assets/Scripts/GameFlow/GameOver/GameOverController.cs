@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// SHOW
+
 public class GameOverController : MonoBehaviour, IGameOver, IGameOverEvents, IObserver<GameWinnerEventArgs>
 {
     public ISubject<ButtonRestartEventArgs> ButtonRestartSubject => buttonRestartSubject;

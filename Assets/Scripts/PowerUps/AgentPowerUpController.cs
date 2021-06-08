@@ -1,4 +1,8 @@
-﻿public class AgentPowerUpController : Subject<PowerUpEventArgs>, IPowerUpable, IConsumePowerUp, IObserver<EndRoundEventArgs>
+﻿/// <summary>
+/// Controller to control the activation of power ups in the agent
+/// </summary>
+
+public class AgentPowerUpController : Subject<PowerUpEventArgs>, IPowerUpable, IConsumePowerUp, IObserver<EndRoundEventArgs>
 {
     private IPowerUp repairPowerUp;
     private IPowerUp speedPowerUp;
@@ -8,6 +12,7 @@
 
     private IPowerUp powerUp;
 
+    // TODO: interface
     private GameController gameController;
 
     private void Awake()
@@ -31,6 +36,7 @@
         gameController.EndRoundSubject?.Remove(this);
     }
 
+    // TODO: pass power up behaviour instead of ID
     public void ApplyPowerUp(int id)
     {
         if (powerUp != null) return;

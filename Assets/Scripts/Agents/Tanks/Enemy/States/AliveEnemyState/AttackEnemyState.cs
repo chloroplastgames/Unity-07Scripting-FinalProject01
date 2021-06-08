@@ -32,6 +32,7 @@ public class AttackEnemyState : AliveEnemyStateBase
     {
         base.Enter();
 
+        // Launch routine to dodge
         dodgeRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(
             Random.Range(attackEnemyStateData.MinTimeToDodge, attackEnemyStateData.MaxTimeToDodge), () => SwitchToDodgeEnemyState());
     }
@@ -40,6 +41,7 @@ public class AttackEnemyState : AliveEnemyStateBase
     {
         Vector3 direction = looker.LookAtTarget(target);
 
+        // Almost facing target
         if (Vector3.Angle(direction, agent.forward) < attackEnemyStateData.RotateToShootPrecision && canShoot)
         {
             shooter.CalculateTrajectoryShoot(target);
@@ -57,6 +59,7 @@ public class AttackEnemyState : AliveEnemyStateBase
     {
         base.Exit();
 
+        // Stops routine to avoid errors
         CoroutinesHelperSingleton.Instance.StopCoroutine(dodgeRoutine);
     }
 

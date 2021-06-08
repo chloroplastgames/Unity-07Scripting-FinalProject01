@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+// SHOW
+
+/// <summary>
+/// Data (ScriptableObject) that holds player control config
+/// </summary>
+
 [CreateAssetMenu(fileName = "NewPlayerControl", menuName = "ScriptableObject/Agents/Tanks/Player/Control/PlayerControl")]
 public class PlayerControlData : ScriptableObject
 {

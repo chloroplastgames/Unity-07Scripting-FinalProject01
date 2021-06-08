@@ -1,4 +1,8 @@
-﻿public class DieBehaviour : Subject<DieEventArgs>, IKillable
+﻿/// <summary>
+/// Behaviour to launch AgentDeadEvent
+/// </summary>
+
+public class DieBehaviour : Subject<DieEventArgs>, IKillable
 {
     public void Kill()
     {

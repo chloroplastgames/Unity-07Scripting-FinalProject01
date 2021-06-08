@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controller that controls the camera and reacts to multiple events
+/// </summary>
 public class GameplayCameraController : MonoBehaviour,
     IObserver<SetupGameEventArgs>,
     IObserver<StartRoundEventArgs>,
@@ -34,7 +37,6 @@ public class GameplayCameraController : MonoBehaviour,
     private void Start()
     {
         initialPosition = transform.position;
-        print("initial position: " + initialPosition);
 
         gameController.SetupGameSubject.Add(this);
         gameController.StartRoundSubject.Add(this);

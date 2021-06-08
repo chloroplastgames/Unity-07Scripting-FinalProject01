@@ -33,14 +33,17 @@ public class ChaseEnemyState : AliveEnemyStateBase
 
     public override void Update()
     {
+        // Has seen target
         if (Vector3.SqrMagnitude(target.position - agent.position) <= enemyStateData.VisionRange * enemyStateData.VisionRange)
         {
             SwitchToAttackEnemyState();
             return;
         }
 
+        // Has arrived to destination
         if (navMeshAgent.RemainingDistance <= enemyStateData.RemainingDistance)
         {
+            // New destination
             SetDestination();
         }
     }
@@ -66,6 +69,7 @@ public class ChaseEnemyState : AliveEnemyStateBase
         }
         else
         {
+            // New destination
             SetDestination();
         }
     }

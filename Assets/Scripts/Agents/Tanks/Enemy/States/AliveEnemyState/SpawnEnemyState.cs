@@ -2,6 +2,7 @@
 
 public class SpawnEnemyState : AliveEnemyStateBase
 {
+    // TODO: move to config
     private const float TimeToChase = 0.25f;
 
     private Coroutine chaseRoutine;

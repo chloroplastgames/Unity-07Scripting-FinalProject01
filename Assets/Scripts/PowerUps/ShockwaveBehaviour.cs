@@ -13,6 +13,7 @@ public class ShockwaveBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // In order to avoid multiple stacks of damage
         if (hasDamaged) return;
 
         IDamageable target = other.GetComponent<IDamageable>();

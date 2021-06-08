@@ -20,8 +20,6 @@ public class MainMenuState : State, IObserver<ButtonPvsPEventArgs>, IObserver<Bu
 
     public override void Enter()
     {
-        base.Enter();
-
         mainMenu.ButtonPvsPSubject.Add(this);
         mainMenu.ButtonPvsCPUSubject.Add(this);
 
@@ -42,8 +40,6 @@ public class MainMenuState : State, IObserver<ButtonPvsPEventArgs>, IObserver<Bu
 
     public override void Exit()
     {
-        base.Exit();
-
         mainMenu.ButtonPvsPSubject.Remove(this);
         mainMenu.ButtonPvsCPUSubject.Remove(this);
 

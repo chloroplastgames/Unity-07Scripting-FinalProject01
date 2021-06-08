@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour to rotate the agent to look at target
+/// </summary>
+
 public class LookAtTargetBehaviour : MonoBehaviour, ILookAtTarget
 {
+    // TODO: move to config
     [SerializeField] private float speed = 3f;
 
     public Vector3 LookAtTarget(Transform target)

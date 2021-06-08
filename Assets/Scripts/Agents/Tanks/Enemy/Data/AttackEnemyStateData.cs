@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Data (ScriptableObject) that holds attack cpu agent state config
+/// </summary>
+
 [CreateAssetMenu(fileName = "NewAttackEnemyState", menuName = "ScriptableObject/Agents/Tanks/Enemy/States/AttackEnemyState")]
 public class AttackEnemyStateData : ScriptableObject
 {

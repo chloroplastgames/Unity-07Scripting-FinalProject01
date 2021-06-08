@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour of the shot powerup. Increments force and damage for a time, don't stack and don't reset duration
+/// </summary>
+
 public class ShotPowerUpBehaviour : MonoBehaviour, IPowerUp, IObserver<EndRoundEventArgs>
 {
     public string PowerUpName => powerUpName;
@@ -33,6 +37,7 @@ public class ShotPowerUpBehaviour : MonoBehaviour, IPowerUp, IObserver<EndRoundE
         gameController.EndRoundSubject.Remove(this);
     }
 
+    // Has access to agent shooting
     public void Consume()
     {
         if (shotRoutine != null) return;

@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour to face the velocity of the rigidbody
+/// </summary>
+
 [RequireComponent(typeof(Rigidbody))]
 public class FaceVelocityDirectionBehaviour : MonoBehaviour, IFaceVelocityDirection
 {

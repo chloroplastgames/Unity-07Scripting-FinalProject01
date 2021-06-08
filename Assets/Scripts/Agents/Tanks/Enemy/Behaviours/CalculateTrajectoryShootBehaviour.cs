@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour to calculate the angle of the agent fire point to hit target spot
+/// </summary>
+
 public class CalculateTrajectoryShootBehaviour : MonoBehaviour, ICalculateTrajectoryShoot
 {
+    // TODO : move to config ScriptableObject
     [SerializeField] private Rigidbody shellPrefab;
     [SerializeField] private Transform fireTransform;
     [SerializeField] private float launchForce = 30f;
     [SerializeField] private Transform turret;
-    [SerializeField] private bool isLowAngle = true;
+    [SerializeField] private bool isLowAngle = true; // Should use low angle instead or high angle?
     [SerializeField] private float maxAngleDistanceDeviation;
     [SerializeField] private float minAngleDistanceDeviation;
 

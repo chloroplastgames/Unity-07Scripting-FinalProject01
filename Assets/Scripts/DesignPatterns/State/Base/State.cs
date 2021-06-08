@@ -9,17 +9,11 @@ public abstract class State : IState
         this.controller = controller;
     }
 
-    public virtual void Enter()
-    {
-        Debug.Log($"Enter {GetType()}");
-    }
+    public abstract void Enter();
 
     public abstract void Update();
 
     public abstract void FixedUpdate();
 
-    public virtual void Exit()
-    {
-        Debug.Log($"Exit {GetType()}");
-    }
+    public abstract void Exit();
 }

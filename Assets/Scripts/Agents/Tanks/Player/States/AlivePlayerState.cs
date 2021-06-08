@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// State that controls player
+/// </summary>
+
 public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
 {
     private readonly ITranslate translator;
@@ -31,8 +35,6 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
 
     public override void Enter()
     {
-        base.Enter();
-
         gameController.EndRoundSubject.Add(this);
     }
 
@@ -46,6 +48,7 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
         else if (Input.GetKey(control.TurnLeft)) rotationSense = -1f;
         else rotationSense = 0f;
 
+        // Shooter has input controller
         shooter.Shoot();
 
         if (Input.GetKey(control.Special))
@@ -62,8 +65,6 @@ public class AlivePlayerState : State, IObserver<EndRoundEventArgs>
 
     public override void Exit()
     {
-        base.Exit();
-
         gameController.EndRoundSubject.Add(this);
     }
 

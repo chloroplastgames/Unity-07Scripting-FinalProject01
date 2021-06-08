@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controller to implement HoldShootBehaviour
+/// </summary>
+
 public class HoldShootController : MonoBehaviour, IShoot, IObserver<EndRoundEventArgs>
 {
     public float Multiplier { get => multiplier; set => multiplier = value; }

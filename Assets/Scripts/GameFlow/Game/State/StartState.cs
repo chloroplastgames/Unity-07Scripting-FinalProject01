@@ -15,8 +15,6 @@
 
     public override void Enter()
     {
-        base.Enter();
-
         mainMenuEvents.ButtonPvsPSubject.Add(this);
         mainMenuEvents.ButtonPvsCPUSubject.Add(this);
     }
@@ -33,8 +31,6 @@
 
     public override void Exit()
     {
-        base.Exit();
-
         mainMenuEvents.ButtonPvsPSubject.Remove(this);
         mainMenuEvents.ButtonPvsCPUSubject.Remove(this);
     }

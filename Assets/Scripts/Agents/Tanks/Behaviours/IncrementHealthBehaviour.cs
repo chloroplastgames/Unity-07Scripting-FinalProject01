@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Behaviour to increment agent health and launch IncrementHealthEvent
+/// </summary>
+
 public class IncrementHealthBehaviour : Subject<IncrementHealthEventArgs>
 {
     private int currentHealth;

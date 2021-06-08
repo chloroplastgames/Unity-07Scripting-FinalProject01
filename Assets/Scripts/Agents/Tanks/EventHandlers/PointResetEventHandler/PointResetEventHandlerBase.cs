@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Handler to reset the position of the agent when the round ends
+/// </summary>
+
 public abstract class PointResetEventHandlerBase : MonoBehaviour, IObserver<EndRoundEventArgs>
 {
     [SerializeField] protected GameObject leftDustTrail;
     [SerializeField] protected GameObject rightDustTrail;
 
+    // TODO: interface
     protected GameController gameController;
 
     private void Awake()

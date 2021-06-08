@@ -2,6 +2,10 @@
 using UnityEngine;
 using System.Linq;
 
+/// <summary>
+/// Spawner of power ups. Spawns one power up for spot every some seconds during each round
+/// </summary>
+
 public class PowerUpSpawner : MonoBehaviour, IObserver<StartRoundEventArgs>, IObserver<EndRoundEventArgs>
 {
     [SerializeField] private Transform[] spawnPoints;
@@ -63,6 +67,7 @@ public class PowerUpSpawner : MonoBehaviour, IObserver<StartRoundEventArgs>, IOb
 
         powerUpInstancesList.Add(powerUpInstance);
 
+        // In order to avoid multiple power ups spawning in the same spot
         spawnPointsList.RemoveAt(pointIndex);
 
         spawnRoutine = CoroutinesHelperSingleton.Instance.WaitForSeconds(timeBetweenPowerUps, () => StartSpawner());
@@ -72,6 +77,7 @@ public class PowerUpSpawner : MonoBehaviour, IObserver<StartRoundEventArgs>, IOb
     {
         CoroutinesHelperSingleton.Instance.StopCoroutine(spawnRoutine);
 
+        // Destroy power ups for new round
         foreach(GameObject instance in powerUpInstancesList)
         {
             Destroy(instance);
